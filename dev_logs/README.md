@@ -1,2 +1,0 @@
-# Weekly Team Dev Logs
-
