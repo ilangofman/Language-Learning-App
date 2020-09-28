@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/homePage"
+        android:icon="@drawable/home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/practiceMode"
+        android:icon="@drawable/practice"
+        android:title="Practice"/>
+    <item
+        android:id="@+id/interactiveMode"
+
+        android:icon="@drawable/interactive"
+        android:title="Interactive"/>
+    <item
+        android:id="@+id/statsPage"
+        android:icon="@drawable/stats"
+        android:title="Stats"/>
+    <item
+        android:id="@+id/morePage"
+        android:icon="@drawable/more"
+        android:title=""/>
+</menu>
