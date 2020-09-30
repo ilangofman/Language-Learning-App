@@ -2,16 +2,19 @@ package com.example.lyngua
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class ActivityTabs : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_tabs)
 
-        //Launch activity main -> this will be the first screen (the welcome screen)
-        setContentView(R.layout.activity_main)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navController = findNavController(R.id.fragment)
 
+        bottomNavigationView.setupWithNavController(navController)
     }
 }
