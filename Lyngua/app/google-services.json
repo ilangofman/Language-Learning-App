@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "626850950077",
+    "firebase_url": "https://lyngua-556ed.firebaseio.com",
+    "project_id": "lyngua-556ed",
+    "storage_bucket": "lyngua-556ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626850950077:android:8f16a6fb216106a60100d4",
+        "android_client_info": {
+          "package_name": "com.example.lyngua"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626850950077-p44sanhitqsooqd455hogocrb53j05fj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh7g3DIrboHL_6IRB7hOALwHzsYq9M2Jc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626850950077-p44sanhitqsooqd455hogocrb53j05fj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

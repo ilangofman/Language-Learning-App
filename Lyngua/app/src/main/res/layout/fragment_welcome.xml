@@ -33,7 +33,7 @@ tools:context=".Welcome"
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
     <Button
         android:id="@+id/create_account_btn_welcome_page"
@@ -75,6 +75,7 @@ tools:context=".Welcome"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="248dp"
         android:src="@drawable/logolyngua"
+        app:srcCompat="@drawable/logolyngua"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,5 +93,6 @@ tools:context=".Welcome"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.178"
         app:srcCompat="@drawable/welcomeimage2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
