@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/createAccountFragment"
-        android:name="com.example.lyngua.createAccountFragment"
+        android:name="com.example.lyngua.views.createAccountFragment"
         android:label="fragment_create_account"
         tools:layout="@layout/fragment_create_account" />
     <fragment
         android:id="@+id/welcome"
-        android:name="com.example.lyngua.Welcome"
+        android:name="com.example.lyngua.views.Welcome"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.lyngua.LogInFragment"
+        android:name="com.example.lyngua.views.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" />
     <action

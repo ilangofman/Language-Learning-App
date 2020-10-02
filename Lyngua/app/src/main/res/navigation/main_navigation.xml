@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/homePage"
-        android:name="com.example.lyngua.homePage"
+        android:name="com.example.lyngua.views.homePage"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" />
     <fragment
         android:id="@+id/practiceMode"
-        android:name="com.example.lyngua.PracticeMode"
+        android:name="com.example.lyngua.views.PracticeMode"
         android:label="fragment_practice_mode"
         tools:layout="@layout/fragment_practice_mode" />
     <fragment
         android:id="@+id/interactiveMode"
-        android:name="com.example.lyngua.InteractiveMode"
+        android:name="com.example.lyngua.views.InteractiveMode"
         android:label="fragment_interactive_mode"
         tools:layout="@layout/fragment_interactive_mode" />
     <fragment
         android:id="@+id/statsPage"
-        android:name="com.example.lyngua.StatsPage"
+        android:name="com.example.lyngua.views.StatsPage"
         android:label="fragment_stats_page"
         tools:layout="@layout/fragment_stats_page" />
     <fragment
         android:id="@+id/morePage"
-        android:name="com.example.lyngua.morePage"
+        android:name="com.example.lyngua.views.morePage"
         android:label="fragment_more_page"
         tools:layout="@layout/fragment_more_page" />
 
