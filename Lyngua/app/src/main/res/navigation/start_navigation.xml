@@ -5,19 +5,15 @@
     android:id="@+id/start_navigation"
     app:startDestination="@id/welcome">
 
-    <fragment
-        android:id="@+id/createAccountFragment"
-        android:name="com.example.lyngua.views.createAccountFragment"
-        android:label="fragment_create_account"
-        tools:layout="@layout/fragment_create_account" />
+
     <fragment
         android:id="@+id/welcome"
         android:name="com.example.lyngua.views.Welcome"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
-            android:id="@+id/action_welcome_to_createAccountFragment"
-            app:destination="@id/createAccountFragment"
+            android:id="@+id/action_welcome_to_signUp"
+            app:destination="@id/signUp"
             app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_welcome_to_logInFragment"
@@ -28,8 +24,48 @@
         android:name="com.example.lyngua.views.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" />
-    <action
-        android:id="@+id/action_global_homePage"
-        app:destination="@id/homePage" />
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.lyngua.views.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_setupProfile"
+            app:destination="@id/setupProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupProfile"
+        android:name="com.example.lyngua.views.SetupProfile"
+        android:label="fragment_setup_profile"
+        tools:layout="@layout/fragment_setup_profile" >
+        <action
+            android:id="@+id/action_setupProfile_to_chooseLanguage"
+            app:destination="@id/chooseLanguage" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseLanguage"
+        android:name="com.example.lyngua.views.ChooseLanguage"
+        android:label="fragment_choose_language"
+        tools:layout="@layout/fragment_choose_language" >
+        <action
+            android:id="@+id/action_chooseLanguage_to_chooseInterests"
+            app:destination="@id/chooseInterests" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseInterests"
+        android:name="com.example.lyngua.views.ChooseInterests"
+        android:label="fragment_choose_interests"
+        tools:layout="@layout/fragment_choose_interests" >
+        <action
+            android:id="@+id/action_chooseInterests_to_completeSignUp"
+            app:destination="@id/completeSignUp"
+            app:popUpTo="@id/start_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeSignUp"
+        android:name="com.example.lyngua.views.CompleteSignUp"
+        android:label="fragment_complete_sign_up"
+        tools:layout="@layout/fragment_complete_sign_up" />
 
 </navigation>
