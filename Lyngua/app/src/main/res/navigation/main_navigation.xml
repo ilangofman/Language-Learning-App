@@ -12,9 +12,13 @@
         tools:layout="@layout/fragment_home_page" />
     <fragment
         android:id="@+id/practiceMode"
-        android:name="com.example.lyngua.views.PracticeMode"
+        android:name="com.example.lyngua.views.categoryList.PracticeMode"
         android:label="fragment_practice_mode"
-        tools:layout="@layout/fragment_practice_mode" />
+        tools:layout="@layout/fragment_practice_mode" >
+        <action
+            android:id="@+id/action_practiceMode_to_addCategory"
+            app:destination="@id/addCategory" />
+    </fragment>
     <fragment
         android:id="@+id/interactiveMode"
         android:name="com.example.lyngua.views.InteractiveMode"
@@ -30,5 +34,14 @@
         android:name="com.example.lyngua.views.morePage"
         android:label="fragment_more_page"
         tools:layout="@layout/fragment_more_page" />
+    <fragment
+        android:id="@+id/addCategory"
+        android:name="com.example.lyngua.views.addCategory.addCategory"
+        android:label="fragment_add_category"
+        tools:layout="@layout/fragment_add_category" >
+        <action
+            android:id="@+id/action_addCategory_to_practiceMode"
+            app:destination="@id/practiceMode" />
+    </fragment>
 
 </navigation>
