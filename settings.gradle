@@ -1,0 +1,4 @@
+include ':app'
+include ':app'
+project(':app').projectDir = new File(rootDir, 'Lyngua/app/')
+rootProject.name = "QuizApp1"
