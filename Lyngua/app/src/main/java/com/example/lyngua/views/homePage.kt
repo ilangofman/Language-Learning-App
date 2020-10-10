@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_home_page.*
 
 class homePage : Fragment() {
 
@@ -30,7 +31,7 @@ class homePage : Fragment() {
         navBar = requireActivity().findViewById(R.id.bottomNavigationView)
         navBar.visibility = View.VISIBLE
 
-        view.findViewById<Button>(R.id.button).setOnClickListener {
+        button.setOnClickListener {
             navBar.visibility = View.GONE
             navController.navigate(R.id.action_homePage_to_start_navigation)
         }
