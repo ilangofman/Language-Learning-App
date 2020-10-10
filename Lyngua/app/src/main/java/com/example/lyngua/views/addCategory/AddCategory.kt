@@ -16,6 +16,13 @@ import kotlinx.android.synthetic.main.fragment_add_category.view.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
+/*
+
+The database was set up through the tutorial found here:
+https://www.youtube.com/watch?v=3USvr1Lz8g8
+
+*/
+
 class addCategory : Fragment() {
 
     private lateinit var userController:CategoryController
@@ -32,7 +39,7 @@ class addCategory : Fragment() {
 
         view.add_category_btn.setOnClickListener{
             val categoryName = category_name_input_text.text.toString()
-            if(inputValidation(categoryName)){
+            if(categoryName.isNotEmpty()){
                     val response = userController.addCategory(categoryName)
                     if (response){
                         Toast.makeText(requireContext(), "Successfully Added Category", Toast.LENGTH_LONG).show()
@@ -49,9 +56,6 @@ class addCategory : Fragment() {
     }
 
 
-    private fun inputValidation(categoryName: String): Boolean {
-        return categoryName.isNotEmpty()
-    }
 
 
 
