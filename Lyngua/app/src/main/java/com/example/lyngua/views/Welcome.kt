@@ -1,4 +1,4 @@
-package com.example.lyngua
+package com.example.lyngua.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.lyngua.R
+import com.example.lyngua.views.ActivityTabs
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
 

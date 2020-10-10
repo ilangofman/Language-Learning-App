@@ -12,3 +12,4 @@
 /captures
 .externalNativeBuild
 .cxx
+/Lyngua/app/src/main/res/raw/google_translate_api_credentials.json
