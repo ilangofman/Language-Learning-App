@@ -1,0 +1,9 @@
+Week 2 - Dev Log 
+
+Dates: Sep 28 to Oct 4, 2020
+
+Work Completed:
+
+Implemented the navigation for the home screen to log in screen and the main navigation system. 
+Conducted research on the best architecture styles such as MVC, MVP, MVVM and more. 
+Set up the API interface for the Google translate API. Now we can make queries for translations. 

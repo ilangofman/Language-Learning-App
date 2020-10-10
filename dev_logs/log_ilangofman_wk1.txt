@@ -1,0 +1,13 @@
+Week 1 - Dev Log 
+
+Dates: Sep 21 to Sep 27, 2020
+
+Work Completed:
+
+Finish the requirements document and prepared for the deliverable 1 presentation. 
+
+Created wireframes for what we would like the app to look like. 
+
+Background research on different app architecture styles. 
+
+
