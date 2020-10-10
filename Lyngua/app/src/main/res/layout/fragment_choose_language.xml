@@ -13,13 +13,13 @@
         android:gravity="center"
         android:text="@string/choose_language_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/languageList"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/languageList"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,68 +27,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
+            android:id="@+id/languageList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- TODO: Replace following buttons with buttons generated from code representing languages from API -->
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="#00FFFFFF"
-                android:drawableRight="@drawable/ic_chevron_right_black"
-                android:drawableEnd="@drawable/ic_chevron_right_black"
-                android:padding="25dp"
-                android:text="French"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="#00FFFFFF"
-                android:drawableRight="@drawable/ic_chevron_right_black"
-                android:drawableEnd="@drawable/ic_chevron_right_black"
-                android:padding="25dp"
-                android:text="Spanish"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="#00FFFFFF"
-                android:drawableRight="@drawable/ic_chevron_right_black"
-                android:drawableEnd="@drawable/ic_chevron_right_black"
-                android:padding="25dp"
-                android:text="Chinese"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="#00FFFFFF"
-                android:drawableRight="@drawable/ic_chevron_right_black"
-                android:drawableEnd="@drawable/ic_chevron_right_black"
-                android:padding="25dp"
-                android:text="Russian"
-                android:gravity="start|center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-        </LinearLayout>
+            android:orientation="vertical" />
     </ScrollView>
-
-    <!-- TEMPORARY BUTTON - TODO: ONCE LANGUAGES ARE FILLED PROGRAMMATICALLY CLICKING ONE WILL ADVANCE TO NEXT SCREEN -->
-    <Button
-        android:id="@+id/skipLanguageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
