@@ -1,6 +1,6 @@
 Vatsan Prabhu - Dev Log - Week 1
 
-Dates: Sep 21 to Sep 27, 2020
+Dates: Sep 20 to Sep 26, 2020
 
 Work Completed:
 - Created wireframes for our ideas of what the final app will look like
