@@ -5,11 +5,17 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/homePage">
 
+    <include app:graph="@navigation/start_navigation"/>
+
     <fragment
         android:id="@+id/homePage"
         android:name="com.example.lyngua.views.homePage"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePage_to_start_navigation"
+            app:destination="@id/start_navigation" />
+    </fragment>
     <fragment
         android:id="@+id/practiceMode"
         android:name="com.example.lyngua.views.PracticeMode"

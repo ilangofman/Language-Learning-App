@@ -13,4 +13,32 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="no_connection">No Internet Connection</string>
 
+    <!-- TEXT FIELDS -->
+    <string name="email_field">Email</string>
+    <string name="password_field">Password</string>
+    <string name="first_name_field">First Name</string>
+    <string name="last_name_field">Last Name</string>
+    <string name="interest1">Interest 1</string>
+    <string name="interest2">Interest 2</string>
+    <string name="interest3">Interest 3</string>
+
+    <!-- BUTTONS -->
+    <string name="next_button">Next</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="google_button">Sign in with Google</string>
+    <string name="lets_go_button">Let\'s Go!</string>
+    <string name="no_thanks_button">No Thanks</string>
+
+    <!-- PAGE TITLES AND HEADERS -->
+    <string name="sign_up_title">Let\'s Get Started</string>
+    <string name="setup_profile_title">What do we call you?</string>
+    <string name="choose_language_title">What language\ndo you want to learn?</string>
+    <string name="choose_interests_title">What are\nyour interests?</string>
+    <string name="complete_sign_up_title">You\'re Good To Go!</string>
+
+    <!-- GENERAL TEXT -->
+    <string name="or">OR</string>
+    <string name="interests_example">Choose up to 3 interests\nEx. basketball, mathematics, nature</string>
+    <string name="app_tour_prompt">Take a tour of the app\nto get started!</string>
+
 </resources>

@@ -37,13 +37,15 @@ class Welcome : Fragment(){
 
 
         home_page_btn_welcome_page.setOnClickListener{
-            Log.d("Welcome Screen", "Create Account Button Pressed")
-            val intent = Intent(getActivity(), ActivityTabs::class.java)
-            startActivity(intent)
+//            Log.d("Welcome Screen", "Create Account Button Pressed")
+//            val intent = Intent(getActivity(), ActivityTabs::class.java)
+//            startActivity(intent)
+//            navController.navigate(R.id.action_welcome_to_main_navigation)
+
         }
 
         create_account_btn_welcome_page.setOnClickListener{
-            navController.navigate(R.id.action_welcome_to_createAccountFragment)
+            navController.navigate(R.id.action_welcome_to_signUp)
         }
 
 
