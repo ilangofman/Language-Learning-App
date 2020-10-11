@@ -1,0 +1,9 @@
+Vatsan Prabhu - Dev Log - Week 3
+
+Dates: Oct 4 to Oct 10, 2020
+
+Work Completed:
+- Adjusted sign up process code to align with MVC structure
+- Implemented language query to show real list of languages in sign up process
+- Implemented Android CameraX to allow camera support in interactive mode
+- So far we can take a picture which is immediately stored in storage
