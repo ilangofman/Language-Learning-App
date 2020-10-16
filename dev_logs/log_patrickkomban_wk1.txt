@@ -1,0 +1,14 @@
+Week 1 Development Log - Patrick Komban
+
+Dates: Sep 21 to Sep 27, 2020
+
+Work Completed:
+
+- Finish the requirements document and prepared for the deliverable 1 presentation. 
+
+- Created high-fidelity and low-fidelity wireframes for what we would like the app to look like. 
+
+- Background research on different app architecture styles.
+
+- Began planning of tasks to accomplish and division of those tasks. 
+

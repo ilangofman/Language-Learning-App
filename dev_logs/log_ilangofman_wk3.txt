@@ -1,0 +1,9 @@
+Week 3 - Dev Log 
+
+Dates: Oct 5 to 11, 2020
+
+Work Completed:
+
+Added the rooms library which is a sqlite wrapper. This will enable persistant storage for the user data. 
+Added the ability to have the user be able to add a category. This will add it to the phone database. So everytime the app is restarted, the caategories are not deleted. 
+Started working displaying the categories nicely. This was done with a recycler view. 
