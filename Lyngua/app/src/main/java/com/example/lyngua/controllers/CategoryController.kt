@@ -20,13 +20,37 @@ class CategoryController(context: Context){
     }
 
 
-
     fun addCategory(catName: String): Boolean {
-        val category = Category(0, catName,  6)
+        val cateogryAPI = CategoryAPI()
+        val res =  cateogryAPI.getWordsForCategory()
+        if(res == null){
+            val category = Category(0, catName,  6, emptyArray())
+            thread{
+                repository.addCategory(category)
+            }
+        }else{
+            val category = Category(0, catName,  6, res)
+            thread{
+                repository.addCategory(category)
+            }
+
+        }
+
+        return true
+    }
+
+    fun updateCategory(catId: Int, catName: String, catWords: Int): Boolean {
+        val category = Category(catId, catName,  catWords)
         val cateogryAPI = CategoryAPI()
         thread{
-            repository.addCategory(category)
-            cateogryAPI.getWordsForCategory()
+            repository.updateCategory(category)
+        }
+        return true
+    }
+
+    fun deleteCategory(category: Category): Boolean {
+        thread{
+            repository.deleteCategory(category)
         }
         return true
     }

@@ -6,23 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".views.addCategory.addCategory">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 
     <TextView
         android:id="@+id/textView3"
@@ -48,20 +31,35 @@
         android:gravity="center"
         android:hint="Category Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/add_category_btn"
+        app:layout_constraintBottom_toTopOf="@+id/update_category_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/add_category_btn"
+        android:id="@+id/update_category_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="464dp"
-        android:text="Learn!"
+        android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/delete_category_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_red_dark"
+        android:padding="10dp"
+        android:text="Delete Category"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update_category_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

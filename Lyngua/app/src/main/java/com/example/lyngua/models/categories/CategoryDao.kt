@@ -1,10 +1,7 @@
 package com.example.lyngua.models.categories
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.lyngua.models.categories.Category
 
 @Dao
@@ -14,4 +11,10 @@ interface CategoryDao{
 
     @Query("SELECT * FROM category_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<Category>>
+
+    @Update
+    fun updateCategory(category: Category)
+
+    @Delete
+    fun deleteCategory(category: Category)
 }

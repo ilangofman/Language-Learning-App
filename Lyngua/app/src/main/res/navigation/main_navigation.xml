@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_practiceMode_to_addCategory"
             app:destination="@id/addCategory" />
+        <action
+            android:id="@+id/action_practiceMode_to_updateCategoryFragment"
+            app:destination="@id/updateCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/interactiveMode"
@@ -48,6 +51,17 @@
         <action
             android:id="@+id/action_addCategory_to_practiceMode"
             app:destination="@id/practiceMode" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCategoryFragment"
+        android:name="com.example.lyngua.UpdateCategoryFragment"
+        android:label="Update Category Fragment" >
+        <action
+            android:id="@+id/action_updateCategoryFragment_to_practiceMode"
+            app:destination="@id/practiceMode" />
+        <argument
+            android:name="categoryChosen"
+            app:argType="com.example.lyngua.models.categories.Category" />
     </fragment>
 
 </navigation>

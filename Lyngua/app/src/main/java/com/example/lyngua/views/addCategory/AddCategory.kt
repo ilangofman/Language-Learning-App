@@ -25,7 +25,7 @@ https://www.youtube.com/watch?v=3USvr1Lz8g8
 
 class addCategory : Fragment() {
 
-    private lateinit var userController:CategoryController
+    private lateinit var categoryController:CategoryController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +35,12 @@ class addCategory : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_add_category, container, false)
 
 
-        userController = CategoryController(requireContext())
+        categoryController = CategoryController(requireContext())
 
         view.add_category_btn.setOnClickListener{
             val categoryName = category_name_input_text.text.toString()
             if(categoryName.isNotEmpty()){
-                    val response = userController.addCategory(categoryName)
+                    val response = categoryController.addCategory(categoryName)
                     if (response){
                         Toast.makeText(requireContext(), "Successfully Added Category", Toast.LENGTH_LONG).show()
                         findNavController().navigate(R.id.action_addCategory_to_practiceMode)
