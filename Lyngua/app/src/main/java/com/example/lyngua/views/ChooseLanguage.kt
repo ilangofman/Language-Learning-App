@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
-import com.example.lyngua.models.LanguageButton
 import com.example.lyngua.models.Languages
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_choose_language.*
