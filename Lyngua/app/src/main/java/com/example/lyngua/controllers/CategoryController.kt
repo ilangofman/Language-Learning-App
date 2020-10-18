@@ -1,11 +1,9 @@
 package com.example.lyngua.controllers
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.lyngua.models.categories.Category
-import com.example.lyngua.models.categories.CategoryAPI
-import com.example.lyngua.models.categories.CategoryDatabase
-import com.example.lyngua.models.categories.CategoryRepository
+import com.example.lyngua.models.categories.*
 import kotlin.concurrent.thread
 
 class CategoryController(context: Context){
@@ -14,34 +12,27 @@ class CategoryController(context: Context){
     private val repository: CategoryRepository
 
     init{
-        val userDao = CategoryDatabase.getDatabase(context).userDao()
-        repository = CategoryRepository(userDao)
+        val categoryDao = CategoryDatabase.getDatabase(context).categoryDao()
+        repository = CategoryRepository(categoryDao)
         readAllData = repository.readAllData
     }
 
 
     fun addCategory(catName: String): Boolean {
         val cateogryAPI = CategoryAPI()
-        val res =  cateogryAPI.getWordsForCategory()
-        if(res == null){
-            val category = Category(0, catName,  6, emptyArray())
-            thread{
-                repository.addCategory(category)
-            }
-        }else{
-            val category = Category(0, catName,  6, res)
-            thread{
-                repository.addCategory(category)
-            }
+        val category = Category(0, catName,  6, emptyList())
+        thread {
+            val id_added = repository.addCategory(category)
+            Log.d("Words", "The id is ${id_added}")
+            cateogryAPI.getWordsForCategory(id_added, repository)
 
         }
-
         return true
     }
 
-    fun updateCategory(catId: Int, catName: String, catWords: Int): Boolean {
-        val category = Category(catId, catName,  catWords)
-        val cateogryAPI = CategoryAPI()
+    fun updateCategory(catId: Int, catName: String, catWords: Int, catWordsList: List<Word>): Boolean {
+        val category = Category(catId, catName,  catWords, catWordsList)
+
         thread{
             repository.updateCategory(category)
         }

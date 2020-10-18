@@ -22,7 +22,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>(){
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentCategory = categoryList[position]
-        holder.itemView.cat_description_txt.text= "This is category ${currentCategory.id}, words left: ${currentCategory.numWords}."
+//        holder.itemView.cat_description_txt.text= "This is category ${currentCategory.id}, words left: ${currentCategory.numWords}."
+        holder.itemView.cat_description_txt.text= "This is # words: ${currentCategory.wordsList.size},"
 //        holder.itemView.category_id_txt.text = currentCategory.id.toString()
         holder.itemView.category_name_txt.text = currentCategory.name.toString()
 //        holder.itemView.number_words_left_txt.text = currentCategory.numWords.toString()
