@@ -1,4 +1,4 @@
-package com.example.lyngua
+package com.example.lyngua.views.Categories
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,17 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.lyngua.R
+import com.example.lyngua.views.Categories.UpdateCategoryArgs
 import com.example.lyngua.controllers.CategoryController
-import com.example.lyngua.models.categories.Category
-import kotlinx.android.synthetic.main.custom_category_row.view.*
 import kotlinx.android.synthetic.main.fragment_update_category.*
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
 
 
-class UpdateCategoryFragment : Fragment() {
+class UpdateCategory : Fragment() {
 
     private lateinit var categoryController: CategoryController
-    private val args by navArgs<UpdateCategoryFragmentArgs>()
+    private val args by navArgs<UpdateCategoryArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

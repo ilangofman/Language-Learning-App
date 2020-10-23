@@ -3,6 +3,7 @@ package com.example.lyngua.models.categories
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.lyngua.models.categories.Category
+import com.example.lyngua.models.words.Word
 
 @Dao
 @TypeConverters(WordsTypeConverter::class)

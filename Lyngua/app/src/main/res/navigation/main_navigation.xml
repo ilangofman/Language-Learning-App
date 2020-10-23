@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/practiceMode"
-        android:name="com.example.lyngua.views.categoryList.PracticeMode"
+        android:name="com.example.lyngua.views.Categories.PracticeMode"
         android:label="fragment_practice_mode"
         tools:layout="@layout/fragment_practice_mode" >
         <action
@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_practiceMode_to_updateCategoryFragment"
             app:destination="@id/updateCategoryFragment" />
+        <action
+            android:id="@+id/action_practiceMode_to_viewWordsFragment"
+            app:destination="@id/viewWordsFragment" />
     </fragment>
     <fragment
         android:id="@+id/interactiveMode"
@@ -45,7 +48,7 @@
         tools:layout="@layout/fragment_more_page" />
     <fragment
         android:id="@+id/addCategory"
-        android:name="com.example.lyngua.views.addCategory.addCategory"
+        android:name="com.example.lyngua.views.Categories.addCategory"
         android:label="fragment_add_category"
         tools:layout="@layout/fragment_add_category" >
         <action
@@ -54,11 +57,20 @@
     </fragment>
     <fragment
         android:id="@+id/updateCategoryFragment"
-        android:name="com.example.lyngua.UpdateCategoryFragment"
+        android:name="com.example.lyngua.views.Categories.UpdateCategory"
         android:label="Update Category Fragment" >
         <action
             android:id="@+id/action_updateCategoryFragment_to_practiceMode"
             app:destination="@id/practiceMode" />
+        <argument
+            android:name="categoryChosen"
+            app:argType="com.example.lyngua.models.categories.Category" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewWordsFragment"
+        android:name="com.example.lyngua.views.practice_words.ViewWordsFragment"
+        android:label="fragment_view_words"
+        tools:layout="@layout/fragment_view_words" >
         <argument
             android:name="categoryChosen"
             app:argType="com.example.lyngua.models.categories.Category" />

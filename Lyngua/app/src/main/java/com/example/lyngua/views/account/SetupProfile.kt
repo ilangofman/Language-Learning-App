@@ -1,4 +1,4 @@
-package com.example.lyngua.views
+package com.example.lyngua.views.account
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
 
-class SignUp : Fragment() {
+class SetupProfile : Fragment() {
 
     lateinit var navController: NavController
 
@@ -19,15 +19,15 @@ class SignUp : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        return inflater.inflate(R.layout.fragment_setup_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        view.findViewById<Button>(R.id.signUpButton).setOnClickListener {
-            navController.navigate(R.id.action_signUp_to_setupProfile)
+        view.findViewById<Button>(R.id.button_next).setOnClickListener {
+            navController.navigate(R.id.action_setupProfile_to_chooseLanguage)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.lyngua.views.categoryList
+package com.example.lyngua.views.Categories
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
+import com.example.lyngua.views.Categories.CategoryListAdapter
 import kotlinx.android.synthetic.main.fragment_practice_mode.view.*
 
 class PracticeMode : Fragment() {
@@ -26,9 +27,10 @@ class PracticeMode : Fragment() {
 
         categoryController = CategoryController(requireContext())
 
-        val listAdapter = ListAdapter()
+        val listAdapter = CategoryListAdapter()
         val categoryRecyclerView = view.categoryRecyclerView
         categoryRecyclerView.adapter = listAdapter
+
         categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         categoryController.readAllData.observe(viewLifecycleOwner, Observer { category ->

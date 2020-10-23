@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.lyngua.models.categories.*
+import com.example.lyngua.models.words.Word
 import kotlin.concurrent.thread
 
 class CategoryController(context: Context){
@@ -24,7 +25,7 @@ class CategoryController(context: Context){
         thread {
             val id_added = repository.addCategory(category)
             Log.d("Words", "The id is ${id_added}")
-            cateogryAPI.getWordsForCategory(id_added, repository)
+            cateogryAPI.getWordsForCategory(id_added, catName, repository)
 
         }
         return true

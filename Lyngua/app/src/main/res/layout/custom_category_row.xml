@@ -34,5 +34,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_name_txt" />
 
+    <Button
+        android:id="@+id/category_settings_button"
+        android:layout_width="27dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00FFFFFF"
+        android:drawableStart="@drawable/ic_baseline_more_vert_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableLeft="@drawable/ic_baseline_more_vert_24" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

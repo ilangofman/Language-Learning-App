@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.TypeConverters
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.categories.CategoryDao
+import com.example.lyngua.models.words.Word
 
 class CategoryRepository(private val categoryDao: CategoryDao) {
     val readAllData: LiveData<List<Category>> = categoryDao.readAllData()

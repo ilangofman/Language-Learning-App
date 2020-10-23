@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
+import com.example.lyngua.models.words.Word
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.parcel.Parcelize

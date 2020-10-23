@@ -1,4 +1,4 @@
-package com.example.lyngua.views.addCategory
+package com.example.lyngua.views.Categories
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +11,6 @@ import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
 import kotlinx.android.synthetic.main.fragment_add_category.*
 import kotlinx.android.synthetic.main.fragment_add_category.view.*
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
 /*
