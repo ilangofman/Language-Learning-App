@@ -27,6 +27,7 @@ class PracticeMode : Fragment() {
 
         categoryController = CategoryController(requireContext())
 
+        // Call the category list adapter to inflate all the data inside the recycler view
         val listAdapter = CategoryListAdapter()
         val categoryRecyclerView = view.categoryRecyclerView
         categoryRecyclerView.adapter = listAdapter

@@ -18,6 +18,12 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
+    /*
+    *Purpose: Create the view holder for the recycler view
+    * Input: parent, which is the ViewGroup
+    *        viewType: int-  0 for the header, and 1 for a regular row
+    * Output: MyViewHolder
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return if(viewType == view_type_normal) {
             MyViewHolder(
@@ -33,12 +39,24 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
 
     }
 
+    /*
+    *Purpose: Insert the data into each row in the recycler view
+    * Input: holder, MyViewHolder - the row in the recycler view
+    *        position: the order in the row
+    * Output: None
+     */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        //if the position is the category data row and not the header of the recycler view
         if(getItemViewType(position) == view_type_normal) {
+
             val currentCategory = categoryList[position-1]
+
+            //add the data to the row
             holder.itemView.cat_description_txt.text =
                 "This is # words: ${currentCategory.wordsList.size},"
             holder.itemView.category_name_txt.text = currentCategory.name.toString()
+
+            //the listener for the update button
             holder.itemView.category_settings_button.setOnClickListener {
                 val actionChosen =
                     PracticeModeDirections.actionPracticeModeToUpdateCategoryFragment(
@@ -48,6 +66,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
 
             }
 
+            // the listener for the category selection
             holder.itemView.rowLayout.setOnClickListener {
                 val actionChosen =
                     PracticeModeDirections.actionPracticeModeToViewWordsFragment(
