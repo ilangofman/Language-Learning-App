@@ -18,9 +18,20 @@
     </fragment>
     <fragment
         android:id="@+id/practice"
-        android:name="com.example.lyngua.views.Practice"
+        android:name="com.example.lyngua.views.Categories.Practice"
         android:label="fragment_practice"
-        tools:layout="@layout/fragment_practice" />
+        tools:layout="@layout/fragment_practice" >
+        <action
+            android:id="@+id/action_practice_to_addCategory"
+            app:destination="@id/addCategory" />
+        <action
+            android:id="@+id/action_practice_to_updateCategoryFragment"
+            app:destination="@id/updateCategoryFragment" />
+        <action
+            android:id="@+id/action_practice_to_viewWordsFragment"
+            app:destination="@id/viewWordsFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/interactive"
         android:name="com.example.lyngua.views.Interactive"
@@ -32,17 +43,50 @@
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
     <fragment
-        android:id="@+id/more"
-        android:name="com.example.lyngua.views.More"
-        android:label="fragment_more"
-        tools:layout="@layout/fragment_more">
-        <action
-            android:id="@+id/action_more_to_personalDetails"
-            app:destination="@id/personalDetails" />
-        <action
-            android:id="@+id/action_more_to_changeLanguage"
-            app:destination="@id/changeLanguage" />
+    android:id="@+id/more"
+    android:name="com.example.lyngua.views.More"
+    android:label="fragment_more"
+    tools:layout="@layout/fragment_more">
+    <action
+        android:id="@+id/action_more_to_personalDetails"
+        app:destination="@id/personalDetails" />
+    <action
+        android:id="@+id/action_more_to_changeLanguage"
+        app:destination="@id/changeLanguage" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/addCategory"
+        android:name="com.example.lyngua.views.Categories.addCategory"
+        android:label="fragment_add_category"
+        tools:layout="@layout/fragment_add_category" >
+        <action
+            android:id="@+id/action_addCategory_to_practice"
+            app:destination="@id/practice" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCategoryFragment"
+        android:name="com.example.lyngua.views.Categories.UpdateCategory"
+        android:label="Update Category Fragment" >
+        <action
+            android:id="@+id/action_updateCategoryFragment_to_practice"
+            app:destination="@id/practice" />
+        <argument
+            android:name="categoryChosen"
+            app:argType="com.example.lyngua.models.categories.Category" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewWordsFragment"
+        android:name="com.example.lyngua.views.practice_words.ViewWordsFragment"
+        android:label="fragment_view_words"
+        tools:layout="@layout/fragment_view_words" >
+        <argument
+            android:name="categoryChosen"
+            app:argType="com.example.lyngua.models.categories.Category" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/personalDetails"
         android:name="com.example.lyngua.views.PersonalDetails"
@@ -53,5 +97,6 @@
         android:name="com.example.lyngua.views.ChangeLanguage"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
+
 
 </navigation>
