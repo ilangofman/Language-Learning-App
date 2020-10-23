@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUp : Fragment() {
 
@@ -26,7 +27,7 @@ class SignUp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        view.findViewById<Button>(R.id.signUpButton).setOnClickListener {
+        button_sign_up.setOnClickListener {
             navController.navigate(R.id.action_signUp_to_setupProfile)
         }
     }

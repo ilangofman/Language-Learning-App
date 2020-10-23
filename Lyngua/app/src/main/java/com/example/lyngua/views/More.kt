@@ -9,9 +9,9 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
-import kotlinx.android.synthetic.main.fragment_choose_interests.*
+import kotlinx.android.synthetic.main.fragment_more.*
 
-class ChooseInterests : Fragment() {
+class More : Fragment() {
 
     lateinit var navController: NavController
 
@@ -20,15 +20,19 @@ class ChooseInterests : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_choose_interests, container, false)
+        return inflater.inflate(R.layout.fragment_more, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        button_next.setOnClickListener {
-            navController.navigate(R.id.action_chooseInterests_to_completeSignUp)
+        button_personal.setOnClickListener {
+            navController.navigate(R.id.action_more_to_personalDetails)
+        }
+
+        button_language.setOnClickListener {
+            navController.navigate(R.id.action_more_to_changeLanguage)
         }
     }
 }

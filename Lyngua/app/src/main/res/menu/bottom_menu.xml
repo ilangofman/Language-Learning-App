@@ -3,24 +3,24 @@
 
 
     <item
-        android:id="@+id/homePage"
+        android:id="@+id/home"
         android:icon="@drawable/home"
         android:title="Home"/>
     <item
-        android:id="@+id/practiceMode"
+        android:id="@+id/practice"
         android:icon="@drawable/practice"
         android:title="Practice"/>
     <item
-        android:id="@+id/interactiveMode"
+        android:id="@+id/interactive"
 
         android:icon="@drawable/interactive"
         android:title="Interactive"/>
     <item
-        android:id="@+id/statsPage"
+        android:id="@+id/stats"
         android:icon="@drawable/stats"
         android:title="Stats"/>
     <item
-        android:id="@+id/morePage"
+        android:id="@+id/more"
         android:icon="@drawable/more"
         android:title=""/>
 </menu>

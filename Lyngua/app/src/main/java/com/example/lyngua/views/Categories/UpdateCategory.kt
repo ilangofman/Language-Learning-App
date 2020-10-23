@@ -38,7 +38,7 @@ class UpdateCategory : Fragment() {
                 val result = categoryController.updateCategory(args.categoryChosen.id, categoryName, args.categoryChosen.numWords+1, args.categoryChosen.wordsList)
                 if(result){
                     Toast.makeText(requireContext(), "Category Has Been Updated", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_updateCategoryFragment_to_practiceMode)
+                    findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
                 }
             }else{
                 Toast.makeText(requireContext(), "Category Name Cannot be Empty", Toast.LENGTH_LONG).show()
@@ -54,7 +54,7 @@ class UpdateCategory : Fragment() {
             confirmation.setPositiveButton("Delete"){_,_ ->
                 categoryController.deleteCategory(args.categoryChosen)
                 Toast.makeText(requireContext(), "Delete Success", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_updateCategoryFragment_to_practiceMode)
+                findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
             }
             confirmation.setNegativeButton("Cancel"){_,_ ->}
             confirmation.create().show()

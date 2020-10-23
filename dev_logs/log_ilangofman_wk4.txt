@@ -1,0 +1,9 @@
+Week 4 - Dev Log 
+
+Dates: Oct 12 to 17, 2020
+
+Work Completed:
+
+Continued to work on categories. Set up the different design patterns to work with the categories. 
+Ability to add, edit and delete categories.
+Improve the UI of the categories. 

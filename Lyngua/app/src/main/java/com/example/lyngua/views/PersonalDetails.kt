@@ -1,4 +1,4 @@
-package com.example.lyngua.views.account
+package com.example.lyngua.views
 
 import android.Manifest
 import android.app.Activity
@@ -14,27 +14,28 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
+import kotlinx.android.synthetic.main.fragment_personal_details.*
 import kotlinx.android.synthetic.main.fragment_setup_profile.*
+import kotlinx.android.synthetic.main.fragment_setup_profile.imageView_edit
+import kotlinx.android.synthetic.main.fragment_setup_profile.imageView_profile
 
-class SetupProfile : Fragment() {
 
-    lateinit var navController: NavController
+class PersonalDetails : Fragment() {
+
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setup_profile, container, false)
+        return inflater.inflate(R.layout.fragment_personal_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
 
-        button_next.setOnClickListener {
-            navController.navigate(R.id.action_setupProfile_to_chooseLanguage)
-        }
+        navController = Navigation.findNavController(view)
 
         imageView_edit.setOnClickListener {
             //check runtime permission
@@ -45,6 +46,10 @@ class SetupProfile : Fragment() {
                 //show popup to request runtime permission
                 requestPermissions(REQUIRED_PERMISSIONS, PERMISSION_CODE)
             }
+        }
+
+        button_save.setOnClickListener {
+            navController.popBackStack()
         }
     }
 
@@ -59,6 +64,7 @@ class SetupProfile : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             imageView_profile.setImageURI(data?.data)
+            button_save.visibility = View.VISIBLE
         }
     }
 

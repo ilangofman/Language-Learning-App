@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyngua.R
 import com.example.lyngua.models.categories.Category
+import com.example.lyngua.views.Categories.PracticeDirections
 import kotlinx.android.synthetic.main.custom_category_row.view.*
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
 
@@ -59,7 +60,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
             //the listener for the update button
             holder.itemView.category_settings_button.setOnClickListener {
                 val actionChosen =
-                    PracticeModeDirections.actionPracticeModeToUpdateCategoryFragment(
+                    PracticeDirections.actionPracticeToUpdateCategoryFragment(
                         currentCategory
                     )
                 holder.itemView.findNavController().navigate(actionChosen)
@@ -69,7 +70,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
             // the listener for the category selection
             holder.itemView.rowLayout.setOnClickListener {
                 val actionChosen =
-                    PracticeModeDirections.actionPracticeModeToViewWordsFragment(
+                    PracticeDirections.actionPracticeToViewWordsFragment(
                         currentCategory
                     )
                 holder.itemView.findNavController().navigate(actionChosen)

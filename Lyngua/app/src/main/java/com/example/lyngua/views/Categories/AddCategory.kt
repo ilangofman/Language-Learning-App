@@ -40,7 +40,7 @@ class addCategory : Fragment() {
                     val response = categoryController.addCategory(categoryName)
                     if (response){
                         Toast.makeText(requireContext(), "Successfully Added Category", Toast.LENGTH_LONG).show()
-                        findNavController().navigate(R.id.action_addCategory_to_practiceMode)
+                        findNavController().navigate(R.id.action_addCategory_to_practice)
                     }else{
                         Toast.makeText(requireContext(), "Failed Add Category", Toast.LENGTH_LONG).show()
                     }

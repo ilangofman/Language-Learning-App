@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.views.Categories.CategoryListAdapter
-import kotlinx.android.synthetic.main.fragment_practice_mode.view.*
+import kotlinx.android.synthetic.main.fragment_practice.view.*
 
-class PracticeMode : Fragment() {
+class Practice : Fragment() {
 
     private lateinit var categoryController: CategoryController
 
@@ -23,7 +23,7 @@ class PracticeMode : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_practice_mode, container, false)
+        val view = inflater.inflate(R.layout.fragment_practice, container, false)
 
         categoryController = CategoryController(requireContext())
 
@@ -39,7 +39,7 @@ class PracticeMode : Fragment() {
         })
 
         view.addCategoryButton.setOnClickListener{
-            findNavController().navigate(R.id.action_practiceMode_to_addCategory)
+            findNavController().navigate(R.id.action_practice_to_addCategory)
         }
 
         return view
