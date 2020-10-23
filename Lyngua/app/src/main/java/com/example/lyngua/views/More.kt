@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
+import com.example.lyngua.controllers.UserController
+import com.example.lyngua.models.User.User
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class More : Fragment() {
@@ -26,6 +28,9 @@ class More : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        val user: User? = UserController().readUserInfo(requireContext())
+
 
         button_personal.setOnClickListener {
             navController.navigate(R.id.action_more_to_personalDetails)

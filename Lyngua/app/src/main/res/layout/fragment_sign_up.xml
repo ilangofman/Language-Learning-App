@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signUpTitle">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email_field" />
@@ -55,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/emailField">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password_field" />

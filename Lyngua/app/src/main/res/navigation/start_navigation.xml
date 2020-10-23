@@ -41,15 +41,21 @@
         <action
             android:id="@+id/action_setupProfile_to_chooseLanguage"
             app:destination="@id/chooseLanguage" />
+        <argument
+            android:name="user"
+            app:argType="com.example.lyngua.models.User.User" />
     </fragment>
     <fragment
         android:id="@+id/chooseLanguage"
-        android:name="com.example.lyngua.views.ChooseLanguage"
+        android:name="com.example.lyngua.views.account.ChooseLanguage"
         android:label="fragment_choose_language"
         tools:layout="@layout/fragment_choose_language" >
         <action
             android:id="@+id/action_chooseLanguage_to_chooseInterests"
             app:destination="@id/chooseInterests" />
+        <argument
+            android:name="user"
+            app:argType="com.example.lyngua.models.User.User" />
     </fragment>
     <fragment
         android:id="@+id/chooseInterests"

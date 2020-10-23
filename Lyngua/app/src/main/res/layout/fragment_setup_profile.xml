@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.account.SetupProfile">
@@ -52,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_profile">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/first_name_field" />
@@ -73,6 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInput_first_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/last_name_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/last_name_field" />

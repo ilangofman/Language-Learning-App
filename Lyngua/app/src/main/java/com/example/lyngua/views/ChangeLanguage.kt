@@ -9,7 +9,9 @@ import android.widget.LinearLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
+import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.Languages
+import com.example.lyngua.models.User.User
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_change_language.*
 
@@ -35,6 +37,11 @@ class ChangeLanguage : Fragment() {
         navController = Navigation.findNavController(view)
         languageList = languageModel.getSupportedAllLanguages()
 
+        val user: User? = UserController().readUserInfo(requireContext())
+        if (user != null) {
+            currentLanguage = user.language
+        }
+
         if (currentLanguage != null) {
             val currentLanguageButton = LanguageButton(requireContext(), currentLanguage!!)
             currentLanguageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
@@ -55,6 +62,11 @@ class ChangeLanguage : Fragment() {
 
         button_save.setOnClickListener {
             currentLanguage = view.findViewById<LanguageButton>(radioGroup_language_list.checkedRadioButtonId).language
+            if (user != null) {
+                user.language = currentLanguage as Language
+                UserController().saveInfo(requireContext(),user)
+            }
+
             navController.popBackStack()
         }
     }
