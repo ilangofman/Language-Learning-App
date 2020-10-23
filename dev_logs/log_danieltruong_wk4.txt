@@ -1,0 +1,12 @@
+Daniel Truong -  Dev Log - Week 1
+
+
+Dates: Sep 21 to Sep 27, 2020
+
+Work Completed:
+
+Created an algorithm that generates a session of words for multiple choice questions.
+
+Implemented a system that allows the choosing of which session words should be tested in.
+
+Word difficulty progression based on getting correct answers.
