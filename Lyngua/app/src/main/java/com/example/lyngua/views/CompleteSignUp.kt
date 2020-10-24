@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
+import kotlinx.android.synthetic.main.fragment_complete_sign_up.*
 
 class CompleteSignUp : Fragment() {
 
@@ -26,11 +27,11 @@ class CompleteSignUp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        view.findViewById<Button>(R.id.button_lets_go).setOnClickListener {
+        button_lets_go.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
 
-        view.findViewById<Button>(R.id.button_no_thanks).setOnClickListener {
+        button_no_thanks.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
     }

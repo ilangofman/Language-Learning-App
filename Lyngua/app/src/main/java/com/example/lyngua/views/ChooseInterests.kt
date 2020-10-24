@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
+import kotlinx.android.synthetic.main.fragment_choose_interests.*
 
 class ChooseInterests : Fragment() {
 
@@ -26,7 +27,7 @@ class ChooseInterests : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        view.findViewById<Button>(R.id.button_next).setOnClickListener {
+        button_next.setOnClickListener {
             navController.navigate(R.id.action_chooseInterests_to_completeSignUp)
         }
     }
