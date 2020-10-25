@@ -39,7 +39,6 @@ class Word (
         totalGuesses = 0
         EF = 2.5
         streak = 0
-
     }
 
     //Initialize the words with this function because of an issue with Gson
@@ -62,36 +61,44 @@ class Word (
         println("${this.word} initialized with id: ${this.id} and box # ${this.boxNumber}")
     }
 
-    //Updates the word's next repetition, stats, and streak for type of question received
-    //NOTE: May need to break into 2 functions
-    //Calls the repetition function to determine the new boxNumber for the word
+    //The 2 functions updates the word's next repetition, stats, and streak for type of question received
 
-//TODO make two functions for when the user gets the word correct and when incorrect
+    fun correctAnswer(){
 
-//    fun updateWord(answer: Int?){
-//        if(answer == option){
-//            boxNumber = repetitionInterval(4.0)
-//            streak++
-//            correctGuesses++
-//
-//        }
-//        else{
-//            boxNumber = repetitionInterval( 0.0)
-//            if(streak >= 3)
-//                streak = streak - 2
-//            else
-//                streak--
-//
-//        }
-//        //Changes if the question should be asking for the english or the other language word as a question
-//        if(typeFlag == 0)
-//            typeFlag++
-//        else
-//            typeFlag--
-//        totalGuesses++
-//    }
+        //Calls the repetition function to determine the new boxNumber for the word
+        boxNumber = repetitionInterval(4.0)
+
+        streak++
+        correctGuesses++
+
+        //Changes if the question should be asking for the english or the other language word as a question
+        if(typeFlag == 0)
+            typeFlag++
+        else
+            typeFlag--
+        totalGuesses++
+    }
+
+    fun incorrectAnswer(){
+
+        //Calls the repetition function to determine the new boxNumber for the word
+        boxNumber = repetitionInterval( 0.0)
+
+        if(streak >= 3)
+            streak -= 2
+        else
+            streak--
+
+        //Changes if the question should be asking for the english or the other language word as a question
+        if(typeFlag == 0)
+            typeFlag++
+        else
+            typeFlag--
+        totalGuesses++
+    }
 
     //Function that determines the next session that the word should be in based on the quality of answer
+    //Input Parameter is the quality of the answer, based on a correct/incorrect answer
     //Returns the new boxNumber for the word
     private fun repetitionInterval(quality: Double): Int{
 
