@@ -37,13 +37,13 @@ class SetupProfile : Fragment() {
         navController = Navigation.findNavController(view)
 
         button_next.setOnClickListener {
-
-            val firstName:String = first_name_txt.text.toString()
-            val lastName: String = last_name_txt.text.toString()
-
-            userPassedIn.user.firstName = firstName
-            userPassedIn.user.lastName = lastName
-            userPassedIn.user.profilePicture = profileImageUri
+            userPassedIn.user.firstName = editText_first_name.text.toString()
+            userPassedIn.user.lastName = editText_last_name.text.toString()
+            if (profileImageUri != null) {
+                userPassedIn.user.profilePicture = profileImageUri.toString()
+            } else {
+                userPassedIn.user.profilePicture = null
+            }
 
             val actionChosen = SetupProfileDirections.actionSetupProfileToChooseLanguage(userPassedIn.user)
             navController.navigate(actionChosen)
@@ -72,7 +72,7 @@ class SetupProfile : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             profileImageUri = data?.data
-            imageView_profile.setImageURI(data?.data)
+            imageView_profile.setImageURI(profileImageUri)
         }
     }
 

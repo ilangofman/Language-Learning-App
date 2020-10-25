@@ -13,6 +13,7 @@ import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.User.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_home.*
+import android.net.Uri
 
 class Home : Fragment() {
 

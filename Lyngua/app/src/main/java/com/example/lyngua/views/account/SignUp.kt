@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.example.lyngua.R
 import com.example.lyngua.models.User.User
-import com.example.lyngua.views.Categories.PracticeDirections
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUp : Fragment() {
@@ -31,8 +28,8 @@ class SignUp : Fragment() {
         navController = Navigation.findNavController(view)
 
         button_sign_up.setOnClickListener {
-            val email = email_field.text.toString()
-            val password = password_field.text.toString()
+            val email = editText_email.text.toString()
+            val password = editText_password.text.toString()
             val user = User()
             user.email = email
 

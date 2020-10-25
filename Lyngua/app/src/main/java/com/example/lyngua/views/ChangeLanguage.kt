@@ -49,22 +49,20 @@ class ChangeLanguage : Fragment() {
             currentLanguageButton.isChecked = true
         }
 
-        if (languageList != null) {
-            for (language in languageList!!) {
-                val languageButton = LanguageButton(requireContext(), language)
-                languageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
-                languageButton.setOnClickListener {
-                    button_save.visibility = View.VISIBLE
-                }
-                radioGroup_language_list.addView(languageButton)
+        languageList?.forEach { language ->
+            val languageButton = LanguageButton(requireContext(), language)
+            languageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
+            languageButton.setOnClickListener {
+                button_save.visibility = View.VISIBLE
             }
+            radioGroup_language_list.addView(languageButton)
         }
 
         button_save.setOnClickListener {
             currentLanguage = view.findViewById<LanguageButton>(radioGroup_language_list.checkedRadioButtonId).language
             if (user != null) {
-                user.language = currentLanguage as Language
-                UserController().saveInfo(requireContext(),user)
+                user.language = currentLanguage!!
+                UserController().saveInfo(requireContext(), user)
             }
 
             navController.popBackStack()

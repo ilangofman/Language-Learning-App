@@ -15,6 +15,7 @@ import com.example.lyngua.models.Languages
 import com.example.lyngua.views.LanguageButton
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_choose_language.*
+import java.util.*
 
 class ChooseLanguage : Fragment() {
 
@@ -37,18 +38,17 @@ class ChooseLanguage : Fragment() {
         navController = Navigation.findNavController(view)
 
         languageList = languageModel.getSupportedAllLanguages()
-        if (languageList != null) {
-            for (language in languageList!!) {
-                val languageButton = LanguageButton(requireContext(), language)
-                languageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
-                languageButton.setOnClickListener {
-                    userPassedIn.user.language = languageButton.language
-                    userController.saveInfo(requireContext(), userPassedIn.user)
+        languageList?.forEach { language ->
+            val languageButton = LanguageButton(requireContext(), language)
+            languageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
+            languageButton.setOnClickListener {
+                userPassedIn.user.language = languageButton.language
+                userPassedIn.user.dateCreated = Date()
+                userController.saveInfo(requireContext(), userPassedIn.user)
 
-                    navController.navigate(R.id.action_chooseLanguage_to_chooseInterests)
-                }
-                radioGroup_language_list.addView(languageButton)
+                navController.navigate(R.id.action_chooseLanguage_to_chooseInterests)
             }
+            radioGroup_language_list.addView(languageButton)
         }
     }
 }
