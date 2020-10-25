@@ -21,7 +21,7 @@ class CategoryController(context: Context){
 
     fun addCategory(catName: String): Boolean {
         val cateogryAPI = CategoryAPI()
-        val category = Category(0, catName,  6, emptyList())
+        val category = Category(0, catName,  6, emptyList(), 1)
         thread {
             val id_added = repository.addCategory(category)
             Log.d("Words", "The id is ${id_added}")
@@ -31,8 +31,8 @@ class CategoryController(context: Context){
         return true
     }
 
-    fun updateCategory(catId: Int, catName: String, catWords: Int, catWordsList: List<Word>): Boolean {
-        val category = Category(catId, catName,  catWords, catWordsList)
+    fun updateCategory(catId: Int, catName: String, catWords: Int, catWordsList: List<Word>, catSessionNumber: Int): Boolean {
+        val category = Category(catId, catName,  catWords, catWordsList, catSessionNumber)
 
         thread{
             repository.updateCategory(category)

@@ -18,7 +18,8 @@ data class Category(
     @ColumnInfo(name="id")          val id:Int,
     @ColumnInfo(name="name")        val name: String,
     @ColumnInfo(name="numWords")    val numWords:Int,
-    @ColumnInfo(name="wordsList")   val wordsList: List<Word>
+    @ColumnInfo(name="wordsList")   val wordsList: List<Word>,
+    @ColumnInfo(name="sessionNumber") var sessionNumber:Int
 ): Parcelable
 
 class WordsTypeConverter {

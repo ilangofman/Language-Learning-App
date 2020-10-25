@@ -35,7 +35,7 @@ class UpdateCategory : Fragment() {
         view.update_category_btn.setOnClickListener{
             val categoryName = category_name_input_text.text.toString()
             if(categoryName.isNotEmpty()) {
-                val result = categoryController.updateCategory(args.categoryChosen.id, categoryName, args.categoryChosen.numWords+1, args.categoryChosen.wordsList)
+                val result = categoryController.updateCategory(args.categoryChosen.id, categoryName, args.categoryChosen.numWords+1, args.categoryChosen.wordsList, args.categoryChosen.sessionNumber)
                 if(result){
                     Toast.makeText(requireContext(), "Category Has Been Updated", Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
