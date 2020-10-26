@@ -7,34 +7,34 @@
     tools:context=".views.ChooseInterests">
 
     <TextView
-        android:id="@+id/chooseInterestsTitle"
+        android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="@string/choose_interests_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/interestsExample"
+        app:layout_constraintBottom_toTopOf="@+id/textView_example"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/interestsExample"
+        android:id="@+id/textView_example"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/interests_example"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/firstInterest"
+        app:layout_constraintBottom_toTopOf="@+id/textInput_interest1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseInterestsTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_title" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstInterest"
+        android:id="@+id/textInput_interest1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
@@ -42,19 +42,20 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="75dp"
         android:layout_marginRight="75dp"
-        app:layout_constraintBottom_toTopOf="@+id/secondInterest"
+        app:layout_constraintBottom_toTopOf="@+id/textInput_interest2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interestsExample">
+        app:layout_constraintTop_toBottomOf="@+id/textView_example">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_interest1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/interest1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/secondInterest"
+        android:id="@+id/textInput_interest2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
@@ -62,19 +63,20 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="75dp"
         android:layout_marginRight="75dp"
-        app:layout_constraintBottom_toTopOf="@id/thirdInterest"
+        app:layout_constraintBottom_toTopOf="@id/textInput_interest3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstInterest">
+        app:layout_constraintTop_toBottomOf="@+id/textInput_interest1">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_interest2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/interest2" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/thirdInterest"
+        android:id="@+id/textInput_interest3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
@@ -86,9 +88,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondInterest">
+        app:layout_constraintTop_toBottomOf="@+id/textInput_interest2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_interest3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/interest3" />
