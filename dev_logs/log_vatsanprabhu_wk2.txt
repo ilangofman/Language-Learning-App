@@ -1,0 +1,8 @@
+Vatsan Prabhu - Dev Log - Week 2
+
+Dates: Sep 27 to Oct 3, 2020
+
+Work Completed:
+- Created fragments for UI of the sign up process.
+- UI additions include filling in personal details, interests, language choice
+- Fixed navigation between main navigation graph and setup navigation graoh to allow better flow

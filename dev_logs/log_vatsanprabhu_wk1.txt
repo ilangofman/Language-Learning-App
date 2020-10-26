@@ -1,0 +1,9 @@
+Vatsan Prabhu - Dev Log - Week 1
+
+Dates: Sep 20 to Sep 26, 2020
+
+Work Completed:
+- Created wireframes for our ideas of what the final app will look like
+- Worked on presentation slides for Deliverable 1
+- Started planning out code for creating a sign up process for the app
+- Started looking into architecture styles for the app

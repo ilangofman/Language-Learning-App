@@ -28,6 +28,10 @@
     <string name="google_button">Sign in with Google</string>
     <string name="lets_go_button">Let\'s Go!</string>
     <string name="no_thanks_button">No Thanks</string>
+    <string name="personal_button">Personal Details</string>
+    <string name="language_button">Change Language</string>
+    <string name="password_button">Change Password</string>
+    <string name="save_button">Save</string>
 
     <!-- PAGE TITLES AND HEADERS -->
     <string name="sign_up_title">Let\'s Get Started</string>
