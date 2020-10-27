@@ -6,8 +6,6 @@ import android.os.Parcelable
 import android.util.Log
 import kotlinx.android.parcel.Parcelize
 
-
-
 @Parcelize
 class Word (
     val score: Int,
