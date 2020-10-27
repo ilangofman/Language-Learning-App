@@ -82,7 +82,7 @@ class Interactive : Fragment() {
             Toast.makeText(requireContext(), "Photo saved in gallery", Toast.LENGTH_SHORT).show()
         }
 
-        outputDirectory = galleryController.getOutputDirectory(activity, resources.getString(R.string.app_name)) ?: requireContext().filesDir
+        outputDirectory = galleryController.getOutputDirectory(requireContext(), activity, resources.getString(R.string.app_name))
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
