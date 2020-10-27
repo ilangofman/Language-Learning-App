@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -51,6 +52,16 @@ class Interactive : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            imageView.setImageDrawable(null)
+            viewFinder.visibility = View.VISIBLE
+            button_camera_capture.visibility = View.VISIBLE
+            button_close.visibility = View.GONE
+            button_save.visibility = View.GONE
+
+            this.isEnabled = false
+        }
+
         // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
@@ -61,6 +72,7 @@ class Interactive : Fragment() {
         // Set up the listener for take photo button
         button_camera_capture.setOnClickListener {
             takePhoto()
+            callback.isEnabled = true
         }
 
         button_close.setOnClickListener {
@@ -69,6 +81,7 @@ class Interactive : Fragment() {
             button_camera_capture.visibility = View.VISIBLE
             button_close.visibility = View.GONE
             button_save.visibility = View.GONE
+            callback.isEnabled = false
         }
 
         button_save.setOnClickListener {
