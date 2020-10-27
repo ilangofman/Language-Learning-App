@@ -16,13 +16,14 @@ import com.example.lyngua.views.LanguageButton
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_choose_language.*
 import java.util.*
+import kotlin.concurrent.thread
 
 class ChooseLanguage : Fragment() {
 
     private var languageModel: Languages = Languages
     private var languageList: List<Language>? = null
     private lateinit var navController: NavController
-    private val userPassedIn by navArgs<SetupProfileArgs>()
+    private val userPassedIn by navArgs<ChooseLanguageArgs>()
     private val userController:UserController = UserController()
 
     override fun onCreateView(
@@ -37,7 +38,9 @@ class ChooseLanguage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        languageList = languageModel.getSupportedAllLanguages()
+        thread {
+            languageList = languageModel.getSupportedAllLanguages()
+        }.join()
         languageList?.forEach { language ->
             val languageButton = LanguageButton(requireContext(), language)
             languageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)

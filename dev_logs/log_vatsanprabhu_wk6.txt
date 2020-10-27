@@ -1,0 +1,9 @@
+Vatsan Prabhu - Dev Log - Week 6
+
+Dates: Oct 25 to Oct 31, 2020
+
+Work Completed:
+- Added photo library support to display a page of all saved photos regardless of which album
+- Implemented SpannedGridLayoutManager for photolibrary to display photos in a visually pleasing way
+- Started working on implementing album support to allow users to save photos to a specific album
+- Albums will be saved on device in the form of folders and photos will be put into those folders for each album

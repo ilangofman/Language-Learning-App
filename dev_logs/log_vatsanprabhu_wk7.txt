@@ -1,0 +1,8 @@
+Vatsan Prabhu - Dev Log - Week 6
+
+Dates: Nov 1 to Nov 7, 2020
+
+Work Completed:
+- Completed album support for gallery
+- Added database functionality to allow photos to be stored
+- Added dialogs to allow creation, editing, deletion, etc of albums

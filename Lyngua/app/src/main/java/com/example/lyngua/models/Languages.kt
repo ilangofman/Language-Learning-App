@@ -2,12 +2,13 @@ package com.example.lyngua.models
 
 import android.os.StrictMode
 import android.util.Log
-import com.example.lyngua.R
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.translate.Language
 import com.google.cloud.translate.Translate
 import com.google.cloud.translate.TranslateOptions
+import com.google.cloud.translate.Translation
 import java.io.IOException
+
 
 object Languages {
 
@@ -60,6 +61,19 @@ object Languages {
        return translate?.listSupportedLanguages()
    }
 
+    fun translate(word: String, language: String): String? {
+        if(translate == null){
+            translate = startTranslatorService()
+        }
 
+        return translate?.translate(
+            word,
+            Translate.TranslateOption.targetLanguage(language),
+            Translate.TranslateOption.model("base")
+        )?.translatedText
+
+
+
+    }
 
 }

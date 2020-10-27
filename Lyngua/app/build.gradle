@@ -8,6 +8,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    aaptOptions {
+        noCompress "tflite"  // Prevent the image classification model from being compressed
+    }
 
 
     defaultConfig {
@@ -63,6 +66,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -73,6 +77,15 @@ dependencies {
     }
     annotationProcessor 'com.google.cloud:google-cloud-translate:1.12.0'
 
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+
+    def camerax_version = "1.0.0-beta11"
+    // CameraX core library using camera2 implementation
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    // CameraX Lifecycle Library
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    // CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha18"
 
 
     // Kotlin components
@@ -96,5 +109,13 @@ dependencies {
 
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    // ML dependencies
+    implementation 'com.google.mlkit:image-labeling:17.0.0'
+    // Image labeling feature with custom classifier support
+    implementation 'com.google.mlkit:image-labeling-custom:16.2.1'
 }
