@@ -20,10 +20,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lyngua.R
+import com.example.lyngua.controllers.GalleryController
 import kotlinx.android.synthetic.main.fragment_interactive.*
 import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -32,13 +31,14 @@ import java.util.concurrent.Executors
 
 class Interactive : Fragment() {
 
+    private val galleryController = GalleryController()
+
     private var imageCapture: ImageCapture? = null
     private var imageBitmap: Bitmap? = null
     private lateinit var photoFile: File
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var outputStream: OutputStream
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,10 +72,7 @@ class Interactive : Fragment() {
         }
 
         button_save.setOnClickListener {
-            outputStream = FileOutputStream(photoFile)
-            imageBitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-            outputStream.flush()
-            outputStream.close()
+            galleryController.savePhoto(imageBitmap, photoFile)
 
             viewFinder.visibility = View.VISIBLE
             button_camera_capture.visibility = View.VISIBLE
