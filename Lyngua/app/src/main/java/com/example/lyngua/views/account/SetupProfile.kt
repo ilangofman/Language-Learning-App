@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,12 +14,15 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
 import kotlinx.android.synthetic.main.fragment_setup_profile.*
 
 class SetupProfile : Fragment() {
 
     lateinit var navController: NavController
+    private val userPassedIn by navArgs<SetupProfileArgs>()
+    private var profileImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +37,16 @@ class SetupProfile : Fragment() {
         navController = Navigation.findNavController(view)
 
         button_next.setOnClickListener {
-            navController.navigate(R.id.action_setupProfile_to_chooseLanguage)
+            userPassedIn.user.firstName = editText_first_name.text.toString()
+            userPassedIn.user.lastName = editText_last_name.text.toString()
+            if (profileImageUri != null) {
+                userPassedIn.user.profilePicture = profileImageUri.toString()
+            } else {
+                userPassedIn.user.profilePicture = null
+            }
+
+            val actionChosen = SetupProfileDirections.actionSetupProfileToChooseLanguage(userPassedIn.user)
+            navController.navigate(actionChosen)
         }
 
         imageView_edit.setOnClickListener {
@@ -58,7 +71,8 @@ class SetupProfile : Fragment() {
     //handle result of picked image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            imageView_profile.setImageURI(data?.data)
+            profileImageUri = data?.data
+            imageView_profile.setImageURI(profileImageUri)
         }
     }
 

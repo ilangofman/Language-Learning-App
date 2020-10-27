@@ -1,0 +1,10 @@
+Week 5 - Dev Log 
+
+Dates: Oct 18 to 24, 2020
+
+Work Completed:
+
+- Finished up the categories integration with the external words API. 
+- Worked with Vatsan to add persistant storage for the user information with shared preferences.
+- Worked with Daniel to integrate his changes for the sessions with the categories. 
+- Did research about object detection and image classification. 

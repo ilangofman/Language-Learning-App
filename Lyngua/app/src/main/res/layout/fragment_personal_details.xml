@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView_profile" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_email"
+        android:id="@+id/textInput_first_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
@@ -49,6 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_profile">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/first_name_field" />
@@ -65,16 +66,17 @@
         android:layout_marginRight="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_email">
+        app:layout_constraintTop_toBottomOf="@+id/textInput_first_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/last_name_field" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_first_name"
+        android:id="@+id/textInput_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
@@ -87,6 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInput_last_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email_field" />
@@ -100,6 +103,6 @@
         android:text="@string/password_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_first_name" />
+        app:layout_constraintTop_toBottomOf="@+id/textInput_email" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
