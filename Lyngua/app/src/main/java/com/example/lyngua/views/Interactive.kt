@@ -82,7 +82,7 @@ class Interactive : Fragment() {
             Toast.makeText(requireContext(), "Photo saved in gallery", Toast.LENGTH_SHORT).show()
         }
 
-        outputDirectory = getOutputDirectory()
+        outputDirectory = galleryController.getOutputDirectory(activity, resources.getString(R.string.app_name)) ?: requireContext().filesDir
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
@@ -161,19 +161,6 @@ class Interactive : Fragment() {
                 Log.e("CameraX", errorType.toString())
             }
         })
-    }
-
-    /*
-     * Purpose: Get the directory for where photos will be stored
-     * Input: None
-     * Output: File object containing directory path
-     */
-    private fun getOutputDirectory(): File {
-        val mediaDir = activity?.getExternalFilesDirs(Environment.DIRECTORY_PICTURES)?.firstOrNull()?.let {
-            File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
-
-        return if (mediaDir != null && mediaDir.exists())
-            mediaDir else requireContext().filesDir
     }
 
     /*
