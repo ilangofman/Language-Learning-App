@@ -21,6 +21,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
+import com.google.mlkit.common.model.LocalModel
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import kotlinx.android.synthetic.main.fragment_interactive.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -61,6 +66,7 @@ class Interactive : Fragment() {
         // Set up the listener for take photo button
         button_camera_capture.setOnClickListener {
             takePhoto()
+
         }
 
         button_close.setOnClickListener {
@@ -154,6 +160,48 @@ class Interactive : Fragment() {
                 button_save.visibility = View.VISIBLE
                 // Use the image, then make sure to close it.
                 image.close()
+
+
+
+                if(imageBitmap != null){
+                    Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
+
+                    val image = InputImage.fromBitmap(imageBitmap!!, 0)
+
+                    val localModel =
+                        LocalModel.Builder()
+                            .setAssetFilePath("classification_models/image_classifier.tflite")
+//                            .setAssetFilePath("classification_models/mobilenet_v2.tflite")
+//                            .setAssetFilePath("classification_models/mnasnet_1.tflite")
+//                            .setAssetFilePath("classification_models/nasnet_large_1_metadata_1.tflite")
+                            .build()
+                    val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+//                            .setConfidenceThreshold(0.5f)
+                        .setMaxResultCount(1)
+                        .build()
+                    val labeler =
+                        ImageLabeling.getClient(customImageLabelerOptions)
+
+//                    val labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                    labeler.process(image)
+                        .addOnSuccessListener { labels ->
+                            for (label in labels) {
+                                val text = label.text
+                                val confidence = label.confidence
+                                val index = label.index
+                                Log.d("ImageC", "Found: $text, with $confidence")
+                                Toast.makeText(requireContext(), "Found image classification ${text} with $confidence",Toast.LENGTH_SHORT).show()
+
+                            }
+                            Toast.makeText(requireContext(), "Found image classification ${labels.size}",Toast.LENGTH_SHORT).show()
+
+                        }
+                        .addOnFailureListener { e ->
+                            Log.d("ImageC", e.toString())
+                            Toast.makeText(requireContext(), "Failed To  $e",Toast.LENGTH_SHORT).show()
+                        }
+                }
+
             }
 
             override fun onError(exception: ImageCaptureException) {

@@ -5,92 +5,66 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".views.Welcome"
-    android:background="@android:color/white">
+    android:background="@drawable/welcome_background">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/bold"
         android:gravity="center_horizontal"
-        android:text="Welcome To Lyngua"
-        android:textSize="20dp"
+        android:text="Welcome!"
+        android:textColor="@android:color/white"
+        android:textSize="42sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
-
-    <Button
-        android:id="@+id/log_in_btn_welcome_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginLeft="162dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginRight="162dp"
-        android:text="Log In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <Button
         android:id="@+id/create_account_btn_welcome_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginLeft="134dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="134dp"
-        android:layout_marginRight="134dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:width="163dp"
+        android:height="53dp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="@font/regular"
         android:text="Create Account"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/log_in_btn_welcome_page" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/home_page_btn_welcome_page"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="154dp"
-        android:layout_marginLeft="154dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="155dp"
-        android:layout_marginRight="155dp"
-        android:layout_marginBottom="57dp"
-        android:text="Home Page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_account_btn_welcome_page" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="355dp"
-        android:layout_height="67dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="248dp"
-        android:src="@drawable/logolyngua"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_marginTop="12dp"
+        android:alpha="0.6"
+        android:fontFamily="@font/regular"
+        android:text="Lets Start Learning!"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="344dp"
-        android:layout_height="346dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/welcomeimage2"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_width="359dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/logolyngua"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.178"
-        app:srcCompat="@drawable/welcomeimage2" />
+        app:layout_constraintTop_toBottomOf="@+id/create_account_btn_welcome_page"
+        app:layout_constraintVertical_bias="0.962" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

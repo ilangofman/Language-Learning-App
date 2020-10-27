@@ -31,18 +31,7 @@ class Welcome : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.log_in_btn_welcome_page).setOnClickListener{
-           navController.navigate(R.id.action_welcome_to_logInFragment)
-        }
 
-
-        home_page_btn_welcome_page.setOnClickListener{
-//            Log.d("Welcome Screen", "Create Account Button Pressed")
-//            val intent = Intent(getActivity(), ActivityTabs::class.java)
-//            startActivity(intent)
-//            navController.navigate(R.id.action_welcome_to_main_navigation)
-
-        }
 
         create_account_btn_welcome_page.setOnClickListener{
             navController.navigate(R.id.action_welcome_to_signUp)
