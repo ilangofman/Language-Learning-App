@@ -35,6 +35,7 @@ tools:context=".views.Welcome"
         android:background="@drawable/button_shape"
         android:fontFamily="@font/regular"
         android:text="Create Account"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

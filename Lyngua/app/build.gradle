@@ -66,6 +66,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.2.1'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -108,7 +109,11 @@ dependencies {
 
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
     // ML dependencies
     implementation 'com.google.mlkit:image-labeling:17.0.0'
     // Image labeling feature with custom classifier support

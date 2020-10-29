@@ -12,12 +12,11 @@
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
-            android:id="@+id/action_welcome_to_signUp"
-            app:destination="@id/signUp"
-            app:enterAnim="@android:anim/fade_in" />
-        <action
             android:id="@+id/action_welcome_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_welcome_to_setupProfile"
+            app:destination="@id/setupProfile" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -41,9 +40,6 @@
         <action
             android:id="@+id/action_setupProfile_to_chooseLanguage"
             app:destination="@id/chooseLanguage" />
-        <argument
-            android:name="user"
-            app:argType="com.example.lyngua.models.User.User" />
     </fragment>
     <fragment
         android:id="@+id/chooseLanguage"

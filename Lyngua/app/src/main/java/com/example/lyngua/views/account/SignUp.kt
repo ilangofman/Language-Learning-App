@@ -32,8 +32,9 @@ class SignUp : Fragment() {
             val user = User()
             user.email = email
 
-
-            val actionChosen = SignUpDirections.actionSignUpToSetupProfile(user)
+//
+            val actionChosen = SignUpDirections.actionSignUpToSetupProfile()
+//            val actionChosen = SignUpDirections.actionSignUpToSetupProfile(user)
 
             navController.navigate(actionChosen)
 

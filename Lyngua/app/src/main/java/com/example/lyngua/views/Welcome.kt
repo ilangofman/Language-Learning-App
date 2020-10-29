@@ -34,7 +34,7 @@ class Welcome : Fragment(){
 
 
         create_account_btn_welcome_page.setOnClickListener{
-            navController.navigate(R.id.action_welcome_to_signUp)
+            navController.navigate(R.id.action_welcome_to_setupProfile)
         }
 
 

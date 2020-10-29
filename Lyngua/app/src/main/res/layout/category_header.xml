@@ -10,7 +10,7 @@
     >
 
     <TextView
-        android:id="@+id/category_name_txt"
+        android:id="@+id/question_title_interactive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Practice Mode"
