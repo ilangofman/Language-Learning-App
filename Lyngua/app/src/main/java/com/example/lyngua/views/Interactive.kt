@@ -8,25 +8,32 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.Image
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
+import com.example.lyngua.controllers.UserController
+import com.example.lyngua.models.Languages
+import com.example.lyngua.models.User.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
-import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import kotlinx.android.synthetic.main.fragment_interactive.*
+import kotlinx.android.synthetic.main.interactive_question_panel.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,6 +51,8 @@ class Interactive : Fragment() {
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    lateinit var navController: NavController
+    lateinit var navBar: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +74,12 @@ class Interactive : Fragment() {
 
         // Set up the listener for take photo button
         button_camera_capture.setOnClickListener {
+            navController = Navigation.findNavController(view)
+            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
+            navBar.visibility = View.GONE
+
             takePhoto()
+
 
         }
 
@@ -75,6 +89,10 @@ class Interactive : Fragment() {
             button_camera_capture.visibility = View.VISIBLE
             button_close.visibility = View.GONE
             button_save.visibility = View.GONE
+
+            navController = Navigation.findNavController(view)
+            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
+            navBar.visibility = View.VISIBLE
         }
 
         button_save.setOnClickListener {
@@ -185,15 +203,37 @@ class Interactive : Fragment() {
 //                    val labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
                     labeler.process(image)
                         .addOnSuccessListener { labels ->
+                            var objectIdentifiedtext: String = "Word to Translate"
                             for (label in labels) {
-                                val text = label.text
+                                objectIdentifiedtext = label.text
                                 val confidence = label.confidence
                                 val index = label.index
-                                Log.d("ImageC", "Found: $text, with $confidence")
-                                Toast.makeText(requireContext(), "Found image classification ${text} with $confidence",Toast.LENGTH_SHORT).show()
+                                Log.d("ImageC", "Found: $objectIdentifiedtext, with $confidence")
+//                                Toast.makeText(requireContext(), "Found image classification $objectIdentifiedtext with $confidence",Toast.LENGTH_SHORT).show()
 
                             }
-                            Toast.makeText(requireContext(), "Found image classification ${labels.size}",Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(requireContext(), "Found image classification ${labels.size}",Toast.LENGTH_SHORT).show()
+
+
+                            val user: User? = UserController().readUserInfo(requireContext())
+                            if(user != null) {
+                                //create the question
+                                val bottomSheet: BottomSheetDialog =
+                                    BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+
+                                bottomSheet.setContentView(R.layout.interactive_question_panel)
+
+
+                                bottomSheet.question_title_interactive.text = objectIdentifiedtext
+                                val translated = Languages.translate(objectIdentifiedtext, user.language.code)
+                                bottomSheet.option_1.text = translated
+                                bottomSheet.option_2.text = "Option 2"
+                                bottomSheet.option_3.text = "Option 3"
+                                bottomSheet.option_4.text = "Option 4"
+
+                                bottomSheet.setCanceledOnTouchOutside(false)
+                                bottomSheet.show()
+                            }
 
                         }
                         .addOnFailureListener { e ->
