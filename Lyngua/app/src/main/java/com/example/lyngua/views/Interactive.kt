@@ -7,7 +7,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.Image
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -166,6 +169,7 @@ class Interactive : Fragment() {
 
         imageCapture.takePicture(ContextCompat.getMainExecutor(requireContext()), object :
             ImageCapture.OnImageCapturedCallback() {
+            @RequiresApi(Build.VERSION_CODES.N)
             @SuppressLint("UnsafeExperimentalUsageError")
             override fun onCaptureSuccess(image: ImageProxy) {
                 imageBitmap = image.image?.toBitmap()
@@ -224,9 +228,14 @@ class Interactive : Fragment() {
                                 bottomSheet.setContentView(R.layout.interactive_question_panel)
 
 
-                                bottomSheet.question_title_interactive.text = objectIdentifiedtext
+                                bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
                                 val translated = Languages.translate(objectIdentifiedtext, user.language.code)
-                                bottomSheet.option_1.text = translated
+                                if (translated != null) {
+                                    val translateFiltered =  Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+                                    bottomSheet.option_1.text = translateFiltered.capitalize()
+                                }else{
+                                    bottomSheet.option_1.text = "Error :("
+                                }
                                 bottomSheet.option_2.text = "Option 2"
                                 bottomSheet.option_3.text = "Option 3"
                                 bottomSheet.option_4.text = "Option 4"
