@@ -22,7 +22,7 @@ class ChooseLanguage : Fragment() {
     private var languageModel: Languages = Languages
     private var languageList: List<Language>? = null
     private lateinit var navController: NavController
-    private val userPassedIn by navArgs<SetupProfileArgs>()
+    private val userPassedIn by navArgs<ChooseLanguageArgs>()
     private val userController:UserController = UserController()
 
     override fun onCreateView(

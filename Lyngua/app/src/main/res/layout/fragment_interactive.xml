@@ -6,15 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".views.Interactive">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Interactive"
-        android:textSize="20dp"
+    <Button
+        android:id="@+id/button_camera_capture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/ic_capture_white"
+        android:elevation="2dp"
+        android:scaleType="fitCenter"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:strokeColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/button_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/ic_close_white"
+        android:visibility="gone"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/ic_save_white"
+        android:visibility="gone"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

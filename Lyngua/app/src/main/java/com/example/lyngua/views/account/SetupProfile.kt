@@ -16,12 +16,15 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
+import com.example.lyngua.models.User.User
 import kotlinx.android.synthetic.main.fragment_setup_profile.*
+import kotlinx.android.synthetic.main.fragment_setup_profile.editText_email
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SetupProfile : Fragment() {
 
     lateinit var navController: NavController
-    private val userPassedIn by navArgs<SetupProfileArgs>()
+//    private val userPassedIn by navArgs<SetupProfileArgs>()
     private var profileImageUri: Uri? = null
 
     override fun onCreateView(
@@ -37,15 +40,20 @@ class SetupProfile : Fragment() {
         navController = Navigation.findNavController(view)
 
         button_next.setOnClickListener {
-            userPassedIn.user.firstName = editText_first_name.text.toString()
-            userPassedIn.user.lastName = editText_last_name.text.toString()
+
+            val user = User()
+            val email = editText_email.text.toString()
+            user.email = email
+
+            user.firstName = editText_first_name.text.toString()
+            user.lastName = editText_last_name.text.toString()
             if (profileImageUri != null) {
-                userPassedIn.user.profilePicture = profileImageUri.toString()
+                user.profilePicture = profileImageUri.toString()
             } else {
-                userPassedIn.user.profilePicture = null
+                user.profilePicture = null
             }
 
-            val actionChosen = SetupProfileDirections.actionSetupProfileToChooseLanguage(userPassedIn.user)
+            val actionChosen = SetupProfileDirections.actionSetupProfileToChooseLanguage(user)
             navController.navigate(actionChosen)
         }
 
