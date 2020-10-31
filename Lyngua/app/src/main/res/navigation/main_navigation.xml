@@ -28,8 +28,8 @@
             android:id="@+id/action_practice_to_updateCategoryFragment"
             app:destination="@id/updateCategoryFragment" />
         <action
-            android:id="@+id/action_practice_to_viewWordsFragment"
-            app:destination="@id/viewWordsFragment" />
+            android:id="@+id/action_practice_to_categoryGame"
+            app:destination="@id/categoryGame" />
     </fragment>
 
     <fragment
@@ -97,6 +97,18 @@
         android:name="com.example.lyngua.views.ChangeLanguage"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
+    <fragment
+        android:id="@+id/categoryGame"
+        android:name="com.example.lyngua.views.Categories.CategoryGame"
+        android:label="fragment_category_game"
+        tools:layout="@layout/fragment_category_game" >
+        <argument
+            android:name="categoryChosen"
+            app:argType="com.example.lyngua.models.categories.Category" />
+        <action
+            android:id="@+id/action_categoryGame_to_practice"
+            app:destination="@id/practice" />
+    </fragment>
 
 
 </navigation>

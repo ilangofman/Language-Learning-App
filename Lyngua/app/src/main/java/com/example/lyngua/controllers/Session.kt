@@ -1,9 +1,11 @@
 package com.example.lyngua.controllers
 
+import com.example.lyngua.models.Languages
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
+import com.example.lyngua.models.User.User
 
-class Session(val category: Category) {
+class Session(val category: Category, val user: User?) {
 
     //Goes through the list of words using the wordIdList and generates the question
     //Inputs are
@@ -38,7 +40,6 @@ class Session(val category: Category) {
         var count = 0
         while (newSession.isEmpty()) {
             for (word in category.wordsList) {
-
                 //Add only 20 words for a single session
                 if (category.sessionNumber == word.boxNumber && count < 20) {
 
@@ -69,6 +70,11 @@ class Session(val category: Category) {
 
         //Loops through the list of words for the category
         for (word in category.wordsList) {
+            // Get the translation of each word in the given category users' settings
+            if (user != null) {
+                word.translated = Languages.translate(word.word, user.language.code).toString()
+            }
+
             if (wordIdList.size > currentId) {
 
                 //If the current word is to be in the session
