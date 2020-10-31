@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
+import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.models.words.Word
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,7 +20,8 @@ data class Category(
     @ColumnInfo(name="name")        val name: String,
     @ColumnInfo(name="numWords")    val numWords:Int,
     @ColumnInfo(name="wordsList")   val wordsList: List<Word>,
-    @ColumnInfo(name="sessionNumber") var sessionNumber:Int
+    @ColumnInfo(name="sessionNumber") var sessionNumber:Int,
+    @ColumnInfo(name="goal") var goal: Goal
 ): Parcelable
 
 class WordsTypeConverter {
@@ -31,5 +33,13 @@ class WordsTypeConverter {
     @TypeConverter
     fun fromWordList(wordList: List<Word?>): String{
         return Gson().toJson(wordList)
+    }
+    @TypeConverter
+    fun toGoal(jsonString: String?): Goal{
+        return Gson().fromJson(jsonString, object :TypeToken<Goal>(){}.type)
+    }
+    @TypeConverter
+    fun fromGoal(goal: Goal): String{
+        return Gson().toJson(goal)
     }
 }
