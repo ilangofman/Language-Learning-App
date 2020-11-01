@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyngua.R
 import com.example.lyngua.models.categories.Category
+import com.example.lyngua.views.*
 import com.example.lyngua.views.Categories.PracticeDirections
 import kotlinx.android.synthetic.main.custom_category_row.view.*
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
@@ -88,6 +89,9 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                     (currentCategory.goal.numWordsCompleted / currentCategory.goal.totalNumWords * 100).toInt()
                 holder.itemView.progress_percentage_txt.text =
                     "${(currentCategory.goal.numWordsCompleted / currentCategory.goal.totalNumWords * 100).toInt()}%"
+            }
+            else{
+                holder.itemView.progress_bar.visibility = View.INVISIBLE
             }
 
             // the listener for the category selection
