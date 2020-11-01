@@ -106,8 +106,22 @@
             android:name="categoryChosen"
             app:argType="com.example.lyngua.models.categories.Category" />
         <action
-            android:id="@+id/action_categoryGame_to_practice"
+            android:id="@+id/action_categoryGame_to_categoryResults"
+            app:destination="@id/categoryResults"
+            app:popUpTo="@id/practice"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/categoryResults"
+        android:name="com.example.lyngua.views.Categories.CategoryResults"
+        android:label="fragment_category_results"
+        tools:layout="@layout/fragment_category_results" >
+        <action
+            android:id="@+id/action_categoryResults_to_practice"
             app:destination="@id/practice" />
+        <argument
+            android:name="currentResults"
+            app:argType="com.example.lyngua.models.words.Results" />
     </fragment>
 
 

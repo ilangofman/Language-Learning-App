@@ -17,6 +17,7 @@ import com.example.lyngua.controllers.Question
 import com.example.lyngua.controllers.Session
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.User.User
+import com.example.lyngua.models.words.Results
 import kotlinx.android.synthetic.main.fragment_category_game.*
 
 import org.w3c.dom.Text
@@ -29,9 +30,13 @@ class CategoryGame : Fragment(), View.OnClickListener {
     val userController: UserController = UserController()
 
     var optionsList: ArrayList<TextView> = arrayListOf()
+    var rightAnsMap = mutableMapOf<String, String>()
+    var wrongAnsMap = mutableMapOf<String, String>()
+
     var questionIndex : Int = 0
     var correctAnswers : Int = 0
     var optionSelected : Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -135,9 +140,11 @@ class CategoryGame : Fragment(), View.OnClickListener {
         // option boxes given the correct or incorrect choice.
         if (question.correctAnswer != optionSelected) {
             question.word.incorrectAnswer()
+            wrongAnsMap[question.displayWord] = question.optionsList[question.correctAnswer - 1]
             resultView(optionSelected, R.drawable.incorrect_choice)
         } else {
             question.word.correctAnswer()
+            rightAnsMap[question.displayWord] = question.optionsList[optionSelected - 1]
             correctAnswers++
         }
         resultView(question.correctAnswer, R.drawable.correct_choice)
@@ -150,13 +157,14 @@ class CategoryGame : Fragment(), View.OnClickListener {
         Handler().postDelayed({
             if (questionIndex == questionsList.size) {
                 Log.d("Answers", "Number of correct answers: $correctAnswers")
+                val results = Results(rightAnsMap, wrongAnsMap, correctAnswers, questionsList.size)
+                val action = CategoryGameDirections.actionCategoryGameToCategoryResults(results)
+                navController.navigate(action)
 
-                // TODO: Create a fragment to display score and list of correct/incorrect answers instead of returning back to practice.
-                navController.navigate(R.id.action_categoryGame_to_practice)
             } else {
                 displayQuestion()
             }
-        }, 5000)
+        }, 3000)
 
     }
 

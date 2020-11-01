@@ -41,7 +41,7 @@ class Session(val category: Category, val user: User?) {
         while (newSession.isEmpty()) {
             for (word in category.wordsList) {
                 //Add only 20 words for a single session
-                if (category.sessionNumber == word.boxNumber && count < 20) {
+                if (category.sessionNumber == word.boxNumber && count < 5) {
 
                     newSession.add(word.id)
                     count++
