@@ -1,0 +1,10 @@
+
+Week 6 - Dev Log 
+
+Dates: Oct 19 to 26, 2020
+
+Work Completed:
+
+- Worked on the interactive component with image classification using mlkit 
+- Redesigned the app UI
+- Cleaned up the code, refactored some of the components 
