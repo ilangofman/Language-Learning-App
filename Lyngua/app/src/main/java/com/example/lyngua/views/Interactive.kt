@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
+import com.example.lyngua.controllers.InteractiveController
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.Languages
 import com.example.lyngua.models.User.User
@@ -56,6 +57,7 @@ class Interactive : Fragment() {
     private lateinit var cameraExecutor: ExecutorService
     lateinit var navController: NavController
     lateinit var navBar: BottomNavigationView
+    val interactiveController: InteractiveController = InteractiveController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -184,71 +186,9 @@ class Interactive : Fragment() {
                 image.close()
 
 
-
                 if(imageBitmap != null){
-                    Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
+                    startInteractiveMode(imageBitmap!!)
 
-                    val image = InputImage.fromBitmap(imageBitmap!!, 0)
-
-                    val localModel =
-                        LocalModel.Builder()
-                            .setAssetFilePath("classification_models/image_classifier.tflite")
-//                            .setAssetFilePath("classification_models/mobilenet_v2.tflite")
-//                            .setAssetFilePath("classification_models/mnasnet_1.tflite")
-//                            .setAssetFilePath("classification_models/nasnet_large_1_metadata_1.tflite")
-                            .build()
-                    val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
-//                            .setConfidenceThreshold(0.5f)
-                        .setMaxResultCount(1)
-                        .build()
-                    val labeler =
-                        ImageLabeling.getClient(customImageLabelerOptions)
-
-//                    val labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
-                    labeler.process(image)
-                        .addOnSuccessListener { labels ->
-                            var objectIdentifiedtext: String = "Word to Translate"
-                            for (label in labels) {
-                                objectIdentifiedtext = label.text
-                                val confidence = label.confidence
-                                val index = label.index
-                                Log.d("ImageC", "Found: $objectIdentifiedtext, with $confidence")
-//                                Toast.makeText(requireContext(), "Found image classification $objectIdentifiedtext with $confidence",Toast.LENGTH_SHORT).show()
-
-                            }
-//                            Toast.makeText(requireContext(), "Found image classification ${labels.size}",Toast.LENGTH_SHORT).show()
-
-
-                            val user: User? = UserController().readUserInfo(requireContext())
-                            if(user != null) {
-                                //create the question
-                                val bottomSheet: BottomSheetDialog =
-                                    BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
-
-                                bottomSheet.setContentView(R.layout.interactive_question_panel)
-
-
-                                bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
-                                val translated = Languages.translate(objectIdentifiedtext, user.language.code)
-                                if (translated != null) {
-                                    val translateFiltered =  Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
-                                    bottomSheet.option_1.text = translateFiltered.capitalize()
-                                }else{
-                                    bottomSheet.option_1.text = "Error :("
-                                }
-                                bottomSheet.option_2.text = "Option 2"
-                                bottomSheet.option_3.text = "Option 3"
-                                bottomSheet.option_4.text = "Option 4"
-
-                                bottomSheet.setCanceledOnTouchOutside(false)
-                                bottomSheet.show()
-                            }
-
-                        }
-                        .addOnFailureListener { e ->
-                            Log.d("ImageC", e.toString())
-                            Toast.makeText(requireContext(), "Failed To  $e",Toast.LENGTH_SHORT).show()
-                        }
                 }
 
             }
@@ -258,6 +198,77 @@ class Interactive : Fragment() {
                 Log.e("CameraX", errorType.toString())
             }
         })
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun startInteractiveMode(imageBitmap: Bitmap){
+//        Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
+
+        val image = InputImage.fromBitmap(imageBitmap, 0)
+
+        val localModel =
+            LocalModel.Builder()
+                .setAssetFilePath("classification_models/image_classifier.tflite")
+                .build()
+        val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+//                            .setConfidenceThreshold(0.5f)
+            .setMaxResultCount(1)
+            .build()
+        val labeler =
+            ImageLabeling.getClient(customImageLabelerOptions)
+
+        labeler.process(image)
+            .addOnSuccessListener { labels ->
+                var objectIdentifiedtext: String = "Word to Translate"
+                for (label in labels) {
+                    objectIdentifiedtext = label.text
+                    val confidence = label.confidence
+                    val index = label.index
+                    Log.d("ImageC", "Found: $objectIdentifiedtext, with $confidence")
+//                                Toast.makeText(requireContext(), "Found image classification $objectIdentifiedtext with $confidence",Toast.LENGTH_SHORT).show()
+
+                }
+//                            Toast.makeText(requireContext(), "Found image classification ${labels.size}",Toast.LENGTH_SHORT).show()
+
+
+                val user: User? = UserController().readUserInfo(requireContext())
+                if(user != null) {
+                    //create the question
+                    val bottomSheet: BottomSheetDialog =
+                        BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+
+                    bottomSheet.setContentView(R.layout.interactive_question_panel)
+
+
+                    bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
+
+                    val wrongOptions = interactiveController.makeQuestionFromWord(objectIdentifiedtext, user.language.code)
+                    if(wrongOptions != null) {
+
+//                        val translated = Languages.translate(objectIdentifiedtext, user.language.code)
+                        val translated = "hi"
+                        if (translated != null) {
+                            val translateFiltered =
+                                Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+                            bottomSheet.option_1.text = wrongOptions[0].capitalize()
+                        } else {
+                            bottomSheet.option_1.text = "Error :("
+                        }
+                        bottomSheet.option_2.text = wrongOptions[1]
+                        bottomSheet.option_3.text = wrongOptions[2]
+                        bottomSheet.option_4.text = wrongOptions[3]
+
+//                        bottomSheet.setCanceledOnTouchOutside(false)
+                        bottomSheet.show()
+                    }
+                }
+
+            }
+            .addOnFailureListener { e ->
+                Log.d("ImageC", e.toString())
+                Toast.makeText(requireContext(), "Failed To  $e",Toast.LENGTH_SHORT).show()
+            }
     }
 
     /*
@@ -310,4 +321,6 @@ private fun Image.toBitmap(): Bitmap {
     matrix.postRotate(90F)
     return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 }
+
+
 
