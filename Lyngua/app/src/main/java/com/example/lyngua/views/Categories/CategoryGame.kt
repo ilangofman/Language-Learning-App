@@ -152,7 +152,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
 
         /*
         After the user selects their choice, the screen with the correct and/or incorrect
-        options highlighted will hold for 5 seconds before moving onto the next question.
+        options highlighted will hold for 3 seconds before moving onto the next question.
          */
         Handler().postDelayed({
             if (questionIndex == questionsList.size) {
