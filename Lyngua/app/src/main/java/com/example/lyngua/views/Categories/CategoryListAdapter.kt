@@ -55,7 +55,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
             //add the data to the row
             holder.itemView.cat_description_txt.text =
                 "This is # words: ${currentCategory.wordsList.size},"
-            holder.itemView.category_name_txt.text = currentCategory.name.toString()
+            holder.itemView.category_name_txt.text = currentCategory.name.toString().capitalize()
 
             //the listener for the update button
             holder.itemView.category_settings_button.setOnClickListener {

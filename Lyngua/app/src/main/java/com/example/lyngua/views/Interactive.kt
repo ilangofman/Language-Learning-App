@@ -87,9 +87,9 @@ class Interactive : Fragment() {
 
         // Set up the listener for take photo button
         button_camera_capture.setOnClickListener {
-            navController = Navigation.findNavController(view)
-            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
-            navBar.visibility = View.GONE
+//            navController = Navigation.findNavController(view)
+//            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
+//            navBar.visibility = View.GONE
 
             takePhoto()
             callback.isEnabled = true
@@ -104,9 +104,9 @@ class Interactive : Fragment() {
             button_save.visibility = View.GONE
 
 
-            navController = Navigation.findNavController(view)
-            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
-            navBar.visibility = View.VISIBLE
+//            navController = Navigation.findNavController(view)
+//            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
+//            navBar.visibility = View.VISIBLE
 
             callback.isEnabled = false
 

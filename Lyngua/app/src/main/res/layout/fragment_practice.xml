@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="0dp"
 
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="50dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_baseline_add_24"
