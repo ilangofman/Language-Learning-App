@@ -5,6 +5,7 @@ import kotlin.math.roundToInt
 import android.os.Parcelable
 import android.util.Log
 import kotlinx.android.parcel.Parcelize
+import kotlin.random.Random
 
 @Parcelize
 class Word (
@@ -32,7 +33,7 @@ class Word (
         id = category_id_counter
         category_id_counter += 1
         boxNumber = 1
-        typeFlag = 0
+        typeFlag = (0..1).random()
         correctGuesses = 0
         totalGuesses = 0
         EF = 2.5

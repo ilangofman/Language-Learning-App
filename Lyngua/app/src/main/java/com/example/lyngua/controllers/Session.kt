@@ -11,17 +11,19 @@ class Session(val category: Category) {
     fun generateSession(): ArrayList<Question> {
         val newSession = ArrayList<Int>()
         var count = 0
+        val WORDS_PER_SESSION = 10
+
         while (newSession.isEmpty()) {
             for (word in category.wordsList) {
 
-                //Add only 20 words for a single session
-                if (category.sessionNumber == word.boxNumber && count < 20) {
+                //Add only the preset number of words for a single session
+                if (category.sessionNumber == word.boxNumber && count < WORDS_PER_SESSION) {
 
                     newSession.add(word.id)
                     count++
                 }
                 //If a word has yet to be played, or if it is to be in a session but there are already
-                //20 words in the session, then increment the boxNumber so that the word could be in the next session
+                //our a preset number words in the session, then increment the boxNumber so that the word could be in the next session
                 else {
                     word.boxNumber++
                 }

@@ -198,7 +198,7 @@ class UpdateCategory : Fragment() {
 
         //On Click listener for the delete category button
         view.delete_category_btn.setOnClickListener {
-            val confirmation = AlertDialog.Builder(requireContext())
+            val confirmation = AlertDialog.Builder(requireContext(), R.style.AlertDialogCustom)
             confirmation.setTitle("Delete?")
             confirmation.setMessage("Are you sure you would like to delete this category?")
             confirmation.setPositiveButton("Delete") { _, _ ->
@@ -208,6 +208,7 @@ class UpdateCategory : Fragment() {
             }
             confirmation.setNegativeButton("Cancel") { _, _ -> }
             confirmation.create().show()
+
         }
 
         return view
