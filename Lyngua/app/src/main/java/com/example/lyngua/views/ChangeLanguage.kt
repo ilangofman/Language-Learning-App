@@ -14,6 +14,7 @@ import com.example.lyngua.models.Languages
 import com.example.lyngua.models.User.User
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_change_language.*
+import kotlin.concurrent.thread
 
 
 class ChangeLanguage : Fragment() {
@@ -35,8 +36,9 @@ class ChangeLanguage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        languageList = languageModel.getSupportedAllLanguages()
-
+        thread {
+            languageList = languageModel.getSupportedAllLanguages()
+        }.join()
         val user: User? = UserController().readUserInfo(requireContext())
         if (user != null) {
             currentLanguage = user.language
