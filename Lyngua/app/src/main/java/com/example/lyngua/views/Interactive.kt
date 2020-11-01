@@ -227,86 +227,79 @@ class Interactive : Fragment() {
                     val confidence = label.confidence
                     val index = label.index
                     Log.d("ImageC", "Found: $objectIdentifiedtext, with $confidence")
-//                                Toast.makeText(requireContext(), "Found image classification $objectIdentifiedtext with $confidence",Toast.LENGTH_SHORT).show()
 
                 }
-//                            Toast.makeText(requireContext(), "Found image classification ${labels.size}",Toast.LENGTH_SHORT).show()
 
+                displayInteractiveQuestion(objectIdentifiedtext)
 
-                val user: User? = UserController().readUserInfo(requireContext())
-                if(user != null) {
-                    //create the question
-                    val bottomSheet: BottomSheetDialog =
-                        BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
-
-                    bottomSheet.setContentView(R.layout.interactive_question_panel)
-
-
-                    bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
-
-                    var wrongOptions = interactiveController.makeQuestionFromWord(
-                        objectIdentifiedtext,
-                        user.language.code
-                    )
-                    if(wrongOptions != null) {
-                        val correctWord = wrongOptions[0]
-
-                        wrongOptions = wrongOptions.shuffled(Random())
-
-                        bottomSheet.option_1.text = Html.fromHtml(wrongOptions[0], Html.FROM_HTML_MODE_LEGACY).toString()
-                        bottomSheet.option_2.text = Html.fromHtml(wrongOptions[1], Html.FROM_HTML_MODE_LEGACY).toString()
-                        bottomSheet.option_3.text = Html.fromHtml(wrongOptions[2], Html.FROM_HTML_MODE_LEGACY).toString()
-                        bottomSheet.option_4.text = Html.fromHtml(wrongOptions[3], Html.FROM_HTML_MODE_LEGACY).toString()
-
-                        var correctOption = 0
-                        if(wrongOptions[0] == correctWord) correctOption = 1
-                        if(wrongOptions[1] == correctWord) correctOption = 2
-                        if(wrongOptions[2] == correctWord) correctOption = 3
-                        if(wrongOptions[3] == correctWord) correctOption = 4
-
-
-
-                        bottomSheet.option_1.setOnClickListener{
-                            if(correctOption == 1){
-                                showCorrectButton(bottomSheet.option_1)
-                            }else{
-                                showWrongButton(bottomSheet.option_1)
-                            }
-                        }
-
-                        bottomSheet.option_2.setOnClickListener {
-                            if(correctOption == 2){
-                                showCorrectButton(bottomSheet.option_2)
-                            }else{
-                                showWrongButton(bottomSheet.option_2)
-                            }
-                        }
-
-                        bottomSheet.option_3.setOnClickListener {
-                            if(correctOption == 3){
-                                showCorrectButton(bottomSheet.option_3)
-                            }else{
-                                showWrongButton(bottomSheet.option_3)
-                            }
-                        }
-
-                        bottomSheet.option_4.setOnClickListener {
-                            if(correctOption == 4){
-                                showCorrectButton(bottomSheet.option_4)
-                            }else{
-                                showWrongButton(bottomSheet.option_4)
-                            }
-                        }
-//                        bottomSheet.setCanceledOnTouchOutside(false)
-                        bottomSheet.show()
-                    }
-                }
 
             }
             .addOnFailureListener { e ->
                 Log.d("ImageC", e.toString())
                 Toast.makeText(requireContext(), "Failed To  $e", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun displayInteractiveQuestion(objectIdentifiedtext: String){
+        val user: User? = UserController().readUserInfo(requireContext())
+        if(user != null) {
+            //create the question
+            val bottomSheet: BottomSheetDialog =
+                BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+
+            bottomSheet.setContentView(R.layout.interactive_question_panel)
+
+
+            bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
+
+            var wrongOptions = interactiveController.makeQuestionFromWord(
+                objectIdentifiedtext,
+                user.language.code
+            )
+            if(wrongOptions != null) {
+                val correctWord = wrongOptions[0]
+
+                wrongOptions = wrongOptions.shuffled(Random())
+
+                bottomSheet.option_1.text = Html.fromHtml(wrongOptions[0], Html.FROM_HTML_MODE_LEGACY).toString()
+                bottomSheet.option_2.text = Html.fromHtml(wrongOptions[1], Html.FROM_HTML_MODE_LEGACY).toString()
+                bottomSheet.option_3.text = Html.fromHtml(wrongOptions[2], Html.FROM_HTML_MODE_LEGACY).toString()
+                bottomSheet.option_4.text = Html.fromHtml(wrongOptions[3], Html.FROM_HTML_MODE_LEGACY).toString()
+
+                var correctOption = 0
+                if(wrongOptions[0] == correctWord) correctOption = 1
+                if(wrongOptions[1] == correctWord) correctOption = 2
+                if(wrongOptions[2] == correctWord) correctOption = 3
+                if(wrongOptions[3] == correctWord) correctOption = 4
+
+
+                bottomSheet.option_1.setOnClickListener{
+                    if(correctOption == 1) showCorrectButton(bottomSheet.option_1)
+                    else showWrongButton(bottomSheet.option_1)
+
+                }
+
+                bottomSheet.option_2.setOnClickListener {
+                    if(correctOption == 2) showCorrectButton(bottomSheet.option_2)
+                    else showWrongButton(bottomSheet.option_2)
+                }
+
+                bottomSheet.option_3.setOnClickListener {
+                    if(correctOption == 3) showCorrectButton(bottomSheet.option_3)
+                    else showWrongButton(bottomSheet.option_3)
+
+                }
+
+                bottomSheet.option_4.setOnClickListener {
+                    if(correctOption == 4) showCorrectButton(bottomSheet.option_4)
+                    else showWrongButton(bottomSheet.option_4)
+
+                }
+//              bottomSheet.setCanceledOnTouchOutside(false)
+                bottomSheet.show()
+            }
+        }
     }
 
     /*
