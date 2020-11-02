@@ -56,20 +56,11 @@ class CategoryResults : Fragment() {
 
     /*
     Function:   setWordList
-    Purpose:    Provide the user with the list of questions they got right and wrong
+    Purpose:    Provide the user with the list of questions they got wrong
      */
 
     private fun setWordList() {
-        var rightWords = ""
         var wrongWords = ""
-
-        for ((k, v) in args.currentResults.rightAnsMap) {
-            rightWords += "$k - $v \n"
-        }
-
-        if (rightWords != "")
-            list_right.text = rightWords
-
 
         for ((k, v) in args.currentResults.wrongAnsMap) {
             wrongWords += "$k - $v \n"

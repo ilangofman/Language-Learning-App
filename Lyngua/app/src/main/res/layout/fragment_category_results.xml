@@ -31,36 +31,6 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/right_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="What you got right:"
-        android:textStyle="bold"
-        android:padding="10dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="5dp">
-
-        <TextView
-            android:id="@+id/list_right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:text="Oops, you got none right, keep working on it!"
-            android:textSize="15sp"/>
-
-    </ScrollView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
-    <TextView
         android:id="@+id/wrong_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

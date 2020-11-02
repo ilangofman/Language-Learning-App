@@ -16,6 +16,7 @@ import com.example.lyngua.R
 import com.example.lyngua.controllers.Question
 import com.example.lyngua.controllers.Session
 import com.example.lyngua.controllers.UserController
+import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.words.Results
 import kotlinx.android.synthetic.main.fragment_category_game.*
@@ -30,7 +31,6 @@ class CategoryGame : Fragment(), View.OnClickListener {
     val userController: UserController = UserController()
 
     var optionsList: ArrayList<TextView> = arrayListOf()
-    var rightAnsMap = mutableMapOf<String, String>()
     var wrongAnsMap = mutableMapOf<String, String>()
 
     var questionIndex : Int = 0
@@ -144,7 +144,6 @@ class CategoryGame : Fragment(), View.OnClickListener {
             resultView(optionSelected, R.drawable.incorrect_choice)
         } else {
             question.word.correctAnswer()
-            rightAnsMap[question.displayWord] = question.optionsList[optionSelected - 1]
             correctAnswers++
         }
         resultView(question.correctAnswer, R.drawable.correct_choice)
@@ -156,8 +155,27 @@ class CategoryGame : Fragment(), View.OnClickListener {
          */
         Handler().postDelayed({
             if (questionIndex == questionsList.size) {
+
+                if(args.categoryChosen.goal.goalType == 0){
+                    //TODO needs updating to be based on the number of questions per session constant from other branch
+                    args.categoryChosen.goal.numWordsCompleted += 20
+                    if(args.categoryChosen.goal.numWordsCompleted >= args.categoryChosen.goal.totalNumWords){
+                        args.categoryChosen.goal.goalType = -1
+                    }
+                }
+
+                val categoryController = CategoryController(requireContext())
+                val goal = categoryController.updateCategory(
+                    args.categoryChosen.id,
+                    args.categoryChosen.name,
+                    args.categoryChosen.numWords + 1,
+                    args.categoryChosen.wordsList,
+                    args.categoryChosen.sessionNumber + 1,
+                    args.categoryChosen.goal
+                )
+
                 Log.d("Answers", "Number of correct answers: $correctAnswers")
-                val results = Results(rightAnsMap, wrongAnsMap, correctAnswers, questionsList.size)
+                val results = Results(wrongAnsMap, correctAnswers, questionsList.size)
                 val action = CategoryGameDirections.actionCategoryGameToCategoryResults(results)
                 navController.navigate(action)
 
