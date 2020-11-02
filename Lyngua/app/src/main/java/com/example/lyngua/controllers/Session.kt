@@ -1,13 +1,19 @@
 package com.example.lyngua.controllers
 
+import android.os.Build
+import android.text.Html
+import androidx.annotation.RequiresApi
+import com.example.lyngua.models.Languages
+import com.example.lyngua.models.User.User
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
 
-class Session(val category: Category) {
+class Session(val category: Category, val user: User?) {
 
     //Chooses the words that should be part of the session based on the sessionNumber and boxNumbers
     //Input parameter is the category that is being played
     //Returns an array of integers for the id of words to be used in the session
+    @RequiresApi(Build.VERSION_CODES.N)
     fun generateSession(): ArrayList<Question> {
         val newSession = ArrayList<Int>()
         var count = 0
@@ -36,6 +42,7 @@ class Session(val category: Category) {
         return generateQuestions(newSession)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun generateQuestions(wordIdList: ArrayList<Int>): ArrayList<Question> {
 
         var currentId = 0
@@ -46,6 +53,11 @@ class Session(val category: Category) {
 
         //Loops through the list of words for the category
         for (word in category.wordsList) {
+            // Get the translation of each word in the given category users' settings
+            if (user != null) {
+                val translated = Languages.translate(word.word, user.language.code).toString()
+                word.translated = Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+            }
             if (wordIdList.size > currentId) {
 
                 //If the current word is to be in the session
@@ -100,7 +112,7 @@ class Session(val category: Category) {
 
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
-                            in 1..4 -> newQuestion =
+                            in 0..4 -> newQuestion =
                                 MultipleChoice(word, word.translated, optionsList, correctOption)
                             in 5..7 -> newQuestion =
                                 WordMatching(word, word.translated, optionsList, correctOption)
@@ -112,7 +124,7 @@ class Session(val category: Category) {
 
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
-                            in 1..4 -> newQuestion =
+                            in 0..4 -> newQuestion =
                                 MultipleChoice(word, word.word, optionsList, correctOption)
                             in 5..7 -> newQuestion =
                                 WordMatching(word, word.word, optionsList, correctOption)
