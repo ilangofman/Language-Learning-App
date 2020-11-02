@@ -74,6 +74,8 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                     "This is # words: ${currentCategory.wordsList.size},"
             }
 
+            holder.itemView.category_name_txt.text = currentCategory.name.toString().capitalize()
+
             //the listener for the update button
             holder.itemView.category_settings_button.setOnClickListener {
                 val actionChosen =
