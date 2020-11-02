@@ -1,36 +1,9 @@
 package com.example.lyngua.controllers
 
-import com.example.lyngua.models.Languages
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
-import com.example.lyngua.models.User.User
 
-class Session(val category: Category, val user: User?) {
-
-    //Goes through the list of words using the wordIdList and generates the question
-    //Inputs are
-//    fun runSession(wordIdList: ArrayList<Int>){
-
-//        var currentId = 0
-//        println("Session Number: ${category.sessionNumber}")
-//        for (word in category.wordsList){
-//            if(wordIdList.size > currentId) {
-//
-//                //Only run if there are still words in the session
-//                if (word.id == wordIdList[currentId]) {
-//                     when (word.streak){
-//                         //in  1 .. 4 -> multipleChoice(word)
-//                         in  5 .. 7 -> wordMatching(word)
-//                         in 8 .. 10 -> fillInTheBlank(word)
-//                    }
-//
-//                    currentId++
-//                }
-//            }
-//        }
-//        category.sessionNumber++
-//        val questions = generateSession()
-//    }
+class Session(val category: Category) {
 
     //Chooses the words that should be part of the session based on the sessionNumber and boxNumbers
     //Input parameter is the category that is being played
@@ -38,16 +11,19 @@ class Session(val category: Category, val user: User?) {
     fun generateSession(): ArrayList<Question> {
         val newSession = ArrayList<Int>()
         var count = 0
+        val WORDS_PER_SESSION = 10
+
         while (newSession.isEmpty()) {
             for (word in category.wordsList) {
-                //Add only 20 words for a single session
-                if (category.sessionNumber == word.boxNumber && count < 20) {
+
+                //Add only the preset number of words for a single session
+                if (category.sessionNumber == word.boxNumber && count < WORDS_PER_SESSION) {
 
                     newSession.add(word.id)
                     count++
                 }
                 //If a word has yet to be played, or if it is to be in a session but there are already
-                //20 words in the session, then increment the boxNumber so that the word could be in the next session
+                //our a preset number words in the session, then increment the boxNumber so that the word could be in the next session
                 else {
                     word.boxNumber++
                 }
@@ -70,11 +46,6 @@ class Session(val category: Category, val user: User?) {
 
         //Loops through the list of words for the category
         for (word in category.wordsList) {
-            // Get the translation of each word in the given category users' settings
-            if (user != null) {
-                word.translated = Languages.translate(word.word, user.language.code).toString()
-            }
-
             if (wordIdList.size > currentId) {
 
                 //If the current word is to be in the session
@@ -158,55 +129,4 @@ class Session(val category: Category, val user: User?) {
 
         return questionsList
     }
-
-//Function to be integrated with multiple choice view
-//TODO change so that the correct option for the word in MC questions is done during runtime of the session
-//NOTE: This function will need to be modified
-//    private fun multipleChoice(word: Word){
-//        //Switching between type translation vs english
-//        if (word.typeFlag % 2 == 0) {
-//
-//            //THIS IS TO PRINT WORDS, IS NOT NEEDED
-//            //Randomize the order of the options
-//            word.option = (1..4).random()
-//            println("----${word.word}----")
-//            var j = 0
-//            for (i in 1..4) {
-//                if (i == word.option) {
-//                    println("${word.option}: ${word.translated}")
-//                } else {
-//                    //Printing of these options for words will depend on if it is from translated to english or vice versa
-//                    println("$i: ${word.wordsList[j]}")
-//                    j++
-//                }
-//            }
-//
-//            //User input test
-//            print("\nWhat is the correct translation?: ")
-//            var answer = readLine()?.toInt()
-//            word.updateWord(answer)
-//
-//        }
-//        else {
-//            //THIS IS TO PRINT WORDS, IS NOT NEEDED
-//            word.option = (1..4).random()
-//            println("----${word.translated}----")
-//            var j = 0
-//
-//            for (i in 1..4) {
-//                if (i == word.option) {
-//                    println("${word.option}: ${word.word}")
-//                } else {
-//                    //Printing of these options for words will depend on if it is from translated to english or vice versa
-//                    println("$i: ${word.wordsList[j]}")
-//                    j++
-//                }
-//            }
-//
-//            //User input test
-//            print("\nWhat is the correct translation?: ")
-//            var answer = readLine()?.toInt()
-//            word.updateWord(answer)
-//        }
-//    }
 }

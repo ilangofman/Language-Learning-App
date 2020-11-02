@@ -1,5 +1,6 @@
 package com.example.lyngua.views.Categories
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +63,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                 val month = currentCategory.goal.time.get(Calendar.MONTH)
                 val day = currentCategory.goal.time.get(Calendar.DAY_OF_MONTH)
                 holder.itemView.cat_description_txt.text =
-                    "${currentCategory.goal.totalNumWords} words to complete by ${DateFormatSymbols().months[month]} $day"
+                    "${currentCategory.goal.totalNumWords - currentCategory.goal.numWordsCompleted} words to complete by ${DateFormatSymbols().months[month]} $day"
             }
             else if(currentCategory.goal.goalType == -1){
                 holder.itemView.cat_description_txt.text =
@@ -72,6 +73,8 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                 holder.itemView.cat_description_txt.text =
                     "This is # words: ${currentCategory.wordsList.size},"
             }
+
+            holder.itemView.category_name_txt.text = currentCategory.name.toString().capitalize()
 
             //the listener for the update button
             holder.itemView.category_settings_button.setOnClickListener {
@@ -85,9 +88,9 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
 
             if(currentCategory.goal.goalType == 0) {
                 holder.itemView.progress_bar.progress =
-                    (currentCategory.goal.numWordsCompleted / currentCategory.goal.totalNumWords * 100).toInt()
+                    (currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat() * 100).toInt()
                 holder.itemView.progress_percentage_txt.text =
-                    "${(currentCategory.goal.numWordsCompleted / currentCategory.goal.totalNumWords * 100).toInt()}%"
+                    "${((currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat()) * 100).toInt()}%"
             }
 
             // the listener for the category selection

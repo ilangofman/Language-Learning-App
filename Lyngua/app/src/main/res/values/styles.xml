@@ -37,6 +37,10 @@
         <item name="android:progressDrawable">@drawable/circle_progress_bar</item>
     </style>
 
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">@color/colorPrimary</item>
+    </style>
+
     <style name="ButtonStyleCustom" parent="Base.Widget.AppCompat.Button">
         <item name="android:textAllCaps">false</item>
         <item name="android:background">@drawable/button_shape</item>
