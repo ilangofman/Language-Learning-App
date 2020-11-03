@@ -54,15 +54,15 @@ class Session(val category: Category, val user: User?) {
         //Loops through the list of words for the category
         for (word in category.wordsList) {
             // Get the translation of each word in the given category users' settings
-            if (user != null) {
-                val translated = Languages.translate(word.word, user.language.code).toString()
-                word.translated = Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
-            }
+
             if (wordIdList.size > currentId) {
 
                 //If the current word is to be in the session
                 if (word.id == wordIdList[currentId]) {
-
+                    if (user != null) {
+                        val translated = Languages.translate(word.word, user.language.code).toString()
+                        word.translated = Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+                    }
                     //Choose which option is going to be the correct one
                     correctOption = (1..4).random()
 
@@ -87,6 +87,10 @@ class Session(val category: Category, val user: User?) {
 
                             //Choose a random word from the category's word list
                             randWord = category.wordsList.random()
+                            if (user != null) {
+                                val translated = Languages.translate(randWord.word, user.language.code).toString()
+                                randWord.translated = Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+                            }
 
                             //Will continue to choose a random word until the random word is not the word corresponding to the question and
                             //that the word is not already an option within the list
