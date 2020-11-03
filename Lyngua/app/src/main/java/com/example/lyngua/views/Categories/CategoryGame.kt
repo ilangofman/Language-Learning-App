@@ -28,6 +28,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
 
     lateinit var navController : NavController
     lateinit var questionsList: ArrayList<Question>
+    lateinit var gameSession: Session
     val userController: UserController = UserController()
 
     var optionsList: ArrayList<TextView> = arrayListOf()
@@ -54,7 +55,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
         val user: User? = userController.readUserInfo(requireContext())
 
         // Retrieving the category selected from the practice fragment
-        val gameSession = Session(args.categoryChosen, user)
+        gameSession = Session(args.categoryChosen, user)
 
         questionsList = gameSession.generateSession()
 
@@ -157,10 +158,11 @@ class CategoryGame : Fragment(), View.OnClickListener {
             if (questionIndex == questionsList.size) {
 
                 if(args.categoryChosen.goal.goalType == 0){
-                    //TODO needs updating to be based on the number of questions per session constant from other branch
-                    args.categoryChosen.goal.numWordsCompleted += 20
+                    args.categoryChosen.goal.numWordsCompleted += gameSession.WORDS_PER_SESSION
+
                     if(args.categoryChosen.goal.numWordsCompleted >= args.categoryChosen.goal.totalNumWords){
                         args.categoryChosen.goal.goalType = -1
+                        args.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }
 

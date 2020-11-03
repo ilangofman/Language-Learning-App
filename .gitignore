@@ -14,3 +14,6 @@
 .cxx
 *.zip
 /Lyngua/app/src/main/res/raw/google_translate_api_credentials.json
+Lyngua/.idea/compiler.xml
+Lyngua/.idea/gradle.xml
+Lyngua/.idea/misc.xml

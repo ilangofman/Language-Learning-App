@@ -9,6 +9,7 @@ import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
 
 class Session(val category: Category, val user: User?) {
+    val WORDS_PER_SESSION = 10
 
     //Chooses the words that should be part of the session based on the sessionNumber and boxNumbers
     //Input parameter is the category that is being played
@@ -17,7 +18,6 @@ class Session(val category: Category, val user: User?) {
     fun generateSession(): ArrayList<Question> {
         val newSession = ArrayList<Int>()
         var count = 0
-        val WORDS_PER_SESSION = 10
 
         while (newSession.isEmpty()) {
             for (word in category.wordsList) {
