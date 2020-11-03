@@ -29,12 +29,12 @@ class SignUp : Fragment() {
 
         button_sign_up.setOnClickListener {
             val email = editText_email.text.toString()
-            val password = editText_password.text.toString()
             val user = User()
             user.email = email
 
-
-            val actionChosen = SignUpDirections.actionSignUpToSetupProfile(user)
+//
+            val actionChosen = SignUpDirections.actionSignUpToSetupProfile()
+//            val actionChosen = SignUpDirections.actionSignUpToSetupProfile(user)
 
             navController.navigate(actionChosen)
 

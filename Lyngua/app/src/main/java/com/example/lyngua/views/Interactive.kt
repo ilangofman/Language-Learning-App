@@ -3,26 +3,39 @@ package com.example.lyngua.views
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
+import android.graphics.*
 import android.media.Image
+import android.os.Build
 import android.os.Bundle
-import android.os.Environment
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.activity.addCallback
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
+import com.example.lyngua.controllers.InteractiveController
+import com.example.lyngua.controllers.UserController
+import com.example.lyngua.models.User.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.mlkit.common.model.LocalModel
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import kotlinx.android.synthetic.main.fragment_interactive.*
+import kotlinx.android.synthetic.main.interactive_question_panel.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,6 +53,9 @@ class Interactive : Fragment() {
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    lateinit var navController: NavController
+    lateinit var navBar: BottomNavigationView
+    val interactiveController: InteractiveController = InteractiveController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,8 +87,13 @@ class Interactive : Fragment() {
 
         // Set up the listener for take photo button
         button_camera_capture.setOnClickListener {
+//            navController = Navigation.findNavController(view)
+//            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
+//            navBar.visibility = View.GONE
+
             takePhoto()
             callback.isEnabled = true
+
         }
 
         button_close.setOnClickListener {
@@ -81,7 +102,14 @@ class Interactive : Fragment() {
             button_camera_capture.visibility = View.VISIBLE
             button_close.visibility = View.GONE
             button_save.visibility = View.GONE
+
+
+//            navController = Navigation.findNavController(view)
+//            navBar = requireActivity().findViewById(R.id.bottomNavigationView)
+//            navBar.visibility = View.VISIBLE
+
             callback.isEnabled = false
+
         }
 
         button_save.setOnClickListener {
@@ -95,7 +123,11 @@ class Interactive : Fragment() {
             Toast.makeText(requireContext(), "Photo saved in gallery", Toast.LENGTH_SHORT).show()
         }
 
-        outputDirectory = galleryController.getOutputDirectory(requireContext(), activity, resources.getString(R.string.app_name))
+        outputDirectory = galleryController.getOutputDirectory(
+            requireContext(), activity, resources.getString(
+                R.string.app_name
+            )
+        )
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
@@ -155,6 +187,7 @@ class Interactive : Fragment() {
 
         imageCapture.takePicture(ContextCompat.getMainExecutor(requireContext()), object :
             ImageCapture.OnImageCapturedCallback() {
+            @RequiresApi(Build.VERSION_CODES.N)
             @SuppressLint("UnsafeExperimentalUsageError")
             override fun onCaptureSuccess(image: ImageProxy) {
                 imageBitmap = image.image?.toBitmap()
@@ -167,6 +200,13 @@ class Interactive : Fragment() {
                 button_save.visibility = View.VISIBLE
                 // Use the image, then make sure to close it.
                 image.close()
+
+
+                if (imageBitmap != null) {
+                    startInteractiveMode(imageBitmap!!)
+
+                }
+
             }
 
             override fun onError(exception: ImageCaptureException) {
@@ -174,6 +214,107 @@ class Interactive : Fragment() {
                 Log.e("CameraX", errorType.toString())
             }
         })
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun startInteractiveMode(imageBitmap: Bitmap){
+//        Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
+
+        val image = InputImage.fromBitmap(imageBitmap, 0)
+
+        val localModel =
+            LocalModel.Builder()
+                .setAssetFilePath("classification_models/image_classifier.tflite")
+                .build()
+        val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+//                            .setConfidenceThreshold(0.5f)
+            .setMaxResultCount(1)
+            .build()
+        val labeler =
+            ImageLabeling.getClient(customImageLabelerOptions)
+
+        labeler.process(image)
+            .addOnSuccessListener { labels ->
+                var objectIdentifiedtext: String = "Word to Translate"
+                for (label in labels) {
+                    objectIdentifiedtext = label.text
+                    val confidence = label.confidence
+                    val index = label.index
+                    Log.d("ImageC", "Found: $objectIdentifiedtext, with $confidence")
+
+                }
+
+                displayInteractiveQuestion(objectIdentifiedtext)
+
+
+            }
+            .addOnFailureListener { e ->
+                Log.d("ImageC", e.toString())
+                Toast.makeText(requireContext(), "Failed To  $e", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun displayInteractiveQuestion(objectIdentifiedtext: String){
+        val user: User? = UserController().readUserInfo(requireContext())
+        if(user != null) {
+            //create the question
+            val bottomSheet: BottomSheetDialog =
+                BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+
+            bottomSheet.setContentView(R.layout.interactive_question_panel)
+
+
+            bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
+
+            var wrongOptions = interactiveController.makeQuestionFromWord(
+                objectIdentifiedtext,
+                user.language.code
+            )
+            if(wrongOptions != null) {
+                val correctWord = wrongOptions[0]
+
+                wrongOptions = wrongOptions.shuffled(Random())
+
+                bottomSheet.option_1.text = Html.fromHtml(wrongOptions[0], Html.FROM_HTML_MODE_LEGACY).toString()
+                bottomSheet.option_2.text = Html.fromHtml(wrongOptions[1], Html.FROM_HTML_MODE_LEGACY).toString()
+                bottomSheet.option_3.text = Html.fromHtml(wrongOptions[2], Html.FROM_HTML_MODE_LEGACY).toString()
+                bottomSheet.option_4.text = Html.fromHtml(wrongOptions[3], Html.FROM_HTML_MODE_LEGACY).toString()
+
+                var correctOption = 0
+                if(wrongOptions[0] == correctWord) correctOption = 1
+                if(wrongOptions[1] == correctWord) correctOption = 2
+                if(wrongOptions[2] == correctWord) correctOption = 3
+                if(wrongOptions[3] == correctWord) correctOption = 4
+
+
+                bottomSheet.option_1.setOnClickListener{
+                    if(correctOption == 1) showCorrectButton(bottomSheet.option_1)
+                    else showWrongButton(bottomSheet.option_1)
+
+                }
+
+                bottomSheet.option_2.setOnClickListener {
+                    if(correctOption == 2) showCorrectButton(bottomSheet.option_2)
+                    else showWrongButton(bottomSheet.option_2)
+                }
+
+                bottomSheet.option_3.setOnClickListener {
+                    if(correctOption == 3) showCorrectButton(bottomSheet.option_3)
+                    else showWrongButton(bottomSheet.option_3)
+
+                }
+
+                bottomSheet.option_4.setOnClickListener {
+                    if(correctOption == 4) showCorrectButton(bottomSheet.option_4)
+                    else showWrongButton(bottomSheet.option_4)
+
+                }
+//              bottomSheet.setCanceledOnTouchOutside(false)
+                bottomSheet.show()
+            }
+        }
     }
 
     /*
@@ -196,7 +337,11 @@ class Interactive : Fragment() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(requireContext(), "Permissions not granted by the user", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Permissions not granted by the user",
+                    Toast.LENGTH_SHORT
+                ).show()
                 requireActivity().finish()
             }
         }
@@ -213,6 +358,23 @@ class Interactive : Fragment() {
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
+
+    private fun showCorrectButton(button: Button){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
+            button.background.setColorFilter(BlendModeColorFilter(ContextCompat.getColor(requireContext(), R.color.green), BlendMode.SRC_ATOP))
+        } else {
+            button.background.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), PorterDuff.Mode.SRC_ATOP)
+        }
+
+    }
+    private fun showWrongButton(button: Button){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            button.background.setColorFilter(BlendModeColorFilter(ContextCompat.getColor(requireContext(), R.color.red), BlendMode.SRC_ATOP))
+        } else {
+            button.background.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), PorterDuff.Mode.SRC_ATOP)
+        }
+    }
 }
 
 private fun Image.toBitmap(): Bitmap {
@@ -226,4 +388,6 @@ private fun Image.toBitmap(): Bitmap {
     matrix.postRotate(90F)
     return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 }
+
+
 

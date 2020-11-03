@@ -35,9 +35,9 @@
 
     <!-- PAGE TITLES AND HEADERS -->
     <string name="sign_up_title">Let\'s Get Started</string>
-    <string name="setup_profile_title">What do we call you?</string>
-    <string name="choose_language_title">What language\ndo you want to learn?</string>
-    <string name="choose_interests_title">What are\nyour interests?</string>
+    <string name="setup_profile_title">What Do We Call You?</string>
+    <string name="choose_language_title">What Language\nDo You Want To Learn?</string>
+    <string name="choose_interests_title">What Are\nYour Interests?</string>
     <string name="complete_sign_up_title">You\'re Good To Go!</string>
 
     <!-- GENERAL TEXT -->
