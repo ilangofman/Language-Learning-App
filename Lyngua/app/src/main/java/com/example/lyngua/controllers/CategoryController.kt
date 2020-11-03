@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.lyngua.models.categories.*
+import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.models.words.Word
+import java.util.*
 import kotlin.concurrent.thread
 
 class CategoryController(context: Context){
@@ -21,7 +23,8 @@ class CategoryController(context: Context){
 
     fun addCategory(catName: String): Boolean {
         val cateogryAPI = CategoryAPI()
-        val category = Category(0, catName,  6, emptyList())
+        val goal: Goal = Goal(0, Calendar.getInstance(), 0,0, -1, -1)
+        val category = Category(0, catName,  6, emptyList(), 1, goal)
         thread {
             val id_added = repository.addCategory(category)
             Log.d("Words", "The id is ${id_added}")
@@ -31,8 +34,8 @@ class CategoryController(context: Context){
         return true
     }
 
-    fun updateCategory(catId: Int, catName: String, catWords: Int, catWordsList: List<Word>): Boolean {
-        val category = Category(catId, catName,  catWords, catWordsList)
+    fun updateCategory(catId: Int, catName: String, catWords: Int, catWordsList: List<Word>, catSessionNumber: Int, catGoal: Goal): Boolean {
+        val category = Category(catId, catName,  catWords, catWordsList, catSessionNumber, catGoal)
 
         thread{
             repository.updateCategory(category)

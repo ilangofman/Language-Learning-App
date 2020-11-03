@@ -1,0 +1,15 @@
+Daniel Truong -  Dev Log - Week 5
+
+
+Dates: Oct 26 to Nov 1, 2020
+
+Work Completed:
+
+Created a goals class to keep track of the number of words to complete for a certain time frame for categories
+
+Implemented the ability to receive notification for your goal
+
+Updated the practice mode tab to include a progress circle for your category goal
+
+Revamped the interface for the update category fragment
+
