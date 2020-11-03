@@ -1,0 +1,13 @@
+Daniel Truong -  Dev Log - Week 5
+
+
+Dates: Oct 19 to Oct 25, 2020
+
+Work Completed:
+
+Integrated the words class to fit the requirements of the category class database
+
+Expanded the session class to become a facade class
+
+Can call function to generate a list of questions for the next session for a category
+

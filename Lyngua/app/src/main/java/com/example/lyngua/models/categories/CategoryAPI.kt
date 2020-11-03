@@ -35,8 +35,17 @@ class CategoryAPI {
                 val responseBody = response?.body()?.string()
                 //Use Gson to convert from json to the Word objects
                 val gson = GsonBuilder().create()
-                val words = gson.fromJson(responseBody, Array<Word>::class.java)
-                repository.updateCategoryWords(id.toInt(), words.toList())
+                val words = gson.fromJson(responseBody, Array<Word>::class.java).toList()
+
+                //Initialize the words with this function because of an issue with Gson
+                //It doesn't call the init function for the class so we have to call it manually
+                for(word in words){
+                    word.initWordWithGson()
+                }
+
+                repository.updateCategoryWords(id.toInt(), words)
+
+
             }
         })
 
