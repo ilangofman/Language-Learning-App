@@ -116,9 +116,9 @@ class Session(val category: Category, val user: User?) {
 
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
-                            in 0..4 -> newQuestion =
+                            in 0..3 -> newQuestion =
                                 MultipleChoice(word, word.translated, optionsList, correctOption)
-                            in 5..7 -> newQuestion =
+                            in 4..6 -> newQuestion =
                                 WordMatching(word, word.translated, optionsList, correctOption)
                             else -> newQuestion =
                                 FillInTheBlank(word, word.translated, optionsList, correctOption)

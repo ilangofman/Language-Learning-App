@@ -31,7 +31,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
 
         //Create bundle to send category and goal information to the broadcast receiver
         var bundle = Bundle()
-        Toast.makeText(context, "Category is ${category.name}", Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "Category is ${category.name}", Toast.LENGTH_LONG).show()
         bundle.putParcelable("category", category)
         bundle.putParcelable("goal", goal)
         broadcastIntent.putExtra("bundle", bundle)
