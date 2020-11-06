@@ -11,17 +11,18 @@
         android:id="@+id/textView_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:text="@string/delete_album_title"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to delete this album?\nAll the photos within this album will be deleted"
+        android:layout_marginTop="10dp"
+        android:text="@string/delete_album_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_title" />
 
@@ -29,22 +30,23 @@
         android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:background="#00FFFFFF"
-        android:text="Cancel"
+        android:text="@string/cancel_button"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_confirm"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_text" />
 
     <Button
         android:id="@+id/button_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:background="#00FFFFFF"
-        android:text="Confirm"
+        android:text="@string/confirm_button"
         android:textColor="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
