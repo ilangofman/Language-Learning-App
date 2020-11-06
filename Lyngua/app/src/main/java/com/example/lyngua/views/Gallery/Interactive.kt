@@ -55,6 +55,7 @@ class Interactive : Fragment() {
     private var imageCapture: ImageCapture? = null
     private var imageBitmap: Bitmap? = null
     private lateinit var fileName: String
+    private var objectWord: String? = null
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
@@ -109,13 +110,18 @@ class Interactive : Fragment() {
             button_close.visibility = View.GONE
             button_save.visibility = View.GONE
             callback.isEnabled = false
+            objectWord = null
         }
 
         //Save button - Display save to album dialog
         button_save.setOnClickListener {
-            val alertSheet = SaveToAlbum()
-            alertSheet.setTargetFragment(this, REQUEST_CODE_DIALOG)
-            alertSheet.show(parentFragmentManager, "alertSheetSaveToAlbum")
+            if (objectWord != null) {
+                val alertSheet = SaveToAlbum()
+                alertSheet.setTargetFragment(this, REQUEST_CODE_DIALOG)
+                alertSheet.show(parentFragmentManager, "alertSheetSaveToAlbum")
+            } else {
+                Toast.makeText(requireContext(), "Object has not been identified yet", Toast.LENGTH_SHORT).show()
+            }
         }
 
         //Gallery button - Navigate to gallery fragment
@@ -203,7 +209,7 @@ class Interactive : Fragment() {
 
                 override fun onError(exception: ImageCaptureException) {
                     val errorType = exception.imageCaptureError
-                    Log.e(this.toString(), errorType.toString())
+                    Log.e("CameraX", errorType.toString())
                 }
             }
         )
@@ -220,7 +226,7 @@ class Interactive : Fragment() {
                 val albumName = data.extras?.getString("albumName")!!
 
                 //Show camera once image is saved to album
-                if (galleryController.savePhoto(imageBitmap, albumName, fileName)) {
+                if (galleryController.savePhoto(imageBitmap, albumName, fileName, objectWord!!)) {
                     Toast.makeText(requireContext(), "Photo saved in $albumName", Toast.LENGTH_SHORT).show()
 
                     viewFinder.visibility = View.VISIBLE
@@ -277,17 +283,17 @@ class Interactive : Fragment() {
         val labeler = ImageLabeling.getClient(customImageLabelerOptions)
 
         labeler.process(image).addOnSuccessListener { labels ->
-            var objectIdentifiedtext: String = "Word to Translate"
+            objectWord = "Word to Translate"
 
             for (label in labels) {
-                objectIdentifiedtext = label.text
+                objectWord = label.text
                 val confidence = label.confidence
                 val index = label.index
 
-                Log.d("ImageC", "Found: $objectIdentifiedtext, with $confidence")
+                Log.d("ImageC", "Found: $objectWord, with $confidence")
             }
 
-            displayInteractiveQuestion(objectIdentifiedtext)
+            displayInteractiveQuestion(objectWord!!)
         }.addOnFailureListener { e ->
             Log.d("ImageC", e.toString())
             Toast.makeText(requireContext(), "Failed To  $e", Toast.LENGTH_SHORT).show()
@@ -295,7 +301,7 @@ class Interactive : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun displayInteractiveQuestion(objectIdentifiedtext: String){
+    private fun displayInteractiveQuestion(objectWord: String){
         val user: User? = UserController().readUserInfo(requireContext())
         if(user != null) {
         //create the question
@@ -305,10 +311,10 @@ class Interactive : Fragment() {
         bottomSheet.setContentView(R.layout.interactive_question_panel)
 
 
-        bottomSheet.question_title_interactive.text = objectIdentifiedtext.capitalize()
+        bottomSheet.question_title_interactive.text = objectWord.capitalize()
 
         var wrongOptions = galleryController.makeQuestionFromWord(
-            objectIdentifiedtext,
+            objectWord,
             user.language.code
         )
 
