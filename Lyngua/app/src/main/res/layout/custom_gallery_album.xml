@@ -34,7 +34,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="TextView"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
         android:textSize="30sp"

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="Edit Name"
+        android:text="@string/edit_name_button"
         android:textColor="@color/colorPrimary"
         android:background="#00FFFFFF"
         android:textSize="18sp" />
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="Delete"
+        android:text="@string/delete_button"
         android:textColor="#FF0000"
         android:background="#00FFFFFF"
         android:textSize="18sp"

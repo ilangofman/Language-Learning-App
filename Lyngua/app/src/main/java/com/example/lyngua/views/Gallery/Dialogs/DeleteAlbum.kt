@@ -31,6 +31,8 @@ class DeleteAlbum(private val albumName: String) : DialogFragment() {
 
         galleryController = GalleryController(requireContext(), requireActivity(), resources.getString(R.string.app_name))
 
+        textView_text.text = String.format(resources.getString(R.string.delete_album_text), albumName)
+
         val bundle = Bundle()
 
         //Cancel button - Send back false boolean to parent

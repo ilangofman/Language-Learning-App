@@ -12,7 +12,7 @@
         android:id="@+id/textView_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose an album"
+        android:text="@string/save_to_album_title"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/textView_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick which album you would like to save \nthis photo to or create a new album"
+        android:text="@string/save_to_album_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_title"/>
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#00FFFFFF"
-        android:text="New Album"
+        android:text="@string/new_album_button"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
