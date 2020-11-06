@@ -47,9 +47,9 @@ class Word (
         id = category_id_counter
         category_id_counter += 1
         boxNumber = 1
-        typeFlag = 0
         correctGuesses = 0
         totalGuesses = 0
+        typeFlag = (0..1).random()
         EF = 2.5
         streak = 0
     }

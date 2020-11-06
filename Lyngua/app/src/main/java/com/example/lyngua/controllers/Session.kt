@@ -53,16 +53,16 @@ class Session(val category: Category, val user: User?) {
 
         //Loops through the list of words for the category
         for (word in category.wordsList) {
-            // Get the translation of each word in the given category users' settings
-            if (user != null) {
-                val translated = Languages.translate(word.word, user.language.code).toString()
-                word.translated = Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
-            }
+
             if (wordIdList.size > currentId) {
 
                 //If the current word is to be in the session
                 if (word.id == wordIdList[currentId]) {
-
+                    // Get the translation of each word in the given category users' settings
+                    if (user != null) {
+                        val translated = Languages.translate(word.word, user.language.code).toString()
+                        word.translated = Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+                    }
                     //Choose which option is going to be the correct one
                     correctOption = (1..4).random()
 
@@ -99,7 +99,17 @@ class Session(val category: Category, val user: User?) {
                             //Adds the proper translated word based on if the question is asking for english or other language translation
                             when (word.typeFlag) {
                                 0 -> optionsList.add(randWord.word)
-                                else -> optionsList.add(randWord.translated)
+                                else -> {
+                                    val randWordTranslated = user?.language?.code?.let {
+                                        Languages.translate(randWord.word,
+                                            it
+                                        ).toString()
+                                    }
+                                    word.translated = Html.fromHtml(randWordTranslated, Html.FROM_HTML_MODE_LEGACY).toString()
+                                    if (randWordTranslated != null) {
+                                        optionsList.add(randWordTranslated)
+                                    }
+                                }
                             }
 
                         }
