@@ -7,7 +7,7 @@ import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.example.lyngua.models.Albums.*
+import com.example.lyngua.models.Photos.*
 import com.example.lyngua.models.Languages
 import com.example.lyngua.models.categories.CategoryAPI
 import com.example.lyngua.models.words.Word
@@ -23,7 +23,7 @@ class GalleryController(private var context: Context,
 
     var liveAlbumData = MutableLiveData<List<Album>>()
     private val repository: PhotoRepository
-    val categoryAPI = CategoryAPI()
+    private val categoryAPI = CategoryAPI()
 
     init {
         liveAlbumData.value = getAlbums()
@@ -76,7 +76,6 @@ class GalleryController(private var context: Context,
         thread {
             photos.addAll(repository.getPhotos(photoUriStringList))
         }.join()
-        Log.d(this.toString(), "Photos = $photos")
 
         return photos
     }
@@ -156,10 +155,7 @@ class GalleryController(private var context: Context,
         else
             Toast.makeText(context, "Album not found", Toast.LENGTH_SHORT).show()
 
-
-        Log.d(this.toString(), "${liveAlbumData.value}")
         liveAlbumData.value = getAlbums()
-        Log.d(this.toString(), "${liveAlbumData.value}")
     }
 
     /*

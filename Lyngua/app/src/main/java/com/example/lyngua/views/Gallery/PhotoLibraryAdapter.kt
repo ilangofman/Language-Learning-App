@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyngua.R
-import com.example.lyngua.models.Albums.Photo
+import com.example.lyngua.models.Photos.Photo
 import kotlinx.android.synthetic.main.custom_gallery_image.view.*
 
 class PhotoLibraryAdapter(private var photoList: MutableList<Photo>) : RecyclerView.Adapter<PhotoLibraryAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.example.lyngua.models.Albums
+package com.example.lyngua.models.Photos
 
 
 class PhotoRepository(private val photoDao: PhotoDao) {

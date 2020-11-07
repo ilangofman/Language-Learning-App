@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyngua.MainNavigationDirections
 import com.example.lyngua.R
-import com.example.lyngua.models.Albums.Album
+import com.example.lyngua.models.Photos.Album
 import kotlinx.android.synthetic.main.custom_gallery_album.view.*
 
 class AlbumAdapter(private var albumList:MutableList<Album>, private var callback:(albumName: String) -> Unit): RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
@@ -19,16 +19,12 @@ class AlbumAdapter(private var albumList:MutableList<Album>, private var callbac
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.d(this.toString(), "onCreatViewHolder called")
-
         val view = LayoutInflater.from(parent.context).inflate(R.layout.custom_gallery_album, parent, false)
         return ViewHolder(view)
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d(this.toString(), "onBindViewHolder called - position $position")
-
         val currentAlbum = albumList[position]
         if (currentAlbum.coverPhoto != null)
             holder.itemView.imageView_gallery.setImageURI(Uri.parse(currentAlbum.coverPhoto))
