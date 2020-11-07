@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
 import com.example.lyngua.models.Photos.Album
-import com.example.lyngua.views.Gallery.Dialogs.CreateAlbum
-import com.example.lyngua.views.Gallery.Dialogs.DeleteAlbum
-import com.example.lyngua.views.Gallery.Dialogs.EditAlbum
-import com.example.lyngua.views.Gallery.Dialogs.EditAlbumName
+import com.example.lyngua.views.Gallery.Dialogs.*
 import com.example.lyngua.views.SpaceItemDecorator
 import kotlinx.android.synthetic.main.fragment_albums.*
 

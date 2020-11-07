@@ -169,8 +169,10 @@ class GalleryController(private var context: Context,
 
         if (albumDir?.exists()!!) {
             if (albumDir.walkBottomUp().all {
-                repository.deletePhoto(it.absolutePath)
-                it.delete()
+                    thread {
+                        repository.deletePhoto(it.absolutePath)
+                    }.join()
+                    it.delete()
             }) Toast.makeText(context, "Album deleted", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(context, "Error deleting album", Toast.LENGTH_SHORT).show()

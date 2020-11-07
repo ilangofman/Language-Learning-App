@@ -1,10 +1,8 @@
 package com.example.lyngua.views.Gallery.Dialogs
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_edit_album_name.*
 import java.util.*
 
-class EditAlbumName(private val albumName: String) : DialogFragment() {
+class EditAlbumName(private var albumName: String) : DialogFragment() {
 
     private lateinit var galleryController: GalleryController
 
@@ -31,7 +28,8 @@ class EditAlbumName(private val albumName: String) : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        galleryController = GalleryController(requireContext(), requireActivity(), resources.getString(R.string.app_name))
+        galleryController = GalleryController(requireContext(), requireActivity(), resources.getString(
+            R.string.app_name))
 
         editText_album_name.setText(albumName)
         editText_album_name.hint = albumName
@@ -46,7 +44,7 @@ class EditAlbumName(private val albumName: String) : DialogFragment() {
             val albumName = editText_album_name.text.toString().toUpperCase(Locale.getDefault())
             if(albumName.isNotEmpty()){
                 val bundle = Bundle()
-                bundle.putString("albumName", albumName)
+                bundle.putString("newAlbumName", albumName)
 
                 val intent = Intent().putExtras(bundle)
 
