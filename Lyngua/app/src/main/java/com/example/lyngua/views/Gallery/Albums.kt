@@ -103,21 +103,33 @@ class Albums : Fragment() {
                 val response = galleryController.createAlbum(albumName)
 
                 if (response)
-                    Toast.makeText(requireContext(), "Successfully Added Album", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Successfully created album", Toast.LENGTH_SHORT).show()
                 else
-                    Toast.makeText(requireContext(), "Failed Add Album", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Failed to create album", Toast.LENGTH_SHORT).show()
 
             //If the dialog was for editing album name call the controller's set name function
             } else if (data.extras?.containsKey("newAlbumName")!!) {
                 val albumName = data.extras?.getString("newAlbumName")!!
 
-                galleryController.setAlbumName(albumEdited, albumName)
+                val response = galleryController.setAlbumName(albumEdited, albumName)
+
+                if (response)
+                    Toast.makeText(context, "Successfully set album name", Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(context, "Failed to set album name", Toast.LENGTH_SHORT).show()
 
             //If the dialog was for deleting album call the controller's delete album function
             } else if (data.extras?.containsKey("deleteAlbum")!!) {
                 val delete = data.extras?.getBoolean("deleteAlbum")!!
 
-                if (delete) galleryController.deleteAlbum(albumEdited)
+                if (delete) {
+                    val response = galleryController.deleteAlbum(albumEdited)
+
+                    if (response)
+                        Toast.makeText(context, "Album deleted", Toast.LENGTH_SHORT).show()
+                    else
+                        Toast.makeText(context, "Failed to delete album", Toast.LENGTH_SHORT).show()
+                }
                 else Toast.makeText(context, "Album not deleted", Toast.LENGTH_SHORT).show()
             }
         }

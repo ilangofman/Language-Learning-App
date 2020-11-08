@@ -253,9 +253,9 @@ class Interactive : Fragment() {
                 val response = galleryController.createAlbum(albumName)
 
                 if (response)
-                    Toast.makeText(requireContext(), "Successfully Added Album", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Successfully created album", Toast.LENGTH_LONG).show()
                 else
-                    Toast.makeText(requireContext(), "Failed Add Album", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Failed to create album", Toast.LENGTH_LONG).show()
 
                 val alertSheet = SaveToAlbum()
                 alertSheet.setTargetFragment(this, REQUEST_CODE_DIALOG)

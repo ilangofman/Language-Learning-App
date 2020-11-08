@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Environment
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.lyngua.models.Photos.*
 import com.example.lyngua.models.Languages
@@ -100,7 +99,7 @@ class GalleryController(private var context: Context,
     fun createAlbum(albumName: String): Boolean {
         val rootPath = getOutputDirectory()
         return if (File(rootPath, albumName).exists()) {
-            Toast.makeText(context, "Album already exists", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "Album already exists")
             false
         } else {
             val albumDir = rootPath.let { File(it, albumName.toUpperCase(Locale.getDefault())).apply { mkdirs() } }
@@ -139,47 +138,58 @@ class GalleryController(private var context: Context,
      * Purpose: Set the name for an album folder
      * Input:   oldAlbumName    - String representing old album name
      *          newAlbumName    - String representing new album name
-     * Output:  File object containing directory path
+     * Output:  Boolean for if name change was successful or not
      */
-    fun setAlbumName(oldAlbumName: String, newAlbumName: String) {
+    fun setAlbumName(oldAlbumName: String, newAlbumName: String): Boolean {
         val rootPath = getOutputDirectory()
         val currentAlbum: File? = File(rootPath, oldAlbumName.toUpperCase(Locale.getDefault()))
         val newAlbum = File(rootPath, newAlbumName.toUpperCase(Locale.getDefault()))
 
-        if (currentAlbum?.exists()!!)
+        return if (currentAlbum?.exists()!!)
             if (newAlbum.exists()) {
-                Toast.makeText(context, "Album already exists", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "Album already exists")
+                false
             } else {
                 currentAlbum.renameTo(newAlbum)
+                liveAlbumData.value = getAlbums()
+                true
             }
-        else
-            Toast.makeText(context, "Album not found", Toast.LENGTH_SHORT).show()
-
-        liveAlbumData.value = getAlbums()
+        else {
+            Log.d(TAG, "Album not found")
+            false
+        }
     }
 
     /*
      * Purpose: Delete an album folder and all its contents
      * Input:   albumName   - String representing album to delete
-     * Output:  None
+     * Output:  Boolean for if deletion was successful or not
      */
-    fun deleteAlbum(albumName: String) {
+    fun deleteAlbum(albumName: String): Boolean {
         val rootPath = getOutputDirectory()
         val albumDir: File? = File(rootPath, albumName)
 
-        if (albumDir?.exists()!!) {
+        return if (albumDir?.exists()!!) {
             if (albumDir.walkBottomUp().all {
                     thread {
                         repository.deletePhoto(it.absolutePath)
                     }.join()
                     it.delete()
-            }) Toast.makeText(context, "Album deleted", Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(context, "Error deleting album", Toast.LENGTH_SHORT).show()
-        } else
-            Toast.makeText(context, "Album not found", Toast.LENGTH_SHORT).show()
-
-        liveAlbumData.value = getAlbums()
+                }) {
+                Log.d(TAG, "Album deleted")
+                liveAlbumData.value = getAlbums()
+                true
+            }
+            else {
+                Log.d(TAG, "Error deleting album")
+                liveAlbumData.value = getAlbums()
+                false
+            }
+        }else {
+            Log.d(TAG, "Album not found")
+            liveAlbumData.value = getAlbums()
+            false
+        }
     }
 
     fun makeQuestionFromWord(word: String, langCode: String): List<String>? {
@@ -228,5 +238,9 @@ class GalleryController(private var context: Context,
 
 
         return chosenOptionsList
+    }
+
+    companion object {
+        private const val TAG = "Gallery Controller"
     }
 }
