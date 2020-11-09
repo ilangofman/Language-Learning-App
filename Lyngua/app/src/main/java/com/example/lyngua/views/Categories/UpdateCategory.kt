@@ -90,7 +90,7 @@ class UpdateCategory : Fragment() {
 
         //If a previous time frame was already set, update spinner to that option
         if (args.categoryChosen.goal.goalType != -1) {
-            spinner.setSelection(args.categoryChosen.goal.timeFrame)
+            spinner.setSelection(args.categoryChosen.goal.timeFrame+1)
         }
 
         // Create spinner listeners for goal time frame
@@ -117,13 +117,13 @@ class UpdateCategory : Fragment() {
                             timeFrameFlag = 0
                         }*/
                         parent.getItemAtPosition(position) == "Day" -> {
-                            timeFrameFlag = 1
+                            timeFrameFlag = 0
                         }
                         parent.getItemAtPosition(position) == "Week" -> {
-                            timeFrameFlag = 2
+                            timeFrameFlag = 1
                         }
                         parent.getItemAtPosition(position) == "Month" -> {
-                            timeFrameFlag = 3
+                            timeFrameFlag = 2
                         }
                     }
                     goalType = 0
@@ -188,6 +188,7 @@ class UpdateCategory : Fragment() {
             }
 
             if (result) {
+                //Toast.makeText(requireContext(), "Deadline is ${myCalendar.get(Calendar.DAY_OF_MONTH)} day for ${myCalendar.get(Calendar.MONTH)} month", Toast.LENGTH_LONG).show()
                 //Toast.makeText(requireContext(), "Category Has Been Updated", Toast.LENGTH_LONG).show()
                 //Toast.makeText(requireContext(), "Word count is $wordGoalCount", Toast.LENGTH_LONG).show()
 
