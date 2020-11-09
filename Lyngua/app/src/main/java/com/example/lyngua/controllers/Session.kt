@@ -2,6 +2,7 @@ package com.example.lyngua.controllers
 
 import android.os.Build
 import android.text.Html
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.lyngua.models.Languages
 import com.example.lyngua.models.User.User
@@ -94,9 +95,16 @@ class Session(val category: Category, val user: User?) {
 
                             //Will continue to choose a random word until the random word is not the word corresponding to the question and
                             //that the word is not already an option within the list
-                            while (word.id == randWord.id || filterList.contains(randWord))
+                            while (word.id == randWord.id || filterList.contains(randWord)){
                                 randWord = category.wordsList.random()
-
+                                if (user != null) {
+                                    val translated =
+                                        Languages.translate(randWord.word, user.language.code)
+                                            .toString()
+                                    randWord.translated =
+                                        Html.fromHtml(translated, Html.FROM_HTML_MODE_LEGACY).toString()
+                                }
+                            }
                             //Add the random word to the filter list
                             filterList.add(randWord)
 
