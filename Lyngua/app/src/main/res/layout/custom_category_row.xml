@@ -5,9 +5,12 @@
     android:id="@+id/rowLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="28dp"
+    android:layout_margin="18dp"
     android:background="@drawable/category_row_shape"
-    android:padding="20sp"
+    android:paddingLeft="12sp"
+    android:paddingRight="12sp"
+    android:paddingBottom="18sp"
+    android:paddingTop="18sp"
     >
 
     <TextView
