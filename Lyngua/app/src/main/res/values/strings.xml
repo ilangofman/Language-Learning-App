@@ -46,11 +46,11 @@
     <string name="complete_sign_up_title">You\'re Good To Go!</string>
 
     <!-- DIALOG TITLES AND TEXT -->
-    <string name="create_album_title">Enter album name</string>
-    <string name="delete_album_title">Delete album</string>
+    <string name="create_album_title">Enter Album Name</string>
+    <string name="delete_album_title">Delete Album</string>
     <string name="delete_album_text">Are you sure you want to delete album %1$s?\nAll the photos within this album will be deleted</string>
     <string name="edit_album_name_title">Enter new album name</string>
-    <string name="save_to_album_title">Choose an album</string>
+    <string name="save_to_album_title">Choose An Album</string>
     <string name="save_to_album_text">Pick which album you would like to save this photo to or create a new album</string>
 
     <!-- GENERAL TEXT -->
