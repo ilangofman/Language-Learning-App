@@ -50,7 +50,8 @@
                     android:gravity="center"
                     android:padding="12dp"
                     android:text="Words within time frame"
-                    android:textSize="14sp"/>
+                    android:textSize="18sp"
+                    />
 
                 <!--
                 <TextView
@@ -74,7 +75,8 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Choose Time Frame"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <Spinner
                 android:id="@+id/set_goals_spn"
@@ -91,7 +93,8 @@
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:text="Choose Number of Words"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/_words_goal_count_text"
@@ -109,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Enable Notification Reminder" />
+                android:text="Enable Notification Reminder"
+                android:buttonTint="@color/colorPrimary"/>
 
         </LinearLayout>
 
@@ -126,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/update_category_button"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Update Category"
@@ -137,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@android:color/holo_red_dark"
+                android:background="@drawable/delete_category_button"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Delete Category"
