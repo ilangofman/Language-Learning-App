@@ -1,6 +1,5 @@
 package com.example.lyngua.views.Categories
 
-import android.content.Intent.getIntent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
