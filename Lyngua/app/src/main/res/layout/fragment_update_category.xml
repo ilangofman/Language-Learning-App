@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:layout_marginTop="10dp">
 
 
         <TextView
@@ -20,9 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
             android:text="Update Category"
+            android:fontFamily="@font/bold"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -34,6 +36,7 @@
             android:padding="0dp">
 
             <LinearLayout
+                android:fontFamily="@font/regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -73,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:fontFamily="@font/regular"
                 android:text="Choose Time Frame"
                 android:textSize="16sp"/>
 
@@ -90,6 +94,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_margin="8dp"
                 android:gravity="center"
+                android:fontFamily="@font/regular"
                 android:text="Choose Number of Words"
                 android:textSize="16sp"/>
 
@@ -109,39 +114,44 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
+                android:fontFamily="@font/regular"
                 android:text="Enable Notification Reminder" />
 
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <Button
-                android:id="@+id/update_category_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Update Category"
-                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/delete_category_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@android:color/holo_red_dark"
                 android:gravity="center"
                 android:padding="8dp"
+                style="@style/ButtonStyleCustom"
                 android:text="Delete Category"
+                android:backgroundTint="@color/red"
                 android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/update_category_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Update Category"
+                style="@style/ButtonStyleCustom" />
+
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
