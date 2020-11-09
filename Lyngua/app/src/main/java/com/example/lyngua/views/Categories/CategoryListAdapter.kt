@@ -96,13 +96,9 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
             // the listener for the category selection
             holder.itemView.rowLayout.setOnClickListener {
 
-                val actionChosen =
-                    PracticeDirections.actionPracticeToViewWordsFragment(
-                        currentCategory
-                    )
+            // Begins the category practice game session
+            val actionChosen = PracticeDirections.actionPracticeToCategoryGame( currentCategory )
 
-
-//                val actionChosen = PracticeDirections.actionPracticeToCategoryGame( currentCategory )
                 holder.itemView.findNavController().navigate(actionChosen)
 
             }
