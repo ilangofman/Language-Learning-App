@@ -184,7 +184,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
             } else {
                 displayQuestion()
             }
-        }, 3000)
+        }, 1500)
 
     }
 

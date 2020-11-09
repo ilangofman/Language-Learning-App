@@ -73,10 +73,10 @@ class UpdateCategory : Fragment() {
         //Create the options for the spinner
         var options: MutableList<String> = ArrayList()
         options.add(0, "None")
-        options.add(1, "10 Seconds")
-        options.add(2, "Day")
-        options.add(3, "Week")
-        options.add(4, "Month")
+        //options.add(1, "10 Seconds")
+        options.add(1, "Day")
+        options.add(2, "Week")
+        options.add(3, "Month")
 
         //Create array adapter to display the options list with the spinner
         val arrayAdapter = ArrayAdapter<String>(
@@ -90,14 +90,14 @@ class UpdateCategory : Fragment() {
 
         //If a previous time frame was already set, update spinner to that option
         if (args.categoryChosen.goal.goalType != -1) {
-            spinner.setSelection(args.categoryChosen.goal.timeFrame + 1)
+            spinner.setSelection(args.categoryChosen.goal.timeFrame)
         }
 
         // Create spinner listeners for goal time frame
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
+
 
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -113,9 +113,9 @@ class UpdateCategory : Fragment() {
                     //Implement the goals time frame here
                     when {
                         //TODO remove this 10 second spinner after testing done
-                        parent.getItemAtPosition(position) == "10 Seconds" -> {
+                       /* parent.getItemAtPosition(position) == "10 Seconds" -> {
                             timeFrameFlag = 0
-                        }
+                        }*/
                         parent.getItemAtPosition(position) == "Day" -> {
                             timeFrameFlag = 1
                         }
@@ -155,10 +155,10 @@ class UpdateCategory : Fragment() {
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
                 -1 -> Calendar.getInstance()
-                0 -> myCalendar.add(Calendar.SECOND, 10)
-                1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
-                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-                3 -> myCalendar.add(Calendar.MONTH, 1)
+                //0 -> myCalendar.add(Calendar.SECOND, 10)
+                0 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
+                2 -> myCalendar.add(Calendar.MONTH, 1)
             }
 
             //Creates a goal object based on the options chosen from updating to be put into the database

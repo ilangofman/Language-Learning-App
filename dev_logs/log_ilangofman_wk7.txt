@@ -1,0 +1,9 @@
+Week 6 - Dev Log 
+
+Dates: Nov 1 to Nov 7, 2020
+
+Work Completed:
+
+- Pull request review and integration of everyone's branches.
+- Finished work on interactive mode.
+- Prepare the app for the demo. 
