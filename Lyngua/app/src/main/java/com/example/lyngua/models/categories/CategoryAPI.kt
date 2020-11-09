@@ -5,6 +5,7 @@ import com.example.lyngua.models.words.Word
 import com.google.gson.GsonBuilder
 import okhttp3.*
 import java.io.IOException
+import kotlin.random.Random
 
 class CategoryAPI {
     /*
@@ -32,6 +33,7 @@ class CategoryAPI {
 
             //Since this is an async call, this will be called once the response is finished
             override fun onResponse(call: Call?, response: Response?) {
+                val random: Random = Random(6)
                 val responseBody = response?.body()?.string()
                 //Use Gson to convert from json to the Word objects
                 val gson = GsonBuilder().create()
@@ -39,11 +41,11 @@ class CategoryAPI {
 
                 //Initialize the words with this function because of an issue with Gson
                 //It doesn't call the init function for the class so we have to call it manually
-                for(word in words){
+                for (word in words) {
                     word.initWordWithGson()
                 }
 
-                repository.updateCategoryWords(id.toInt(), words)
+                repository.updateCategoryWords(id.toInt(), words.shuffled(random))
 
 
             }

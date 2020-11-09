@@ -6,16 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="fontFamily">@font/regular</item>
     </style>
     <!-- App with no action bar -->
-<!--    <style name="NoActionBarTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
     <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@android:color/white</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:textViewStyle">@font/regular</item>
         <item name="buttonStyle">@style/ButtonStyleCustom</item>
 <!--        <item name="android:buttonStyle">@font/regular</item>-->
@@ -31,6 +32,16 @@
 
     <style name="NoActionBarTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="NoActionBarTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppBottomModalStyle</item>
+    </style>
+    
+    <style name="AppBottomModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_shape</item>
+    </style>
 
     <style name="CircularDeterminantProgressBar">
         <item name="android:indeterminateOnly">false</item>

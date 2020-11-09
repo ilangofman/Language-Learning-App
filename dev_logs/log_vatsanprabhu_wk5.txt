@@ -1,0 +1,7 @@
+Vatsan Prabhu - Dev Log - Week 5
+
+Dates: Oct 18 to Oct 24, 2020
+
+Work Completed:
+- Started working on gallery to dislpay all saved images
+- Saved images will be retreived from device by uri and loaded into a recyclerview

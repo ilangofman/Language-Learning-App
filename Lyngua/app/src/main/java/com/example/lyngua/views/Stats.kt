@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.lyngua.R
+import kotlinx.android.synthetic.main.fragment_stats.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Stats.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Stats : Fragment() {
 
     override fun onCreateView(

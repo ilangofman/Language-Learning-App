@@ -1,0 +1,9 @@
+Vatsan Prabhu - Dev Log - Week 4
+
+Dates: Oct 11 to Oct 17, 2020
+
+Work Completed:
+- Added content to more page to show user's name, language they are learning and buttons
+- Buttons on more page navigate to either option to change language or option to change personal details
+- Added Shared Preferences support to save user info such as personal details and language
+- Added ImageView behind camera to display image and then give an option to save image to device
