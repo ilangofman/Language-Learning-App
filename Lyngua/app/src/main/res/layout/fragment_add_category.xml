@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.Categories.addCategory">
+    tools:context=".views.Categories.addCategory"
+    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -15,38 +17,54 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="56dp"
+        android:fontFamily="@font/bold"
         android:text="Explore a New Category"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/category_name_input_text"
+        app:layout_constraintBottom_toTopOf="@+id/cat_name_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/category_name_input_text"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cat_name_field"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Category Name"
-        android:inputType="textPersonName"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/colorBlue"
         app:layout_constraintBottom_toTopOf="@+id/add_category_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_home_page" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/category_name_input_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Category Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/add_category_btn"
-        android:layout_width="wrap_content"
+        style="@style/ButtonStyleCustom"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="Learn!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_name_input_text" />
+        app:layout_constraintTop_toBottomOf="@+id/cat_name_field" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

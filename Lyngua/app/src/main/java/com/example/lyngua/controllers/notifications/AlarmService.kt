@@ -8,13 +8,14 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
+import java.text.DateFormatSymbols
 import java.util.*
 
 
 class AlarmService(context: Context, category: Category, goal: Goal) {
     private val context: Context
     private val mAlarmSender: PendingIntent
-    val c : Calendar = category.goal.time
+    val c : Calendar = goal.time
     fun startAlarm() {
         //Set the alarm to 10 seconds from now
         //val c: Calendar = Calendar.getInstance()
@@ -22,6 +23,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
         val firstTime: Long = c.getTimeInMillis()
         // Schedule the alarm!
         val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        //Toast.makeText(context, "month of ${DateFormatSymbols().months[c.get(Calendar.MONTH)]} day of ${c.get(Calendar.DAY_OF_MONTH)}", Toast.LENGTH_SHORT).show()
         am[AlarmManager.RTC_WAKEUP, firstTime] = mAlarmSender
     }
 
@@ -31,7 +33,6 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
 
         //Create bundle to send category and goal information to the broadcast receiver
         var bundle = Bundle()
-        Toast.makeText(context, "Category is ${category.name}", Toast.LENGTH_LONG).show()
         bundle.putParcelable("category", category)
         bundle.putParcelable("goal", goal)
         broadcastIntent.putExtra("bundle", bundle)

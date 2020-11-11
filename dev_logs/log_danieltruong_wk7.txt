@@ -1,0 +1,14 @@
+Daniel Truong -  Dev Log - Week 5
+
+
+Dates: Nov 2 to Nov 8, 2020
+
+Work Completed:
+
+Added custom icon for app and notification
+
+Made minor adjustments to fix the goals of categories and streaks of words
+
+Notifications can be clicked to bring user back to the app
+
+Wrote status report and progress report for following month
