@@ -17,6 +17,13 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
         return categoryDao.addCategory(category)
     }
 
+    // Purpose: get the most recent category added to the database
+    // Input: None
+    // Output: Category object
+    fun getRecentCategory(): Category {
+        return categoryDao.getRecentCategory()
+    }
+
     // Purpose: Update the category in the database
     // Input: A category object to update
     // Output: None

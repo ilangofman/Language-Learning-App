@@ -31,6 +31,18 @@ class GalleryController(private var context: Context,
     }
 
     /*
+     * Purpose: Get the directory for where photos will be stored
+     * Input:   None
+     * Output:  File object containing directory path
+     */
+    fun getOutputDirectory(): File {
+        val photoDir = activity.getExternalFilesDirs(Environment.DIRECTORY_PICTURES)?.firstOrNull()?.let {
+            File(it, appName).apply { mkdirs() } }
+        return if (photoDir != null && photoDir.exists())
+            photoDir else context.filesDir
+    }
+
+    /*
      * Purpose: Save a photo on the device and in the repository
      * Input:   imageBitmap - Bitmap object representing image
      *          albumName   - String representing album name
@@ -64,14 +76,13 @@ class GalleryController(private var context: Context,
     fun getPhotos(albumName: String = ""): MutableList<Photo> {
         val photoDir = File(getOutputDirectory().absolutePath, albumName)
         val photoUriStringList = arrayListOf<String>()
+        val photos = arrayListOf<Photo>()
 
         photoDir.walkBottomUp()
             .filter { it.extension == "jpg" }
-            .forEach {
-                photoUriStringList.add(it.absolutePath)
-            }
+            .forEach { photoUriStringList.add(it.absolutePath) }
 
-        val photos = arrayListOf<Photo>()
+
         thread {
             photos.addAll(repository.getPhotos(photoUriStringList))
         }.join()
@@ -80,15 +91,25 @@ class GalleryController(private var context: Context,
     }
 
     /*
-     * Purpose: Get the directory for where photos will be stored
-     * Input:   None
-     * Output:  File object containing directory path
+     * Purpose: Get the most recent photos
+     * Input:   numPhotos   - Integer for number of photos to get
+     * Output:  A list of Photo objects
      */
-    fun getOutputDirectory(): File {
-        val photoDir = activity.getExternalFilesDirs(Environment.DIRECTORY_PICTURES)?.firstOrNull()?.let {
-            File(it, appName).apply { mkdirs() } }
-        return if (photoDir != null && photoDir.exists())
-            photoDir else context.filesDir
+    fun getRecentPhotos(numPhotos: Int = 5): MutableList<Photo> {
+        val photoDir = getOutputDirectory()
+        val photoUriStringList = arrayListOf<String>()
+        val photos = arrayListOf<Photo>()
+
+        photoDir.walkBottomUp()
+            .filter { it.extension == "jpg" }
+            .take(numPhotos)
+            .forEach { photoUriStringList.add(it.absolutePath) }
+
+        thread {
+            photos.addAll(repository.getPhotos(photoUriStringList))
+        }.join()
+
+        return photos
     }
 
     /*

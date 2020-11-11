@@ -16,6 +16,8 @@
         android:layout_marginTop="44dp"
         android:layout_marginBottom="13dp"
         android:src="@drawable/image_profile_unset"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/textInput_first_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

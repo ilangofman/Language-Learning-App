@@ -13,8 +13,11 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homePage_to_start_navigation"
+            android:id="@+id/action_home_to_start_navigation"
             app:destination="@id/start_navigation" />
+        <action
+            android:id="@+id/action_home_to_categoryGame"
+            app:destination="@id/categoryGame" />
     </fragment>
     <fragment
         android:id="@+id/practice"
