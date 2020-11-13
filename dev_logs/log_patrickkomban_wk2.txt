@@ -1,0 +1,11 @@
+Week 2 Development Log - Patrick Komban
+
+Dates: Sep 28 to Oct 4, 2020
+
+Work Completed:
+
+- Looked into architecture styles and design patterns.
+
+- Looking into viability of backend database use, specifically Firebase
+
+- Android and Kotlin dev learning/research

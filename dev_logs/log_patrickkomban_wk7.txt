@@ -1,0 +1,13 @@
+Week 7 Development Log - Patrick Komban
+
+Dates: Nov 1 to Nov 7, 2020
+
+Work Completed:
+
+- Removing the list of words that the got right in the CategoryResults fragment as it was deemed unnecessary, hence now only showing the translations-english words that the user chose incorrectly.
+
+- Some fixes to the code using the Google Cloud Translation API in the Session class. 
+
+- Reducing time the frame is held when the choice is selected in the practice game mode to 1.5 seconds (for demo purposes).
+
+- Preparing for demo.

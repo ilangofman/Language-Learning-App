@@ -1,0 +1,13 @@
+Week 4 Development Log - Patrick Komban
+
+Dates: Oct 12 to 17, 2020
+
+Work Completed:
+
+- Worked on game logic for the multiple choice game.
+
+- Created a fragment to display words and the options, which are implemented as clickable TextViews.
+
+- Used SafeArgs to get the category to play with passed from the Practice fragment to the game fragment.
+
+- Small tests done to check option selection/clicks.

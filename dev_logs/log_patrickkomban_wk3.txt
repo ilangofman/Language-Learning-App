@@ -1,0 +1,9 @@
+Week 3 Development Log - Patrick Komban
+
+Dates: Oct 5 to 11, 2020
+
+Work Completed:
+
+- Implementing Firebase user login functionality (NOTE: decided to scrap using Firebase and use Android Rooms instead as it suits the needs of our app better with image saving and learning)
+
+- Looking into implementation details for a multiple choice game that should start when a user selects the category of choice.

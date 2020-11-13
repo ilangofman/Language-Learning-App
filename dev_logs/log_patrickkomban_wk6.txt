@@ -1,0 +1,11 @@
+Week 6 Development Log - Patrick Komban
+
+Dates: Oct 25 to Oct 31, 2020
+
+Work Completed:
+
+- Making it so that when a choice is selected in the MCQ game, the UI holds the frame for 3 seconds to allow the user time to see the right option.
+
+- Added the CategoryResults fragment to display to the user their score from the game session, as well as the list of translations-english words that they got right, as well as the ones they got wrong for practicing in the future.
+
+- Some UI cleanup of the game mode and results fragments.

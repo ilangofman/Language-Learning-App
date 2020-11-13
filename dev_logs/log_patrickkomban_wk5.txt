@@ -1,0 +1,11 @@
+Week 5 Development Log - Patrick Komban
+
+Dates: Oct 18 to 24, 2020
+
+Work Completed:
+
+- Working with Daniel to figure out what information the CategoryGame class requires in order to start a practice mode game session.
+
+- Using Daniel's new Session class to generate a new multiple choice game session when a user wants to practice (clicking on the category of their choice).
+
+- Making sure the UI displays the incorrect option, in addition to the correct option through red and green TextView backgrounds for the options so that the user can see what option was right in the event they guessed incorrectly.
