@@ -50,6 +50,16 @@ class CategoryController(context: Context){
         return true
     }
 
+    fun getRecentCategory(): Category? {
+        var category: Category? = null
+
+        thread {
+            category = repository.getRecentCategory()
+        }.join()
+
+        return category
+    }
+
     fun getAllCategories(){
 
     }

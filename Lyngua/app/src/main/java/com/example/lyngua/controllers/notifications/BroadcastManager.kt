@@ -1,5 +1,6 @@
 package com.example.lyngua.controllers.notifications
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,13 +9,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
+import androidx.navigation.NavDeepLinkBuilder
 import com.example.lyngua.R
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.*
+import com.example.lyngua.views.Categories.Practice
 import java.util.*
 
 //Notifications are set up using tutorials from https://www.youtube.com/watch?v=B5dgmvbrHgs
@@ -22,7 +27,7 @@ import java.util.*
 class BroadcastManager() : BroadcastReceiver() {
 
     private var context: Context? = null
-    private val CHANNEL_ID = "channel_id_example_01"
+    private val CHANNEL_ID = "ReminderID1"
     private val notificationId = 101
 
     override fun onReceive(context: Context, intent: Intent?) {
@@ -35,12 +40,17 @@ class BroadcastManager() : BroadcastReceiver() {
         var currentGoal = bundle?.getParcelable<Goal>("goal")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Notification Title"
-            val descriptionText = "Notification Description"
+            val name = "Category Reminder"
+            val descriptionText = "Goal due date"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
+            channel.enableLights(true)
+            channel.enableVibration(true)
+            channel.lightColor = R.color.colorPrimary
+            channel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+
             val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
@@ -53,16 +63,23 @@ class BroadcastManager() : BroadcastReceiver() {
     }
 
     private fun sendNotification(currentCategory: Category, currentGoal: Goal) {
-        // Create the explicit intent to send a notification
-        val intent = Intent(this.context, More::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        var pendingIntent: PendingIntent = getActivity(this.context, 0, intent, 0)
-        val date = Calendar.getInstance() //MAYBE NOT USED
+
+        var bundle = Bundle()
+        //Toast.makeText(context, "Category is ${category.name}", Toast.LENGTH_LONG).show()
+        bundle.putParcelable("Practice", currentCategory)
+
+        //Build intent to bring the user to the practice mode fragment
+        val pendingIntent = NavDeepLinkBuilder(this.context!!)
+            .setComponentName(ActivityTabs::class.java)
+            .setGraph(R.navigation.main_navigation)
+            .setDestination(R.id.practice)
+            .setArguments(bundle)
+            .createPendingIntent()
 
         //Builds the notification and its components
         val builder = NotificationCompat.Builder(this.context!!, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher) //TODO change to different logo potentially
+            .setSmallIcon(R.drawable.logo_notif_light)
+            .setColor(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
             .setContentTitle("${currentCategory.name.capitalize()} Category")
             .setContentText("You have ${currentGoal.totalNumWords - currentCategory.goal.numWordsCompleted} words left to complete")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)

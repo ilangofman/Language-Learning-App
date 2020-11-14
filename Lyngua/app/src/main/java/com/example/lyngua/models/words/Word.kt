@@ -47,9 +47,9 @@ class Word (
         id = category_id_counter
         category_id_counter += 1
         boxNumber = 1
+        typeFlag = (0..1).random()
         correctGuesses = 0
         totalGuesses = 0
-        typeFlag = (0..1).random()
         EF = 2.5
         streak = 0
     }
@@ -86,7 +86,8 @@ class Word (
         if(streak >= 3)
             streak -= 2
         else
-            streak--
+            if (streak > 0)
+                streak--
 
         //Changes if the question should be asking for the english or the other language word as a question
         if(typeFlag == 0)

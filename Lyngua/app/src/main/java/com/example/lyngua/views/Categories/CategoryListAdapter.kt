@@ -92,6 +92,9 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                 holder.itemView.progress_percentage_txt.text =
                     "${((currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat()) * 100).toInt()}%"
             }
+            else{
+                holder.itemView.progress_bar.visibility = View.INVISIBLE
+            }
 
             // the listener for the category selection
             holder.itemView.rowLayout.setOnClickListener {

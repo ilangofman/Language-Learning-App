@@ -1,0 +1,13 @@
+Daniel Truong -  Dev Log - Week 1
+
+
+Dates: Sep 21 to Sep 27, 2020
+
+Work Completed:
+
+Finished the required documentation in preparation for the 1st deliverable
+
+Created wireframes for the overall app design that we would like
+
+Created the fragment pages to allow changing pages on the app
+

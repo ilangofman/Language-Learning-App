@@ -19,6 +19,9 @@ interface CategoryDao{
     @Query("SELECT * FROM category_table ORDER BY id DESC")
     fun readAllData(): LiveData<List<Category>>
 
+    @Query("SELECT * FROM category_table ORDER BY id DESC LIMIT 1")
+    fun getRecentCategory(): Category
+
     @Update
     fun updateCategory(category: Category)
 
