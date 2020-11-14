@@ -37,6 +37,7 @@
     <string name="edit_name_button">Edit Name</string>
     <string name="delete_button">Delete</string>
     <string name="new_album_button">New Album</string>
+    <string name="see_all_button">See all</string>
 
     <!-- PAGE TITLES AND HEADERS -->
     <string name="sign_up_title">Let\'s Get Started</string>
@@ -44,6 +45,10 @@
     <string name="choose_language_title">What Language\nDo You Want To Learn?</string>
     <string name="choose_interests_title">What Are\nYour Interests?</string>
     <string name="complete_sign_up_title">You\'re Good To Go!</string>
+    <string name="home_title">Welcome</string>
+    <string name="home_photos_header">Recent Photos</string>
+    <string name="home_category_header">Get Practicing!</string>
+    <string name="home_album_header">Check out your recent album</string>
 
     <!-- DIALOG TITLES AND TEXT -->
     <string name="create_album_title">Enter Album Name</string>
@@ -57,6 +62,13 @@
     <string name="or">OR</string>
     <string name="interests_example">Choose up to 3 interests\nEx. basketball, mathematics, nature</string>
     <string name="app_tour_prompt">Take a tour of the app\nto get started!</string>
+    <string name="photos_empty">You haven\'t saved any pictures!</string>
+    <string name="category_empty">You aren\'t practicing any categories!</string>
+    <string name="album_empty">You haven\'t created any albums!</string>
+    <string name="goal_description">%1$d words to complete by %2$s %3$d</string>
+    <string name="goal_percentage">%1$d\%</string>
+    <string name="goal_empty">You have no goals for this category</string>
+    <string name="num_words">This is # words: %1$d</string>
 
     <!-- QUESTION TEXT -->
     <string name="question_en">Select The Correct Translation Of The Word</string>

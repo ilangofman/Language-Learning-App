@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:layout_marginStart="25dp"
-                    android:text="Welcome"
+                    android:text="@string/home_title"
                     android:textAllCaps="true"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
@@ -46,7 +46,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginBottom="25dp"
-                    android:text="Name"
                     android:textAllCaps="true"
                     android:textColor="#FFFFFF"
                     android:textSize="36sp"
@@ -78,88 +77,170 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
-        android:padding="25dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView_recent_photos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recent Photos"
+                android:layout_marginTop="25dp"
+                android:text="@string/home_photos_header"
                 android:textSize="24sp"
-                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <HorizontalScrollView
-                android:id="@+id/scrollView_photos"
+            <Button
+                android:id="@+id/button_photos_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:background="#00FFFFFF"
+                android:text="@string/see_all_button"
+                android:gravity="end|center_vertical"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout_recent_photos"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout_recent_photos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_recent_photos">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout_recent_photos"
+                <TextView
+                    android:id="@+id/textView_photos_empty"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@color/colorAccent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="10dp" />
-            </HorizontalScrollView>
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:text="@string/photos_empty" />
+
+                <HorizontalScrollView
+                    android:id="@+id/scrollView_photos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout_recent_photos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp" />
+                </HorizontalScrollView>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/textView_recent_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Get Practicing!"
+                android:text="@string/home_category_header"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/scrollView_photos" />
+                app:layout_constraintTop_toBottomOf="@id/relativeLayout_recent_photos" />
 
             <Button
                 android:id="@+id/button_category_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
                 android:background="#00FFFFFF"
+                android:text="@string/see_all_button"
+                android:gravity="end|center_vertical"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="textEnd"
-                android:text="See all"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout_recent_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/relativeLayout_recent_photos" />
 
             <RelativeLayout
                 android:id="@+id/relativeLayout_recent_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/textView_recent_category"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView_recent_category">
 
                 <TextView
+                    android:id="@+id/textView_category_empty"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:text="You aren't practicing any categories!"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="@string/category_empty" />
 
-                <include layout="@layout/custom_category_row"
+                <include
                     android:id="@+id/layout_category"
+                    layout="@layout/custom_category_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/button_album_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:gravity="end|center_vertical"
+                android:text="@string/see_all_button"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/linearLayout_recent_album" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout_recent_album"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/relativeLayout_recent_category">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_recent_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView_album_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:gravity="center"
+                        android:text="@string/album_empty" />
+
+                    <include
+                        android:id="@+id/layout_album"
+                        layout="@layout/custom_gallery_album"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textView_recent_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="end|center_vertical"
+                    android:text="@string/home_album_header"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button"
@@ -167,9 +248,9 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="50dp"
                 android:background="#00FFFFFF"
-                app:layout_constraintTop_toBottomOf="@id/relativeLayout_recent_category"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_recent_album" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -109,8 +109,8 @@ class PersonalDetails : Fragment() {
     }
 
     companion object {
-        private const val IMAGE_PICK_CODE = 1000;
-        private const val PERMISSION_CODE = 1001;
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+        private const val IMAGE_PICK_CODE = 1000
+        private const val PERMISSION_CODE = 1001
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 }

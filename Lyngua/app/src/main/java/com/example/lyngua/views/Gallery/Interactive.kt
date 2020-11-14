@@ -142,7 +142,7 @@ class Interactive : Fragment() {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
@@ -288,7 +288,7 @@ class Interactive : Fragment() {
             for (label in labels) {
                 objectWord = label.text
                 val confidence = label.confidence
-                val index = label.index
+//                val index = label.index
 
                 Log.d("ImageC", "Found: $objectWord, with $confidence")
             }
@@ -305,13 +305,13 @@ class Interactive : Fragment() {
         val user: User? = UserController().readUserInfo(requireContext())
         if(user != null) {
         //create the question
-        val bottomSheet: BottomSheetDialog =
+        val bottomSheet =
         BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
 
         bottomSheet.setContentView(R.layout.interactive_question_panel)
 
 
-        bottomSheet.question_title_interactive.text = objectWord.capitalize()
+        bottomSheet.question_title_interactive.text = objectWord.capitalize(Locale.getDefault())
 
         var wrongOptions = galleryController.makeQuestionFromWord(
             objectWord,
