@@ -32,7 +32,7 @@
         </activity>
 
         <receiver
-            android:name="com.example.lyngua.controllers.notifications.BroadcastManager"
+            android:name="com.example.lyngua.controllers.notifications.AlarmNotification"
             android:label="BroadcastReceiverAux">
             <intent-filter>
                 <action android:name="ALARM" />

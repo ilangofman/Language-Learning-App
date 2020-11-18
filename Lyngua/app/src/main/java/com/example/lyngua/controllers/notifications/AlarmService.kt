@@ -14,13 +14,13 @@ import java.util.*
 class AlarmService(context: Context, category: Category, goal: Goal) {
     private val context: Context
     private val mAlarmSender: PendingIntent
-    private val alarmGoalSender : PendingIntent
+    private val alarmGoalSender: PendingIntent
 
     val category = category
     val goal = goal
 
     val notifCalendar = Calendar.getInstance()
-    val c : Calendar = goal.time
+    val c: Calendar = goal.time
     fun startAlarm() {
 
         //Sets the proper time to send the notification for goal
@@ -37,9 +37,9 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
         val intervalTime: Long = firstTime - notifCalendar.getTimeInMillis()
 
         //Create the alarm for notification if the checkbox was enabled
-        if(goal.notificationFlag == 1) {
+        if (goal.notificationFlag == 1) {
             val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            am.set(AlarmManager.RTC_WAKEUP, notifTime, mAlarmSender)
+            am.setRepeating(AlarmManager.RTC_WAKEUP, notifTime, intervalTime, mAlarmSender)
         }
 
         //Schedule alarm for finishing goal
@@ -51,7 +51,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
 
     init {
         this.context = context
-        var broadcastIntent: Intent = Intent(context, BroadcastManager::class.java)
+        var broadcastIntent: Intent = Intent(context, AlarmNotification::class.java)
         var broadcastIntent1: Intent = Intent(context, AlarmGoal::class.java)
 
         //Create bundle to send category and goal information to the broadcast receiver
@@ -62,8 +62,18 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
         broadcastIntent1.putExtra("bundle", bundle)
 
         mAlarmSender =
-            PendingIntent.getBroadcast(context, category.id, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                context,
+                category.id,
+                broadcastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
         alarmGoalSender =
-            PendingIntent.getBroadcast(context, category.id+1000, broadcastIntent1, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                context,
+                category.id + 1000,
+                broadcastIntent1,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
     }
 }

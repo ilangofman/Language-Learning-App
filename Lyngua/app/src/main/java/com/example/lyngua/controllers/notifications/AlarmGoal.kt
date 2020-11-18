@@ -24,7 +24,7 @@ class AlarmGoal() : BroadcastReceiver(){
         var currentCategory = bundle?.getParcelable<Category>("category")
         var currentGoal = bundle?.getParcelable<Goal>("goal")
 
-        Log.d("HELLO","DANYO")
+        Log.d("HELLO","GOAL RESET")
 
         if (currentCategory != null && currentGoal != null) {
             currentGoal.updateGoal(currentCategory, this.context!!)

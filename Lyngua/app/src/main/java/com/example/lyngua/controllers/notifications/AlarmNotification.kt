@@ -26,7 +26,7 @@ import java.util.*
 
 //Notifications are set up using tutorials from https://www.youtube.com/watch?v=B5dgmvbrHgs
 // and https://developer.android.com/training/notify-user/build-notification
-class BroadcastManager() : BroadcastReceiver() {
+class AlarmNotification() : BroadcastReceiver() {
 
     private var context: Context? = null
     private val CHANNEL_ID = "ReminderID1"

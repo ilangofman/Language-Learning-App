@@ -19,8 +19,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.controllers.notifications.AlarmGoal
+import com.example.lyngua.controllers.notifications.AlarmNotification
 import com.example.lyngua.controllers.notifications.AlarmService
-import com.example.lyngua.controllers.notifications.BroadcastManager
 import com.example.lyngua.models.goals.Goal
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_word_interval.*
@@ -45,18 +45,19 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
 
         val myCalendar = Calendar.getInstance()
         var timeFrameFlag: Int = -1
-        var notificationFlag: Int = 0
-        var goalType: Int = -1 //TODO this goaltype variable is currently not being used
+        var notificationFlag = 0
+        var goalType: Int = -1
+        var timeGoal = 0
 
         categoryController = CategoryController(requireContext())
 
-        if(args.categoryChosen.goal.goalType == 1){
+        if (args.categoryChosen.goal.goalType == 1) {
             setSelectedOption(tv_goal_option_one)
         }
 
         //Sets the word count for goal based on last update of category
         if (args.categoryChosen.goal.totalTime != 0) {
-            view._words_goal_count_text.setText(args.categoryChosen.goal.totalTime.toString())
+            view.words_goal_count_text.setText(args.categoryChosen.goal.totalTime.toString())
         }
 
         //If notifications were enabled before, ensures the box is checked
@@ -69,7 +70,7 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
 
         //Create the options for the spinner
         var options: MutableList<String> = ArrayList()
-        options.add(0, "None")
+        options.add(0, "No Goal")
         options.add(1, "10 Seconds")
         options.add(2, "Day")
         options.add(3, "Week")
@@ -101,9 +102,11 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                if (parent!!.getItemAtPosition(position).equals("None")) {
+                if (parent!!.getItemAtPosition(position) == "No Goal") {
                     timeFrameFlag = -1
                     goalType = -1
+                    notificationFlag = 0
+                    timeGoal = 0
                 } else {
 
                     //Implement the goals time frame here
@@ -141,15 +144,17 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
 
         //On Click listener for the update category button
         view.update_category_btn.setOnClickListener {
-            var timeGoal: Int
-            if (view._words_goal_count_text.text.toString().isEmpty()) {
-                timeGoal = 0
-            } else {
-                timeGoal = Integer.parseInt(view._words_goal_count_text.text.toString())
+
+            if(goalType == 0) {
+                if (view.words_goal_count_text.text.toString().isEmpty()) {
+                    timeGoal = 0
+                } else {
+                    timeGoal = Integer.parseInt(view.words_goal_count_text.text.toString())
+                }
             }
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
-                -1 -> Calendar.getInstance()
+                -1 -> cancelAlarms()
                 0 -> myCalendar.add(Calendar.SECOND, 60)
                 1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
                 2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
@@ -182,7 +187,7 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
                 //Creates an alarmservice to run in the background
                 val alarm =
                     AlarmService(requireActivity().applicationContext, args.categoryChosen, goal)
-                //Start alarm based on the option chosen in the spinner
+
                 alarm.startAlarm()
             }
 
@@ -200,27 +205,7 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
             confirmation.setMessage("Are you sure you would like to delete this category?")
             confirmation.setPositiveButton("Delete") { _, _ ->
 
-                val mAlarmSender: PendingIntent
-                val alarmGoalSender: PendingIntent
-                var broadcastIntent: Intent = Intent(context, BroadcastManager::class.java)
-                var broadcastIntent1: Intent = Intent(context, AlarmGoal::class.java)
-
-                //Create bundle to send category and goal information to the broadcast receiver
-                var bundle = Bundle()
-                bundle.putParcelable("category", args.categoryChosen)
-                bundle.putParcelable("goal", args.categoryChosen.goal)
-                broadcastIntent.putExtra("bundle", bundle)
-                broadcastIntent1.putExtra("bundle", bundle)
-
-                //Create pending intent to be able to cancel the alarms set for the specific category
-                mAlarmSender =
-                    PendingIntent.getBroadcast(context, args.categoryChosen.id, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-                alarmGoalSender =
-                    PendingIntent.getBroadcast(context, args.categoryChosen.id+1000, broadcastIntent1, PendingIntent.FLAG_UPDATE_CURRENT)
-                val am = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-                am.cancel(mAlarmSender)
-                am.cancel(alarmGoalSender)
+                cancelAlarms()
 
                 categoryController.deleteCategory(args.categoryChosen)
                 Toast.makeText(requireContext(), "Delete Success", Toast.LENGTH_SHORT).show()
@@ -237,6 +222,40 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
         view.setTextColor(Color.parseColor("#FFFFFF"))
         view.background =
             ContextCompat.getDrawable(requireContext(), R.drawable.selected_goal_background_color)
+    }
+
+    private fun cancelAlarms() {
+        val mAlarmSender: PendingIntent
+        val alarmGoalSender: PendingIntent
+        var broadcastIntent: Intent = Intent(context, AlarmNotification::class.java)
+        var broadcastIntent1: Intent = Intent(context, AlarmGoal::class.java)
+
+        //Create bundle to send category and goal information to the broadcast receiver
+        var bundle = Bundle()
+        bundle.putParcelable("category", args.categoryChosen)
+        bundle.putParcelable("goal", args.categoryChosen.goal)
+        broadcastIntent.putExtra("bundle", bundle)
+        broadcastIntent1.putExtra("bundle", bundle)
+
+        //Create pending intent to be able to cancel the alarms set for the specific category
+        mAlarmSender =
+            PendingIntent.getBroadcast(
+                context,
+                args.categoryChosen.id,
+                broadcastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        alarmGoalSender =
+            PendingIntent.getBroadcast(
+                context,
+                args.categoryChosen.id + 1000,
+                broadcastIntent1,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        val am = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        am.cancel(mAlarmSender)
+        am.cancel(alarmGoalSender)
     }
 
 }
