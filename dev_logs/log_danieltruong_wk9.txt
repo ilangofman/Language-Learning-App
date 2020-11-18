@@ -1,0 +1,12 @@
+Daniel Truong -  Dev Log - Week 9
+
+
+Dates: Nov 9 to Nov 15, 2020
+
+Work Completed:
+
+Implemented the tablayout and viewpager for the two goal types
+
+Reworked notifications and alarm to function appropriately when goals are set
+
+Created a new alarm to properly reset the goal when the deadline is passed

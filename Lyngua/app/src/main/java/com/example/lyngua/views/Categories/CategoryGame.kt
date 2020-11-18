@@ -173,7 +173,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
                     args.categoryChosen.numWords + 1,
                     args.categoryChosen.wordsList,
                     args.categoryChosen.sessionNumber + 1,
-                    args.categoryChosen.goal
+                    args.categoryChosen.goal,
                 )
 
                 Log.d("Answers", "Number of correct answers: $correctAnswers")

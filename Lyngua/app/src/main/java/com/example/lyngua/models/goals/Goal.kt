@@ -1,37 +1,38 @@
 package com.example.lyngua.models.goals
 
+import android.content.Context
 import android.os.Parcelable
+import com.example.lyngua.controllers.notifications.AlarmService
+import com.example.lyngua.models.categories.Category
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
 open class Goal(
-    open var numWordsCompleted: Int,
-    open var time: Calendar,
-    open var timeFrame: Int,
-    open var notificationFlag: Int,
-    open var goalType: Int,
-    open var totalNumWords: Int
+    var time: Calendar,
+    var timeFrame: Int,
+    var notificationFlag: Int,
+    var goalType: Int,
+    var numWordsCompleted: Int,
+    var totalNumWords: Int,
+    var timeSpent: Int,
+    var totalTime: Int
 
-): Parcelable
+): Parcelable {
 
-//TODO Maybe use for when having different types of goals
-@Parcelize
-class DeadLineGoal(
-    override  var numWordsCompleted: Int,
-    override var time: Calendar,
-    override var timeFrame: Int,
-    override var notificationFlag: Int,
-    override var goalType: Int,
-    override var totalNumWords: Int
-) : Goal(numWordsCompleted, time, timeFrame,notificationFlag, goalType, totalNumWords)
+    fun updateGoal(category: Category, context: Context){
+        val myCalendar = Calendar.getInstance()
+        when (this.timeFrame) {
+            -1 -> Calendar.getInstance()
+            0 -> myCalendar.add(Calendar.SECOND, 60)
+            1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
+            2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
+            3 -> myCalendar.add(Calendar.MONTH, 1)
+        }
 
-@Parcelize
-class TimeFrameGoal(
-    override  var numWordsCompleted: Int,
-    override var time: Calendar,
-    override var timeFrame: Int,
-    override var notificationFlag: Int,
-    override var goalType: Int,
-    override var totalNumWords: Int
-) : Goal(numWordsCompleted, time, timeFrame,notificationFlag, goalType, totalNumWords)
+        time = myCalendar
+        numWordsCompleted = 0
+        timeSpent = 0
+
+    }
+}

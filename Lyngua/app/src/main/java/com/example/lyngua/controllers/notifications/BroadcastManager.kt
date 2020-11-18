@@ -10,12 +10,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.lyngua.R
+import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.*
@@ -28,7 +30,6 @@ class BroadcastManager() : BroadcastReceiver() {
 
     private var context: Context? = null
     private val CHANNEL_ID = "ReminderID1"
-    private val notificationId = 101
 
     override fun onReceive(context: Context, intent: Intent?) {
 
@@ -76,16 +77,31 @@ class BroadcastManager() : BroadcastReceiver() {
             .setArguments(bundle)
             .createPendingIntent()
 
+        //Sets message based on type of goal set
+        var message: String
+        if (currentGoal.goalType == 0){
+            message = "You have a word goal ending soon!"
+        }
+        else{
+            message = "You have a time goal ending soon!"
+        }
+
+        val GROUP_GOAL_NOTIFICATION = "GOAL_NOTIFICATION"
+
         //Builds the notification and its components
         val builder = NotificationCompat.Builder(this.context!!, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo_notif_light)
             .setColor(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
             .setContentTitle("${currentCategory.name.capitalize()} Category")
-            .setContentText("You have ${currentGoal.totalNumWords - currentCategory.goal.numWordsCompleted} words left to complete")
+            .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setGroup(GROUP_GOAL_NOTIFICATION)
             .setContentIntent(pendingIntent)
+            .build()
+
         with(NotificationManagerCompat.from(this.context!!)){
-            notify(notificationId,builder.build())
+            notify(currentCategory.id,builder)
         }
     }
+
 }

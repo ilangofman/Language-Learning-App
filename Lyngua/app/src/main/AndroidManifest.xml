@@ -40,6 +40,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name="com.example.lyngua.controllers.notifications.AlarmGoal"
+            android:label="BroadcastReceiverGoal">
+            <intent-filter>
+                <action android:name="ALARM_GOAL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -1,0 +1,9 @@
+Daniel Truong -  Dev Log - Week 3
+
+
+Dates: Oct 5 to Oct 11, 2020
+
+Work Completed:
+
+Continued desigining algorithms for linking how questions are produced to how words are chosen for sessions
+

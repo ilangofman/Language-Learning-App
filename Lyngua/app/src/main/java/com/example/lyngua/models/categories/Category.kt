@@ -1,5 +1,6 @@
 package com.example.lyngua.models.categories
 
+import android.app.PendingIntent
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -21,7 +22,8 @@ data class Category(
     @ColumnInfo(name="numWords")    val numWords:Int,
     @ColumnInfo(name="wordsList")   val wordsList: List<Word>,
     @ColumnInfo(name="sessionNumber") var sessionNumber:Int,
-    @ColumnInfo(name="goal") var goal: Goal
+    @ColumnInfo(name="goal") var goal: Goal,
+
 ): Parcelable
 
 class WordsTypeConverter {

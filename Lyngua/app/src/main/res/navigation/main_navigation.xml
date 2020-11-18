@@ -155,6 +155,14 @@
             android:name="currentResults"
             app:argType="com.example.lyngua.models.words.Results" />
     </fragment>
+    <fragment
+        android:id="@+id/timeInterval"
+        android:name="com.example.lyngua.views.Categories.TimeInterval"
+        android:label="TimeInterval" />
+    <fragment
+        android:id="@+id/wordInterval"
+        android:name="com.example.lyngua.views.Categories.WordInterval"
+        android:label="WordInterval" />
 
 
 </navigation>

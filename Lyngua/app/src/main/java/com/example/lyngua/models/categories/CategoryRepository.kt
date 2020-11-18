@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.TypeConverters
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.categories.CategoryDao
+import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.models.words.Word
 
 class CategoryRepository(private val categoryDao: CategoryDao) {
@@ -38,6 +39,10 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
         Log.d("Words", "UPDATING words # ${wordsList.size}")
         val row = categoryDao.updateCategoryWords(catId, wordsList)
         Log.d("Words Api", "Row: $row")
+    }
+
+    fun updateCategoryGoal(catId: Int, goal: Goal){
+        val row = categoryDao.updateCategoryGoal(catId, goal)
     }
 
     // Purpose: Delete a category from the database
