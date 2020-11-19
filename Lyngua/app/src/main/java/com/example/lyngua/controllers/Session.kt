@@ -2,9 +2,8 @@ package com.example.lyngua.controllers
 
 import android.os.Build
 import android.text.Html
-import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.lyngua.models.Languages
+import com.example.lyngua.models.*
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word

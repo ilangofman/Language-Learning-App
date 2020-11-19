@@ -13,15 +13,13 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
-import com.example.lyngua.controllers.Question
+import com.example.lyngua.models.Question
 import com.example.lyngua.controllers.Session
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.words.Results
 import kotlinx.android.synthetic.main.fragment_category_game.*
-
-import org.w3c.dom.Text
 
 class CategoryGame : Fragment(), View.OnClickListener {
     private val args by navArgs<CategoryGameArgs>()
