@@ -1,4 +1,4 @@
-package com.example.lyngua.views.Categories
+package com.example.lyngua.views.Categories.goals
 
 import android.app.AlarmManager
 import android.app.AlertDialog
@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,19 +14,19 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.controllers.notifications.AlarmGoal
 import com.example.lyngua.controllers.notifications.AlarmNotification
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
+import com.example.lyngua.views.Categories.UpdateCategoryArgs
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_word_interval.*
 import kotlinx.android.synthetic.main.fragment_word_interval.view.*
 import kotlin.collections.ArrayList
 
-class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
+class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
 
     private lateinit var categoryController: CategoryController
     private val args = arg
@@ -37,27 +36,27 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_word_interval, container, false)
+        return inflater.inflate(R.layout.fragment_time_interval, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val myCalendar = Calendar.getInstance()
         var timeFrameFlag: Int = -1
         var notificationFlag = 0
         var goalType: Int = -1
-        var wordGoalCount = 0
-
+        var timeGoal = 0
 
         categoryController = CategoryController(requireContext())
 
-        if (args.categoryChosen.goal.goalType == 0) {
+        if (args.categoryChosen.goal.goalType == 1) {
             setSelectedOption(tv_goal_option_one)
         }
 
         //Sets the word count for goal based on last update of category
-        if (args.categoryChosen.goal.totalNumWords != 0) {
-            view.words_goal_count_text.setText(args.categoryChosen.goal.totalNumWords.toString())
+        if (args.categoryChosen.goal.totalTime != 0) {
+            view.words_goal_count_text.setText(args.categoryChosen.goal.totalTime.toString())
         }
 
         //If notifications were enabled before, ensures the box is checked
@@ -106,8 +105,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
                     timeFrameFlag = -1
                     goalType = -1
                     notificationFlag = 0
-                    wordGoalCount = 0
-
+                    timeGoal = 0
                 } else {
 
                     //Implement the goals time frame here
@@ -127,7 +125,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
                             timeFrameFlag = 3
                         }
                     }
-                    goalType = 0
+                    goalType = 1
                 }
             }
         }
@@ -148,12 +146,11 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
 
             if(goalType == 0) {
                 if (view.words_goal_count_text.text.toString().isEmpty()) {
-                    wordGoalCount = 50
+                    timeGoal = 0
                 } else {
-                    wordGoalCount = Integer.parseInt(view.words_goal_count_text.text.toString())
+                    timeGoal = Integer.parseInt(view.words_goal_count_text.text.toString())
                 }
             }
-
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
                 -1 -> cancelAlarms()
@@ -169,10 +166,11 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
                 timeFrameFlag,
                 notificationFlag,
                 goalType,
-                args.categoryChosen.goal.numWordsCompleted,
-                wordGoalCount,
                 0,
-                0
+                0,
+                args.categoryChosen.goal.timeSpent,
+                timeGoal
+
             )
 
             val result = categoryController.updateCategory(
@@ -193,6 +191,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
             }
 
             if (result) {
+
                 findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
             }
 
@@ -224,7 +223,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
             ContextCompat.getDrawable(requireContext(), R.drawable.selected_goal_background_color)
     }
 
-    private fun cancelAlarms(){
+    private fun cancelAlarms() {
         val mAlarmSender: PendingIntent
         val alarmGoalSender: PendingIntent
         var broadcastIntent: Intent = Intent(context, AlarmNotification::class.java)
@@ -257,4 +256,5 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
         am.cancel(mAlarmSender)
         am.cancel(alarmGoalSender)
     }
+
 }

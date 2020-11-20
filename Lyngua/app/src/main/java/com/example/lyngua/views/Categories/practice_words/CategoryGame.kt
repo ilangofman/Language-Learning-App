@@ -1,4 +1,4 @@
-package com.example.lyngua.views.Categories
+package com.example.lyngua.views.Categories.practice_words
 
 import android.os.Build
 import android.os.Bundle
@@ -21,9 +21,10 @@ import com.example.lyngua.controllers.UserController
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.words.Results
+import com.example.lyngua.views.Categories.practice_words.CategoryGameArgs
+import com.example.lyngua.views.Categories.practice_words.CategoryGameDirections
 import kotlinx.android.synthetic.main.fragment_category_game.*
 
-import org.w3c.dom.Text
 import kotlin.concurrent.thread
 
 class CategoryGame : Fragment(), View.OnClickListener {

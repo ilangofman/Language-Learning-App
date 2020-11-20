@@ -51,7 +51,7 @@
         tools:layout="@layout/fragment_stats" />
     <fragment
     android:id="@+id/more"
-    android:name="com.example.lyngua.views.More"
+    android:name="com.example.lyngua.views.AccountSettings"
     android:label="fragment_more"
     tools:layout="@layout/fragment_more">
     <action
@@ -83,25 +83,16 @@
             android:name="categoryChosen"
             app:argType="com.example.lyngua.models.categories.Category" />
     </fragment>
-    <fragment
-        android:id="@+id/viewWordsFragment"
-        android:name="com.example.lyngua.views.practice_words.ViewWordsFragment"
-        android:label="fragment_view_words"
-        tools:layout="@layout/fragment_view_words" >
-        <argument
-            android:name="categoryChosen"
-            app:argType="com.example.lyngua.models.categories.Category" />
-    </fragment>
 
 
     <fragment
         android:id="@+id/personalDetails"
-        android:name="com.example.lyngua.views.PersonalDetails"
+        android:name="com.example.lyngua.views.settings.PersonalDetails"
         android:label="fragment_personal_details"
         tools:layout="@layout/fragment_personal_details" />
     <fragment
         android:id="@+id/changeLanguage"
-        android:name="com.example.lyngua.views.ChangeLanguage"
+        android:name="com.example.lyngua.views.settings.ChangeLanguage"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
     <fragment
@@ -131,7 +122,7 @@
     <action android:id="@+id/action_global_albumPhotos" app:destination="@id/albumPhotos" />
     <fragment
         android:id="@+id/categoryGame"
-        android:name="com.example.lyngua.views.Categories.CategoryGame"
+        android:name="com.example.lyngua.views.Categories.practice_words.CategoryGame"
         android:label="fragment_category_game"
         tools:layout="@layout/fragment_category_game" >
         <argument
@@ -145,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryResults"
-        android:name="com.example.lyngua.views.Categories.CategoryResults"
+        android:name="com.example.lyngua.views.Categories.practice_words.CategoryResults"
         android:label="fragment_category_results"
         tools:layout="@layout/fragment_category_results" >
         <action
@@ -157,11 +148,11 @@
     </fragment>
     <fragment
         android:id="@+id/timeInterval"
-        android:name="com.example.lyngua.views.Categories.TimeInterval"
+        android:name="com.example.lyngua.views.Categories.goals.TimeInterval"
         android:label="TimeInterval" />
     <fragment
         android:id="@+id/wordInterval"
-        android:name="com.example.lyngua.views.Categories.WordInterval"
+        android:name="com.example.lyngua.views.Categories.goals.WordInterval"
         android:label="WordInterval" />
 
 

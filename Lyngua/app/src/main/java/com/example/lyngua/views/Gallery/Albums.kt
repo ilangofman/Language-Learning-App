@@ -14,7 +14,6 @@ import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
 import com.example.lyngua.models.Photos.Album
 import com.example.lyngua.views.Gallery.Dialogs.*
-import com.example.lyngua.views.SpaceItemDecorator
 import kotlinx.android.synthetic.main.fragment_albums.*
 
 class Albums : Fragment() {
