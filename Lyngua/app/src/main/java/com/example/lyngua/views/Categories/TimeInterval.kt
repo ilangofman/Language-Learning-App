@@ -20,6 +20,9 @@ import com.example.lyngua.controllers.notifications.AlarmGoal
 import com.example.lyngua.controllers.notifications.AlarmNotification
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON_TIMEGOAL
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_word_interval.*
 import kotlinx.android.synthetic.main.fragment_word_interval.view.*
@@ -253,12 +256,6 @@ class TimeInterval(arg: UpdateCategoryArgs) : Fragment() {
 
         am.cancel(mAlarmSender)
         am.cancel(alarmGoalSender)
-    }
-
-    companion object SwitchType{
-        const val  SWITCH_ON_TIMEGOAL = 2
-        const val  SWITCH_ON: Int = 1
-        const val  SWITCH_OFF: Int = 0
     }
 
 }

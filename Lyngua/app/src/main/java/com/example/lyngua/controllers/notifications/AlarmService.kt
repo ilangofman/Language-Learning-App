@@ -9,6 +9,7 @@ import android.util.Log
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.Categories.TimeInterval
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import java.util.*
 
 
@@ -38,7 +39,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
         val intervalTime: Long = firstTime - notifCalendar.getTimeInMillis()
 
         //Create the alarm for notification if the checkbox was enabled
-        if (goal.notificationFlag == TimeInterval.SWITCH_ON) {
+        if (goal.notificationFlag == SWITCH_ON) {
             val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             am.setRepeating(AlarmManager.RTC_WAKEUP, notifTime, intervalTime, mAlarmSender)
         }

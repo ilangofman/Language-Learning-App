@@ -23,6 +23,7 @@ import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.*
 import com.example.lyngua.views.Categories.Practice
 import com.example.lyngua.views.Categories.TimeInterval
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import java.util.*
 
 //Notifications are set up using tutorials from https://www.youtube.com/watch?v=B5dgmvbrHgs
@@ -80,7 +81,7 @@ class AlarmNotification() : BroadcastReceiver() {
 
         //Sets message based on type of goal set
         var message: String
-        if (currentGoal.goalType == TimeInterval.SWITCH_ON){
+        if (currentGoal.goalType == SWITCH_ON){
             message = "You have a word goal ending soon!"
         }
         else{

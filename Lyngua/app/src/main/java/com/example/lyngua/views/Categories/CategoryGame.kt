@@ -19,6 +19,8 @@ import com.example.lyngua.controllers.UserController
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.words.Results
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import kotlinx.android.synthetic.main.fragment_category_game.*
 
 class CategoryGame : Fragment(), View.OnClickListener {
@@ -155,11 +157,11 @@ class CategoryGame : Fragment(), View.OnClickListener {
         Handler().postDelayed({
             if (questionIndex == questionsList.size) {
 
-                if(args.categoryChosen.goal.goalType == TimeInterval.SWITCH_ON){
+                if(args.categoryChosen.goal.goalType == SWITCH_ON){
                     args.categoryChosen.goal.numWordsCompleted += gameSession.WORDS_PER_SESSION
 
                     if(args.categoryChosen.goal.numWordsCompleted >= args.categoryChosen.goal.totalNumWords){
-                        args.categoryChosen.goal.goalType = TimeInterval.SWITCH_OFF
+                        args.categoryChosen.goal.goalType = SWITCH_OFF
                         args.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }

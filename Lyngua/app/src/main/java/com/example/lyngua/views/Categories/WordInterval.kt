@@ -20,8 +20,8 @@ import com.example.lyngua.controllers.notifications.AlarmGoal
 import com.example.lyngua.controllers.notifications.AlarmNotification
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
-import com.example.lyngua.views.Categories.TimeInterval.SwitchType.SWITCH_OFF
-import com.example.lyngua.views.Categories.TimeInterval.SwitchType.SWITCH_ON
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_word_interval.*
 import kotlinx.android.synthetic.main.fragment_word_interval.view.*
