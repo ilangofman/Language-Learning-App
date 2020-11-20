@@ -59,20 +59,20 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
             holder.itemView.category_name_txt.text = currentCategory.name.toString().capitalize()
 
             //add the data to the row
-            if(currentCategory.goal.goalType == 0){
+            if(currentCategory.goal.goalType == TimeInterval.SWITCH_ON){
                 val month = currentCategory.goal.time.get(Calendar.MONTH)
                 val day = currentCategory.goal.time.get(Calendar.DAY_OF_MONTH)
                 holder.itemView.cat_description_txt.text =
                     "${currentCategory.goal.totalNumWords - currentCategory.goal.numWordsCompleted} words to complete by ${DateFormatSymbols().months[month]} $day"
             }
-            else if(currentCategory.goal.goalType == 1){
+            else if(currentCategory.goal.goalType == TimeInterval.SWITCH_ON_TIMEGOAL){
                 val month = currentCategory.goal.time.get(Calendar.MONTH)
                 val day = currentCategory.goal.time.get(Calendar.DAY_OF_MONTH)
                 holder.itemView.cat_description_txt.text =
                     "${currentCategory.goal.totalTime - currentCategory.goal.timeSpent} seconds left to complete by ${DateFormatSymbols().months[month]} $day"
             }
 
-            else if(currentCategory.goal.goalType == -1){
+            else if(currentCategory.goal.goalType == TimeInterval.SWITCH_OFF){
                 holder.itemView.cat_description_txt.text =
                     "You have no goals for this category"
             }
@@ -93,13 +93,13 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
 
             }
 
-            if(currentCategory.goal.goalType == 0) {
+            if(currentCategory.goal.goalType == TimeInterval.SWITCH_ON) {
                 holder.itemView.progress_bar.progress =
                     (currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat() * 100).toInt()
                 holder.itemView.progress_percentage_txt.text =
                     "${((currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat()) * 100).toInt()}%"
             }
-            else if(currentCategory.goal.goalType == 1) {
+            else if(currentCategory.goal.goalType == TimeInterval.SWITCH_ON_TIMEGOAL) {
                 holder.itemView.progress_bar.progress =
                     (currentCategory.goal.timeSpent.toFloat() / currentCategory.goal.totalTime.toFloat() * 100).toInt()
                 holder.itemView.progress_percentage_txt.text =

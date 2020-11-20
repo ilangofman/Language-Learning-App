@@ -23,11 +23,11 @@ open class Goal(
     fun updateGoal(category: Category, context: Context){
         val myCalendar = Calendar.getInstance()
         when (this.timeFrame) {
-            -1 -> Calendar.getInstance()
-            0 -> myCalendar.add(Calendar.SECOND, 60)
-            1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
-            2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-            3 -> myCalendar.add(Calendar.MONTH, 1)
+            0 -> Calendar.getInstance()
+            1 -> myCalendar.add(Calendar.SECOND, 60)
+            2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
+            3 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
+            4 -> myCalendar.add(Calendar.MONTH, 1)
         }
 
         time = myCalendar

@@ -2,9 +2,8 @@ package com.example.lyngua.controllers
 
 import android.os.Build
 import android.text.Html
-import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.lyngua.models.Languages
+import com.example.lyngua.models.*
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
@@ -125,11 +124,26 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
-                                MultipleChoice(word, word.translated, optionsList, correctOption)
+                                MultipleChoice(
+                                    word,
+                                    word.translated,
+                                    optionsList,
+                                    correctOption
+                                )
                             in 4..6 -> newQuestion =
-                                WordMatching(word, word.translated, optionsList, correctOption)
+                                WordMatching(
+                                    word,
+                                    word.translated,
+                                    optionsList,
+                                    correctOption
+                                )
                             else -> newQuestion =
-                                FillInTheBlank(word, word.translated, optionsList, correctOption)
+                                FillInTheBlank(
+                                    word,
+                                    word.translated,
+                                    optionsList,
+                                    correctOption
+                                )
                         }
 
                     } else {
@@ -137,11 +151,26 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..4 -> newQuestion =
-                                MultipleChoice(word, word.word, optionsList, correctOption)
+                                MultipleChoice(
+                                    word,
+                                    word.word,
+                                    optionsList,
+                                    correctOption
+                                )
                             in 5..7 -> newQuestion =
-                                WordMatching(word, word.word, optionsList, correctOption)
+                                WordMatching(
+                                    word,
+                                    word.word,
+                                    optionsList,
+                                    correctOption
+                                )
                             else -> newQuestion =
-                                FillInTheBlank(word, word.word, optionsList, correctOption)
+                                FillInTheBlank(
+                                    word,
+                                    word.word,
+                                    optionsList,
+                                    correctOption
+                                )
                         }
 
                     }

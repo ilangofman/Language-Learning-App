@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +14,14 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.controllers.notifications.AlarmGoal
 import com.example.lyngua.controllers.notifications.AlarmNotification
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
+import com.example.lyngua.views.Categories.TimeInterval.SwitchType.SWITCH_OFF
+import com.example.lyngua.views.Categories.TimeInterval.SwitchType.SWITCH_ON
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_word_interval.*
 import kotlinx.android.synthetic.main.fragment_word_interval.view.*
@@ -42,16 +42,16 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val myCalendar = Calendar.getInstance()
-        var timeFrameFlag: Int = -1
-        var notificationFlag = 0
-        var goalType: Int = -1
-        var wordGoalCount = 0
 
+        val myCalendar = Calendar.getInstance()
+        var timeFrameFlag: Int = SWITCH_OFF
+        var notificationFlag = SWITCH_OFF
+        var goalType: Int = SWITCH_OFF
+        var wordGoalCount = SWITCH_OFF
 
         categoryController = CategoryController(requireContext())
 
-        if (args.categoryChosen.goal.goalType == 0) {
+        if (args.categoryChosen.goal.goalType == SWITCH_ON) {
             setSelectedOption(tv_goal_option_one)
         }
 
@@ -63,7 +63,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
         //If notifications were enabled before, ensures the box is checked
         if (args.categoryChosen.goal.notificationFlag == 1) {
             view.notification_checkbox.isChecked = true
-            notificationFlag = 1
+            notificationFlag = SWITCH_ON
         }
 
         val spinner: Spinner = view.findViewById(R.id.set_goals_spn)
@@ -87,8 +87,8 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
         spinner.adapter = arrayAdapter
 
         //If a previous time frame was already set, update spinner to that option
-        if (args.categoryChosen.goal.goalType != -1) {
-            spinner.setSelection(args.categoryChosen.goal.timeFrame + 1)
+        if (args.categoryChosen.goal.goalType != 0) {
+            spinner.setSelection(args.categoryChosen.goal.timeFrame)
         }
 
         // Create spinner listeners for goal time frame
@@ -103,10 +103,10 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
                 id: Long
             ) {
                 if (parent!!.getItemAtPosition(position) == "No Goal") {
-                    timeFrameFlag = -1
-                    goalType = -1
-                    notificationFlag = 0
-                    wordGoalCount = 0
+                    timeFrameFlag = SWITCH_OFF
+                    goalType = SWITCH_OFF
+                    notificationFlag = SWITCH_OFF
+                    wordGoalCount = SWITCH_OFF
 
                 } else {
 
@@ -114,20 +114,20 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
                     when {
                         //TODO remove this 10 second spinner after testing done
                         parent.getItemAtPosition(position) == "10 Seconds" -> {
-                            timeFrameFlag = 0
+                            timeFrameFlag = 1
                         }
 
                         parent.getItemAtPosition(position) == "Day" -> {
-                            timeFrameFlag = 1
-                        }
-                        parent.getItemAtPosition(position) == "Week" -> {
                             timeFrameFlag = 2
                         }
-                        parent.getItemAtPosition(position) == "Month" -> {
+                        parent.getItemAtPosition(position) == "Week" -> {
                             timeFrameFlag = 3
                         }
+                        parent.getItemAtPosition(position) == "Month" -> {
+                            timeFrameFlag = 4
+                        }
                     }
-                    goalType = 0
+                    goalType = SWITCH_ON
                 }
             }
         }
@@ -136,9 +136,9 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
         val checkBox = view.findViewById(R.id.notification_checkbox) as CheckBox
         checkBox.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
-                notificationFlag = 1
+                notificationFlag = SWITCH_ON
             } else {
-                notificationFlag = 0
+                notificationFlag = SWITCH_OFF
             }
 
         }
@@ -146,7 +146,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
         //On Click listener for the update category button
         view.update_category_btn.setOnClickListener {
 
-            if(goalType == 0) {
+            if(goalType == SWITCH_ON) {
                 if (view.words_goal_count_text.text.toString().isEmpty()) {
                     wordGoalCount = 50
                 } else {
@@ -156,11 +156,11 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
 
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
-                -1 -> cancelAlarms()
-                0 -> myCalendar.add(Calendar.SECOND, 60)
-                1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
-                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-                3 -> myCalendar.add(Calendar.MONTH, 1)
+                0 -> cancelAlarms()
+                1 -> myCalendar.add(Calendar.SECOND, 60)
+                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                3 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
+                4 -> myCalendar.add(Calendar.MONTH, 1)
             }
 
             //Creates a goal object based on the options chosen from updating to be put into the database
@@ -184,7 +184,7 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
                 goal
             )
 
-            if (timeFrameFlag != -1) {
+            if (timeFrameFlag != SWITCH_OFF) {
                 //Creates an alarmservice to run in the background
                 val alarm =
                     AlarmService(requireActivity().applicationContext, args.categoryChosen, goal)
@@ -206,7 +206,6 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
             confirmation.setPositiveButton("Delete") { _, _ ->
 
                 cancelAlarms()
-
                 categoryController.deleteCategory(args.categoryChosen)
                 Toast.makeText(requireContext(), "Delete Success", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)

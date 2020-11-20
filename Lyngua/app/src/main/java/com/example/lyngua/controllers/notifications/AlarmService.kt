@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
+import com.example.lyngua.views.Categories.TimeInterval
 import java.util.*
 
 
@@ -25,11 +26,11 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
 
         //Sets the proper time to send the notification for goal
         when (goal.timeFrame) {
-            -1 -> Calendar.getInstance()
-            0 -> notifCalendar.add(Calendar.SECOND, 30)
-            1 -> notifCalendar.add(Calendar.HOUR, 18)
-            2 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 6)
-            3 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
+            0 -> Calendar.getInstance()
+            1 -> notifCalendar.add(Calendar.SECOND, 30)
+            2 -> notifCalendar.add(Calendar.HOUR, 18)
+            3 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 6)
+            4 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
         }
 
         val firstTime: Long = c.getTimeInMillis()
@@ -37,7 +38,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
         val intervalTime: Long = firstTime - notifCalendar.getTimeInMillis()
 
         //Create the alarm for notification if the checkbox was enabled
-        if (goal.notificationFlag == 1) {
+        if (goal.notificationFlag == TimeInterval.SWITCH_ON) {
             val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             am.setRepeating(AlarmManager.RTC_WAKEUP, notifTime, intervalTime, mAlarmSender)
         }

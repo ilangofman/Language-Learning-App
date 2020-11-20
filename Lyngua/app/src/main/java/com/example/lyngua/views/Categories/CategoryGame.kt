@@ -13,15 +13,13 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
-import com.example.lyngua.controllers.Question
+import com.example.lyngua.models.Question
 import com.example.lyngua.controllers.Session
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.words.Results
 import kotlinx.android.synthetic.main.fragment_category_game.*
-
-import org.w3c.dom.Text
 
 class CategoryGame : Fragment(), View.OnClickListener {
     private val args by navArgs<CategoryGameArgs>()
@@ -157,11 +155,11 @@ class CategoryGame : Fragment(), View.OnClickListener {
         Handler().postDelayed({
             if (questionIndex == questionsList.size) {
 
-                if(args.categoryChosen.goal.goalType == 0){
+                if(args.categoryChosen.goal.goalType == TimeInterval.SWITCH_ON){
                     args.categoryChosen.goal.numWordsCompleted += gameSession.WORDS_PER_SESSION
 
                     if(args.categoryChosen.goal.numWordsCompleted >= args.categoryChosen.goal.totalNumWords){
-                        args.categoryChosen.goal.goalType = -1
+                        args.categoryChosen.goal.goalType = TimeInterval.SWITCH_OFF
                         args.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }
