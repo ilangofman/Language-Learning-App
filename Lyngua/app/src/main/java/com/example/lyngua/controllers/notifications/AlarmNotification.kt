@@ -22,7 +22,6 @@ import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.*
 import com.example.lyngua.views.Categories.Practice
-import com.example.lyngua.views.Categories.TimeInterval
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import java.util.*
 

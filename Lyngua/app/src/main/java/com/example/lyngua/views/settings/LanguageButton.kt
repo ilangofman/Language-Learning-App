@@ -1,4 +1,4 @@
-package com.example.lyngua.views
+package com.example.lyngua.views.settings
 
 import android.content.Context
 import android.graphics.Canvas

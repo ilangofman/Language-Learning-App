@@ -1,4 +1,4 @@
-package com.example.lyngua.views.Categories
+package com.example.lyngua.views.Categories.goals
 
 import android.app.AlarmManager
 import android.app.AlertDialog
@@ -23,6 +23,7 @@ import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON_TIMEGOAL
+import com.example.lyngua.views.Categories.UpdateCategoryArgs
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_word_interval.*
 import kotlinx.android.synthetic.main.fragment_word_interval.view.*

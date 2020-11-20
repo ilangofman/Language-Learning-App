@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.PersonalDetails"
+    tools:context=".views.settings.PersonalDetails"
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     >
 

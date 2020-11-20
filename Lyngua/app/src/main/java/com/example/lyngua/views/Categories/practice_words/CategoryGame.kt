@@ -1,5 +1,6 @@
-package com.example.lyngua.views.Categories
+package com.example.lyngua.views.Categories.practice_words
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -19,9 +21,15 @@ import com.example.lyngua.controllers.UserController
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.models.words.Results
+
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
+import com.example.lyngua.views.Categories.practice_words.CategoryGameArgs
+import com.example.lyngua.views.Categories.practice_words.CategoryGameDirections
+
 import kotlinx.android.synthetic.main.fragment_category_game.*
+
+import kotlin.concurrent.thread
 
 class CategoryGame : Fragment(), View.OnClickListener {
     private val args by navArgs<CategoryGameArgs>()
@@ -47,6 +55,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.fragment_category_game, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
@@ -57,7 +66,9 @@ class CategoryGame : Fragment(), View.OnClickListener {
         // Retrieving the category selected from the practice fragment
         gameSession = Session(args.categoryChosen, user)
 
-        questionsList = gameSession.generateSession()
+        thread {
+            questionsList = gameSession.generateSession()
+        }.join()
 
         // Setting onClickListeners for the textfield options
         option_one.setOnClickListener(this)
@@ -173,7 +184,7 @@ class CategoryGame : Fragment(), View.OnClickListener {
                     args.categoryChosen.numWords + 1,
                     args.categoryChosen.wordsList,
                     args.categoryChosen.sessionNumber + 1,
-                    args.categoryChosen.goal,
+                    args.categoryChosen.goal
                 )
 
                 Log.d("Answers", "Number of correct answers: $correctAnswers")

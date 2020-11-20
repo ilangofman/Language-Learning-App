@@ -1,4 +1,4 @@
-package com.example.lyngua.views.account
+package com.example.lyngua.views.settings
 
 import android.Manifest
 import android.app.Activity
@@ -14,17 +14,16 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
+import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.User.User
-import kotlinx.android.synthetic.main.fragment_setup_profile.*
-import kotlinx.android.synthetic.main.fragment_setup_profile.editText_email
-import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.android.synthetic.main.fragment_personal_details.*
+import kotlinx.android.synthetic.main.fragment_personal_details.imageView_profile
 
-class SetupProfile : Fragment() {
 
-    lateinit var navController: NavController
-//    private val userPassedIn by navArgs<SetupProfileArgs>()
+class PersonalDetails : Fragment() {
+
+    private lateinit var navController: NavController
     private var profileImageUri: Uri? = null
 
     override fun onCreateView(
@@ -32,29 +31,22 @@ class SetupProfile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setup_profile, container, false)
+        return inflater.inflate(R.layout.fragment_personal_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        button_next.setOnClickListener {
-
-            val user = User()
-            val email = editText_email.text.toString()
-            user.email = email
-
-            user.firstName = editText_first_name.text.toString()
-            user.lastName = editText_last_name.text.toString()
-            if (profileImageUri != null) {
-                user.profilePicture = profileImageUri.toString()
-            } else {
-                user.profilePicture = null
+        val user: User? = UserController().readUserInfo(requireContext())
+        if (user != null) {
+            if (user.profilePicture != null) {
+                profileImageUri = Uri.parse(user.profilePicture)
+                imageView_profile.setImageURI(profileImageUri)
             }
-
-            val actionChosen = SetupProfileDirections.actionSetupProfileToChooseLanguage(user)
-            navController.navigate(actionChosen)
+            editText_first_name.setText(user.firstName)
+            editText_last_name.setText(user.lastName)
+            editText_email.setText(user.email)
         }
 
         imageView_edit.setOnClickListener {
@@ -66,6 +58,18 @@ class SetupProfile : Fragment() {
                 //show popup to request runtime permission
                 requestPermissions(REQUIRED_PERMISSIONS, PERMISSION_CODE)
             }
+        }
+
+        button_save.setOnClickListener {
+            if (user != null) {
+                user.firstName = editText_first_name.text.toString()
+                user.lastName = editText_last_name.text.toString()
+                user.email = editText_email.text.toString()
+                user.profilePicture = profileImageUri.toString()
+                UserController().saveInfo(requireContext(), user)
+            }
+
+            navController.popBackStack()
         }
     }
 
@@ -81,6 +85,7 @@ class SetupProfile : Fragment() {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             profileImageUri = data?.data
             imageView_profile.setImageURI(profileImageUri)
+            button_save.visibility = View.VISIBLE
         }
     }
 

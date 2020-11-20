@@ -5,7 +5,7 @@
     android:id="@+id/first_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.account.SetupProfile"
+    tools:context=".views.account_creation.SetupProfile"
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     >
 
