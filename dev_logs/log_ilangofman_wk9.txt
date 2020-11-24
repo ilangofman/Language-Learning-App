@@ -1,0 +1,11 @@
+Week 9 - Dev Log 
+
+Dates: Nov 15 to Nov 21, 2020
+
+Work Completed:
+
+Primarily worked on the deliverable 3 document. Worked on the architecture and design. 
+
+Incorporated various design patterns into the code such as the factory design pattern for question creation. 
+
+Cleaned up the code structure and refactored parts of the code to adhere to best code practices. 
