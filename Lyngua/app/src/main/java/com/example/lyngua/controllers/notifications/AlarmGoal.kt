@@ -27,7 +27,7 @@ class AlarmGoal() : BroadcastReceiver(){
         Log.d("HELLO","GOAL RESET")
 
         if (currentCategory != null && currentGoal != null) {
-            currentGoal.updateGoal(currentCategory, this.context!!)
+            currentGoal.updateGoal()
 
             //Resets the current progress for the goal
             val categoryController = CategoryController(this.context!!)

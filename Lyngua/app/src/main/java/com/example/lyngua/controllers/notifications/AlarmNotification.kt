@@ -17,7 +17,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.lyngua.R
-import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.*

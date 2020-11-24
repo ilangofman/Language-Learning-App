@@ -20,7 +20,7 @@ open class Goal(
 
 ): Parcelable {
 
-    fun updateGoal(category: Category, context: Context){
+    fun updateGoal(){
         val myCalendar = Calendar.getInstance()
         when (this.timeFrame) {
             0 -> Calendar.getInstance()

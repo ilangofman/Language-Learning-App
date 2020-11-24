@@ -21,7 +21,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
     val goal = goal
 
     val notifCalendar = Calendar.getInstance()
-    val c: Calendar = goal.time
+    val goalCalendar: Calendar = goal.time
     fun startAlarm() {
 
         //Sets the proper time to send the notification for goal
@@ -33,7 +33,7 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
             4 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
         }
 
-        val firstTime: Long = c.getTimeInMillis()
+        val firstTime: Long = goalCalendar.getTimeInMillis()
         val notifTime: Long = notifCalendar.getTimeInMillis()
         val intervalTime: Long = firstTime - notifCalendar.getTimeInMillis()
 
