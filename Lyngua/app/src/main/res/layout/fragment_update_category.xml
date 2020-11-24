@@ -109,7 +109,9 @@
                 android:gravity="center"
                 android:hint="Enter Here"
                 android:inputType="number"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"/>
 
             <CheckBox
                 android:id="@+id/notification_checkbox"

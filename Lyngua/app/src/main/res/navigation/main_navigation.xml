@@ -100,12 +100,12 @@
 
     <fragment
         android:id="@+id/personalDetails"
-        android:name="com.example.lyngua.views.PersonalDetails"
+        android:name="com.example.lyngua.views.account.PersonalDetails"
         android:label="fragment_personal_details"
         tools:layout="@layout/fragment_personal_details" />
     <fragment
         android:id="@+id/changeLanguage"
-        android:name="com.example.lyngua.views.ChangeLanguage"
+        android:name="com.example.lyngua.views.account.ChangeLanguage"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
     <fragment

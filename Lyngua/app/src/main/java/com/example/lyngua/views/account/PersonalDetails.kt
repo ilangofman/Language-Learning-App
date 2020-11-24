@@ -1,4 +1,4 @@
-package com.example.lyngua.views
+package com.example.lyngua.views.account
 
 import android.Manifest
 import android.app.Activity
