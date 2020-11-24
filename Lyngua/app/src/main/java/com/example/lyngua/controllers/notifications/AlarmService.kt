@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
 import java.util.*
 
 
@@ -20,24 +21,24 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
     val goal = goal
 
     val notifCalendar = Calendar.getInstance()
-    val c: Calendar = goal.time
+    val goalCalendar: Calendar = goal.time
     fun startAlarm() {
 
         //Sets the proper time to send the notification for goal
         when (goal.timeFrame) {
-            -1 -> Calendar.getInstance()
-            0 -> notifCalendar.add(Calendar.SECOND, 30)
-            1 -> notifCalendar.add(Calendar.HOUR, 18)
-            2 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 6)
-            3 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
+            0 -> Calendar.getInstance()
+            1 -> notifCalendar.add(Calendar.SECOND, 30)
+            2 -> notifCalendar.add(Calendar.HOUR, 18)
+            3 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 6)
+            4 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
         }
 
-        val firstTime: Long = c.getTimeInMillis()
+        val firstTime: Long = goalCalendar.getTimeInMillis()
         val notifTime: Long = notifCalendar.getTimeInMillis()
         val intervalTime: Long = firstTime - notifCalendar.getTimeInMillis()
 
         //Create the alarm for notification if the checkbox was enabled
-        if (goal.notificationFlag == 1) {
+        if (goal.notificationFlag == SWITCH_ON) {
             val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             am.setRepeating(AlarmManager.RTC_WAKEUP, notifTime, intervalTime, mAlarmSender)
         }

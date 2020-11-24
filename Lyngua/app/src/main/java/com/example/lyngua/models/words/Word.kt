@@ -112,10 +112,4 @@ class Word (
         return (boxNumber * EF).roundToInt()
     }
 
-    fun printWord(){
-        println("----Word----")
-        println("English: " + word + " ||| Translated: " + translated)
-        println("Other box number: " + boxNumber)
-        println("Correct Guesses/Total Guesses: " + correctGuesses + "/" + totalGuesses)
-    }
 }

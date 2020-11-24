@@ -56,4 +56,10 @@ class UpdateCategory : Fragment() {
         }.attach()
     }
 
+    companion object SwitchType{
+        const val  SWITCH_ON_TIMEGOAL = 2
+        const val  SWITCH_ON: Int = 1
+        const val  SWITCH_OFF: Int = 0
+    }
+
 }

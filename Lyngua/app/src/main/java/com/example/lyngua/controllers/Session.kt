@@ -142,6 +142,7 @@ class Session(val category: Category, val user: User?) {
                             else -> newQuestion =
                                 questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption)!!
 
+
                         }
 
                     }
