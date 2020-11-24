@@ -14,7 +14,7 @@ https://www.youtube.com/watch?v=3USvr1Lz8g8
 
 @Database(
     entities = [Category::class],
-    version = 8,
+    version = 10,
     exportSchema = false )
 
 @TypeConverters(WordsTypeConverter::class)

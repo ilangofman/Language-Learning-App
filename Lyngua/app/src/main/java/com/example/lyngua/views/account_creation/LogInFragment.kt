@@ -1,4 +1,4 @@
-package com.example.lyngua.views.account
+package com.example.lyngua.views.account_creation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

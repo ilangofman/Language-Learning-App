@@ -23,7 +23,7 @@ class CategoryController(context: Context){
 
     fun addCategory(catName: String): Boolean {
         val cateogryAPI = CategoryAPI()
-        val goal: Goal = Goal(0, Calendar.getInstance(), 0,0, -1, -1)
+        val goal: Goal = Goal(Calendar.getInstance(), 0,0, 0,0,0,0,0)
         val category = Category(0, catName,  6, emptyList(), 1, goal)
         thread {
             val id_added = repository.addCategory(category)
@@ -39,6 +39,13 @@ class CategoryController(context: Context){
 
         thread{
             repository.updateCategory(category)
+        }
+        return true
+    }
+
+    fun updateCategoryGoal(catId: Int, catGoal: Goal): Boolean{
+        thread {
+            repository.updateCategoryGoal(catId, catGoal)
         }
         return true
     }

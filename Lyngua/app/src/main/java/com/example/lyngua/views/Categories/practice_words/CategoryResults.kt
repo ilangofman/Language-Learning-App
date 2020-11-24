@@ -1,4 +1,4 @@
-package com.example.lyngua.views.Categories
+package com.example.lyngua.views.Categories.practice_words
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
+import com.example.lyngua.views.Categories.practice_words.CategoryResultsArgs
 import kotlinx.android.synthetic.main.fragment_category_results.*
 
 class CategoryResults : Fragment() {
@@ -27,6 +28,10 @@ class CategoryResults : Fragment() {
         setResultText()
         setWordList()
     }
+
+//    private fun logResult(){
+//        Log.d()
+//    }
 
     /*
     Function:   setResultText
@@ -69,6 +74,7 @@ class CategoryResults : Fragment() {
         if (wrongWords != "")
             list_wrong.text = wrongWords
     }
+
 
 
 }

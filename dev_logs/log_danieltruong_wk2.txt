@@ -1,0 +1,11 @@
+Daniel Truong -  Dev Log - Week 2
+
+
+Dates: Sep 28 to Oct 4, 2020
+
+Work Completed:
+
+Started designing features for question class and session facade
+
+Designed word class and spaced repetition algorithm
+

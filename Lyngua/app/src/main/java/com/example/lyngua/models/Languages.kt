@@ -8,6 +8,7 @@ import com.google.cloud.translate.Translate
 import com.google.cloud.translate.TranslateOptions
 import com.google.cloud.translate.Translation
 import java.io.IOException
+import kotlin.concurrent.thread
 
 
 object Languages {
@@ -66,13 +67,13 @@ object Languages {
             translate = startTranslatorService()
         }
 
-        return translate?.translate(
-            word,
-            Translate.TranslateOption.targetLanguage(language),
-            Translate.TranslateOption.model("base")
-        )?.translatedText
 
 
+         return translate?.translate(
+             word,
+             Translate.TranslateOption.targetLanguage(language),
+             Translate.TranslateOption.model("base")
+         )?.translatedText.toString()
 
     }
 
