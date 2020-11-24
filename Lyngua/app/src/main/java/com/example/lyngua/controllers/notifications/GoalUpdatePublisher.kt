@@ -11,7 +11,7 @@ import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.goals.Goal
 
 
-class AlarmGoal() : BroadcastReceiver(){
+class GoalUpdatePublisher() : BroadcastReceiver(){
 
     private var context: Context? = null
 

@@ -130,13 +130,13 @@
             app:argType="com.example.lyngua.models.categories.Category" />
         <action
             android:id="@+id/action_categoryGame_to_categoryResults"
-            app:destination="@id/categoryResults"
+            app:destination="@id/CategoryPracticeResults"
             app:popUpTo="@id/practice"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
-        android:id="@+id/categoryResults"
-        android:name="com.example.lyngua.views.Categories.practice_words.CategoryResults"
+        android:id="@+id/CategoryPracticeResults"
+        android:name="com.example.lyngua.views.Categories.practice_words.CategoryPracticeResults"
         android:label="fragment_category_results"
         tools:layout="@layout/fragment_category_results" >
         <action
@@ -147,13 +147,13 @@
             app:argType="com.example.lyngua.models.words.Results" />
     </fragment>
     <fragment
-        android:id="@+id/timeInterval"
-        android:name="com.example.lyngua.views.Categories.goals.TimeInterval"
-        android:label="TimeInterval" />
+        android:id="@+id/TimeIntervalGoal"
+        android:name="com.example.lyngua.views.Categories.goals.TimeIntervalGoal"
+        android:label="TimeIntervalGoal" />
     <fragment
-        android:id="@+id/wordInterval"
-        android:name="com.example.lyngua.views.Categories.goals.WordInterval"
-        android:label="WordInterval" />
+        android:id="@+id/WordIntervalGoal"
+        android:name="com.example.lyngua.views.Categories.goals.WordIntervalGoal"
+        android:label="WordIntervalGoal" />
 
 
 </navigation>

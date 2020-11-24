@@ -32,7 +32,7 @@
         </activity>
 
         <receiver
-            android:name="com.example.lyngua.controllers.notifications.AlarmNotification"
+            android:name="com.example.lyngua.controllers.notifications.GoalNotificationPublisher"
             android:label="BroadcastReceiverAux">
             <intent-filter>
                 <action android:name="ALARM" />
@@ -41,7 +41,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.example.lyngua.controllers.notifications.AlarmGoal"
+            android:name="com.example.lyngua.controllers.notifications.GoalUpdatePublisher"
             android:label="BroadcastReceiverGoal">
             <intent-filter>
                 <action android:name="ALARM_GOAL" />

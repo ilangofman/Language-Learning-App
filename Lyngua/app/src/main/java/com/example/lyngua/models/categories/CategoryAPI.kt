@@ -7,7 +7,7 @@ import okhttp3.*
 import java.io.IOException
 import kotlin.random.Random
 
-class CategoryAPI {
+object CategoryAPI {
     /*
     * Purpose: Use the words api to retrieve the words related to a specific category
     * Input: id - for the category database

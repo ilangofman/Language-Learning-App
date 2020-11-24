@@ -28,7 +28,6 @@ class UpdateCategory : Fragment() {
 
 
     private val args by navArgs<UpdateCategoryArgs>()
-
     private lateinit var updateCategoryAdapter: UpdateCategoryAdapter
     private lateinit var viewPager: ViewPager2
 

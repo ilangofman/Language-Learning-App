@@ -22,7 +22,7 @@ class GalleryController(private var context: Context,
 
     var liveAlbumData = MutableLiveData<List<Album>>()
     private val repository: PhotoRepository
-    private val categoryAPI = CategoryAPI()
+    private val categoryAPI = CategoryAPI
 
     init {
         liveAlbumData.value = getAlbums()
