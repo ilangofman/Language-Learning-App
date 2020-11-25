@@ -52,8 +52,8 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
 
     init {
         this.context = context
-        var broadcastIntent: Intent = Intent(context, AlarmNotification::class.java)
-        var broadcastIntent1: Intent = Intent(context, AlarmGoal::class.java)
+        var broadcastIntent: Intent = Intent(context, GoalNotificationPublisher::class.java)
+        var broadcastIntent1: Intent = Intent(context, GoalUpdatePublisher::class.java)
 
         //Create bundle to send category and goal information to the broadcast receiver
         var bundle = Bundle()

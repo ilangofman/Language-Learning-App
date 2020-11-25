@@ -152,13 +152,13 @@ class CategoryGame : Fragment(), View.OnClickListener {
         // option boxes given the correct or incorrect choice.
         if (question.correctAnswer != optionSelected) {
             question.word.incorrectAnswer()
-            wrongAnsMap[question.displayWord] = question.optionsList[question.correctAnswer - 1]
+            wrongAnsMap[question.displayWord] = question.optionsList[question.correctAnswer as Int - 1]
             resultView(optionSelected, R.drawable.incorrect_choice)
         } else {
             question.word.correctAnswer()
             correctAnswers++
         }
-        resultView(question.correctAnswer, R.drawable.correct_choice)
+        resultView(question.correctAnswer as Int, R.drawable.correct_choice)
         questionIndex++
 
         /*

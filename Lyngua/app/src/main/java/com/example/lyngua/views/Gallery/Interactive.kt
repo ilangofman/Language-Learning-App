@@ -203,7 +203,7 @@ class Interactive : Fragment() {
                     image.close()
 
                     if (imageBitmap != null) {
-                        startInteractiveMode(imageBitmap!!)
+                        startInteractiveModeBlackboard(imageBitmap!!)
                     }
                 }
 
@@ -265,7 +265,7 @@ class Interactive : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun startInteractiveMode(imageBitmap: Bitmap){
+    private fun startInteractiveModeBlackboard(imageBitmap: Bitmap){
     //        Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
 
         val image = InputImage.fromBitmap(imageBitmap, 0)

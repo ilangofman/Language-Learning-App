@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
-import com.example.lyngua.controllers.notifications.AlarmGoal
-import com.example.lyngua.controllers.notifications.AlarmNotification
+import com.example.lyngua.controllers.notifications.GoalUpdatePublisher
+import com.example.lyngua.controllers.notifications.GoalNotificationPublisher
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_word_interval.*
 import kotlinx.android.synthetic.main.fragment_word_interval.view.*
 import kotlin.collections.ArrayList
 
-class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
+    class WordIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
 
     private lateinit var categoryController: CategoryController
     private val args = arg
@@ -227,8 +227,8 @@ class WordInterval(arg: UpdateCategoryArgs) : Fragment() {
     private fun cancelAlarms(){
         val mAlarmSender: PendingIntent
         val alarmGoalSender: PendingIntent
-        var broadcastIntent: Intent = Intent(context, AlarmNotification::class.java)
-        var broadcastIntent1: Intent = Intent(context, AlarmGoal::class.java)
+        var broadcastIntent: Intent = Intent(context, GoalNotificationPublisher::class.java)
+        var broadcastIntent1: Intent = Intent(context, GoalUpdatePublisher::class.java)
 
         //Create bundle to send category and goal information to the broadcast receiver
         var bundle = Bundle()

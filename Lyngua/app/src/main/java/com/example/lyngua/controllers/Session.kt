@@ -10,7 +10,7 @@ import com.example.lyngua.models.words.Word
 
 class Session(val category: Category, val user: User?) {
     val WORDS_PER_SESSION = 5
-
+    val questionFactory: QuestionFactory = QuestionFactory()
     //Chooses the words that should be part of the session based on the sessionNumber and boxNumbers
     //Input parameter is the category that is being played
     //Returns an array of integers for the id of words to be used in the session
@@ -124,26 +124,11 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
-                                MultipleChoice(
-                                    word,
-                                    word.translated,
-                                    optionsList,
-                                    correctOption
-                                )
+                                questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption)!!
                             in 4..6 -> newQuestion =
-                                WordMatching(
-                                    word,
-                                    word.translated,
-                                    optionsList,
-                                    correctOption
-                                )
+                                questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, correctOption)!!
                             else -> newQuestion =
-                                FillInTheBlank(
-                                    word,
-                                    word.translated,
-                                    optionsList,
-                                    correctOption
-                                )
+                                questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption)!!
                         }
 
                     } else {
@@ -151,26 +136,13 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..4 -> newQuestion =
-                                MultipleChoice(
-                                    word,
-                                    word.word,
-                                    optionsList,
-                                    correctOption
-                                )
+                                questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption)!!
                             in 5..7 -> newQuestion =
-                                WordMatching(
-                                    word,
-                                    word.word,
-                                    optionsList,
-                                    correctOption
-                                )
+                                questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, correctOption)!!
                             else -> newQuestion =
-                                FillInTheBlank(
-                                    word,
-                                    word.word,
-                                    optionsList,
-                                    correctOption
-                                )
+                                questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption)!!
+
+
                         }
 
                     }

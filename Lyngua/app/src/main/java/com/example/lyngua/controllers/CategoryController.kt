@@ -22,13 +22,15 @@ class CategoryController(context: Context){
 
 
     fun addCategory(catName: String): Boolean {
-        val cateogryAPI = CategoryAPI()
+
+        val categoryAPI = CategoryAPI
         val goal: Goal = Goal(Calendar.getInstance(), 0,0, 0,0,0,0,0)
+
         val category = Category(0, catName,  6, emptyList(), 1, goal)
         thread {
             val id_added = repository.addCategory(category)
             Log.d("Words", "The id is ${id_added}")
-            cateogryAPI.getWordsForCategory(id_added, catName, repository)
+            categoryAPI.getWordsForCategory(id_added, catName, repository)
 
         }
         return true

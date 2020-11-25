@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
-import com.example.lyngua.views.Categories.practice_words.CategoryResultsArgs
+import com.example.lyngua.views.Categories.practice_words.CategoryPracticeResultsArgs
 import kotlinx.android.synthetic.main.fragment_category_results.*
 
-class CategoryResults : Fragment() {
-    private val args by navArgs<CategoryResultsArgs>()
+class CategoryPracticeResults : Fragment() {
+    private val args by navArgs<CategoryPracticeResultsArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
