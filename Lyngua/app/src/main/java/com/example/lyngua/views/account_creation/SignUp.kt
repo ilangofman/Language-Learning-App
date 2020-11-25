@@ -1,17 +1,17 @@
-package com.example.lyngua.views.account
+package com.example.lyngua.views.account_creation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.lyngua.R
-import kotlinx.android.synthetic.main.fragment_complete_sign_up.*
+import com.example.lyngua.models.User.User
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 
-class CompleteSignUp : Fragment() {
+class SignUp : Fragment() {
 
     lateinit var navController: NavController
 
@@ -20,19 +20,24 @@ class CompleteSignUp : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_complete_sign_up, container, false)
+        return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        button_lets_go.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
-        }
+        button_sign_up.setOnClickListener {
+            val email = editText_email.text.toString()
+            val user = User()
+            user.email = email
 
-        button_no_thanks.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
+//
+            val actionChosen = SignUpDirections.actionSignUpToSetupProfile()
+//            val actionChosen = SignUpDirections.actionSignUpToSetupProfile(user)
+
+            navController.navigate(actionChosen)
+
         }
     }
 }

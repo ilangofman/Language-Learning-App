@@ -1,4 +1,4 @@
-package com.example.lyngua.views
+package com.example.lyngua.views.Gallery
 
 import android.graphics.Rect
 import android.view.View

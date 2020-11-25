@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Lyngua/app/src/main/java/com/example/lyngua/views/account_creation/PersonalDetails.kt
 package com.example.lyngua.views.account
+=======
+package com.example.lyngua.views.settings
+>>>>>>> 65fabd521710b27443243a5356db9b779aeac013:Lyngua/app/src/main/java/com/example/lyngua/views/settings/PersonalDetails.kt
 
 import android.Manifest
 import android.app.Activity

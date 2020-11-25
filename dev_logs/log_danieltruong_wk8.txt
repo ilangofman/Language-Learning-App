@@ -1,0 +1,10 @@
+Daniel Truong -  Dev Log - Week 8
+
+
+Dates: Nov 9 to Nov 15, 2020
+
+Work Completed:
+
+Created viewpager and tablayout for updating categories
+
+Minor fixes to notifications and goals 

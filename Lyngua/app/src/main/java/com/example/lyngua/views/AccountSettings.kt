@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_more.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class More : Fragment() {
+class AccountSettings : Fragment() {
 
     lateinit var navController: NavController
 

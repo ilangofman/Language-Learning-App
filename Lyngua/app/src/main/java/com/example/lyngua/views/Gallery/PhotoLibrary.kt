@@ -1,7 +1,6 @@
 package com.example.lyngua.views.Gallery
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
-import com.example.lyngua.views.SpaceItemDecorator
 import kotlinx.android.synthetic.main.fragment_photo_library.*
 
 

@@ -36,7 +36,7 @@
         android:fontFamily="sans-serif-condensed"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/album_cover"
         app:layout_constraintStart_toStartOf="@id/album_cover" />

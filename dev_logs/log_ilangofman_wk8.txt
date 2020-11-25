@@ -1,0 +1,13 @@
+Week 8 - Dev Log 
+
+Dates: Nov 8 to Nov 14, 2020
+
+Work Completed:
+
+Work on the app demo. Fix up small issues and optimize the performance for the demo.
+
+Review pull requests and provide feedback. 
+
+Resolve bugs pertaining to the practice mode functionality 
+
+Start working on the architecture deliverable. 

@@ -1,4 +1,4 @@
-package com.example.lyngua.controllers
+package com.example.lyngua.models
 
 import com.example.lyngua.models.words.Word
 

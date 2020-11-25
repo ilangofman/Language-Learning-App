@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.account.PersonalDetails"
+    tools:context=".views.settings.PersonalDetails"
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     >
 
@@ -28,7 +28,6 @@
         app:layout_constraintBottom_toBottomOf="@id/imageView_profile"
         app:layout_constraintEnd_toEndOf="@+id/imageView_profile" />
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_first_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -47,7 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_profile">
-
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_first_name"

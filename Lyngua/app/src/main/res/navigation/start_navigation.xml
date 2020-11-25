@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.lyngua.views.account.LogInFragment"
+        android:name="com.example.lyngua.views.account_creation.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" />
     <fragment
         android:id="@+id/signUp"
-        android:name="com.example.lyngua.views.account.SignUp"
+        android:name="com.example.lyngua.views.account_creation.SignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/setupProfile"
-        android:name="com.example.lyngua.views.account.SetupProfile"
+        android:name="com.example.lyngua.views.account_creation.SetupProfile"
         android:label="fragment_setup_profile"
         tools:layout="@layout/fragment_setup_profile" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseLanguage"
-        android:name="com.example.lyngua.views.account.ChooseLanguage"
+        android:name="com.example.lyngua.views.account_creation.ChooseLanguage"
         android:label="fragment_choose_language"
         tools:layout="@layout/fragment_choose_language" >
         <action
@@ -55,7 +55,11 @@
     </fragment>
     <fragment
         android:id="@+id/chooseInterests"
+<<<<<<< HEAD
         android:name="com.example.lyngua.views.account.ChooseInterests"
+=======
+        android:name="com.example.lyngua.views.account_creation.ChooseInterests"
+>>>>>>> 65fabd521710b27443243a5356db9b779aeac013
         android:label="fragment_choose_interests"
         tools:layout="@layout/fragment_choose_interests" >
         <action
@@ -66,7 +70,11 @@
     </fragment>
     <fragment
         android:id="@+id/completeSignUp"
+<<<<<<< HEAD
         android:name="com.example.lyngua.views.account.CompleteSignUp"
+=======
+        android:name="com.example.lyngua.views.account_creation.CompleteSignUp"
+>>>>>>> 65fabd521710b27443243a5356db9b779aeac013
         android:label="fragment_complete_sign_up"
         tools:layout="@layout/fragment_complete_sign_up" />
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Lyngua/app/src/main/java/com/example/lyngua/views/account_creation/ChangeLanguage.kt
 package com.example.lyngua.views.account
+=======
+package com.example.lyngua.views.settings
+>>>>>>> 65fabd521710b27443243a5356db9b779aeac013:Lyngua/app/src/main/java/com/example/lyngua/views/settings/ChangeLanguage.kt
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -3,6 +3,7 @@ package com.example.lyngua.models.categories
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.lyngua.models.categories.Category
+import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.models.words.Word
 
 /*
@@ -28,6 +29,9 @@ interface CategoryDao{
     //query for updating the category with the new word list
     @Query("UPDATE category_table SET wordsList=:wordsList WHERE id LIKE :catId")
     fun updateCategoryWords(catId: Int, wordsList: List<Word>) : Int
+
+    @Query("UPDATE category_table SET goal=:goal WHERE id LIKE :catId")
+    fun updateCategoryGoal(catId: Int, goal: Goal) : Int
 
     @Delete
     fun deleteCategory(category: Category)
