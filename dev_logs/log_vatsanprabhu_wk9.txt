@@ -7,3 +7,4 @@ Work Completed:
 - Changed text fields in sign up process to only allow 1 line
 - Changed list of language choice to be a recyclerview rather than a linearlayout of buttons
 - Started looking into how to implement functionality to practice image from gallery
+- Worked on D3 document
