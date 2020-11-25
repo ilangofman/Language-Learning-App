@@ -196,7 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:gravity="end|center_vertical"
+                android:gravity="end|bottom"
                 android:text="@string/see_all_button"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
