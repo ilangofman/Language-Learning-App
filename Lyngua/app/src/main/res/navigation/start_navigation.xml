@@ -55,11 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseInterests"
-<<<<<<< HEAD
-        android:name="com.example.lyngua.views.account.ChooseInterests"
-=======
         android:name="com.example.lyngua.views.account_creation.ChooseInterests"
->>>>>>> 65fabd521710b27443243a5356db9b779aeac013
         android:label="fragment_choose_interests"
         tools:layout="@layout/fragment_choose_interests" >
         <action
@@ -70,11 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/completeSignUp"
-<<<<<<< HEAD
-        android:name="com.example.lyngua.views.account.CompleteSignUp"
-=======
         android:name="com.example.lyngua.views.account_creation.CompleteSignUp"
->>>>>>> 65fabd521710b27443243a5356db9b779aeac013
         android:label="fragment_complete_sign_up"
         tools:layout="@layout/fragment_complete_sign_up" />
 

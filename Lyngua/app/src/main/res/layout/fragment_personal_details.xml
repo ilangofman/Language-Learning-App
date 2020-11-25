@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.settings.PersonalDetails"
-    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-    >
+    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView_profile"

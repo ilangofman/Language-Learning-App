@@ -1,8 +1,4 @@
-<<<<<<< HEAD:Lyngua/app/src/main/java/com/example/lyngua/views/account_creation/CompleteSignUp.kt
-package com.example.lyngua.views.account
-=======
 package com.example.lyngua.views.account_creation
->>>>>>> 65fabd521710b27443243a5356db9b779aeac013:Lyngua/app/src/main/java/com/example/lyngua/views/CompleteSignUp.kt
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

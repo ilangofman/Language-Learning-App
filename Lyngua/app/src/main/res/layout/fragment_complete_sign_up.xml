@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".views.account.CompleteSignUp">
-=======
     tools:context=".views.account_creation.CompleteSignUp">
->>>>>>> 65fabd521710b27443243a5356db9b779aeac013
 
 
     <TextView

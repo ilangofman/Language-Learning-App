@@ -1,8 +1,4 @@
-<<<<<<< HEAD:Lyngua/app/src/main/java/com/example/lyngua/views/account_creation/ChangeLanguage.kt
-package com.example.lyngua.views.account
-=======
 package com.example.lyngua.views.settings
->>>>>>> 65fabd521710b27443243a5356db9b779aeac013:Lyngua/app/src/main/java/com/example/lyngua/views/settings/ChangeLanguage.kt
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +12,7 @@ import com.example.lyngua.R
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.Languages
 import com.example.lyngua.models.User.User
+import com.example.lyngua.views.account_creation.LanguageListAdapter
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_change_language.*
 import kotlin.concurrent.thread
