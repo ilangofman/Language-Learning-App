@@ -18,6 +18,9 @@ import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.controllers.GalleryController
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.User.User
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
+import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_ON_TIMEGOAL
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.custom_category_row.view.*
@@ -154,17 +157,27 @@ class Home : Fragment() {
         layout_category.category_name_txt.text = category.name.capitalize(Locale.getDefault())
 
         when (category.goal.goalType) {
-            0 -> {
+            SWITCH_ON -> {
                 val month = category.goal.time.get(Calendar.MONTH)
                 val day = category.goal.time.get(Calendar.DAY_OF_MONTH)
                 layout_category.cat_description_txt.text =
-                    resources.getString(R.string.goal_description, category.goal.totalNumWords - category.goal.numWordsCompleted, DateFormatSymbols().months[month], day)
+                    resources.getString(R.string.goal_description_words, category.goal.totalNumWords - category.goal.numWordsCompleted, DateFormatSymbols().months[month], day)
                 layout_category.progress_bar.progress =
                     (category.goal.numWordsCompleted.toFloat() / category.goal.totalNumWords.toFloat() * 100).toInt()
                 layout_category.progress_percentage_txt.text =
                     resources.getString(R.string.goal_percentage, ((category.goal.numWordsCompleted.toFloat() / category.goal.totalNumWords.toFloat()) * 100).toInt())
             }
-            -1 -> {
+            SWITCH_ON_TIMEGOAL -> {
+                val month = category.goal.time.get(Calendar.MONTH)
+                val day = category.goal.time.get(Calendar.DAY_OF_MONTH)
+                layout_category.cat_description_txt.text =
+                    resources.getString(R.string.goal_description_time, category.goal.totalTime - category.goal.timeSpent, DateFormatSymbols().months[month], day)
+                layout_category.progress_bar.progress =
+                    (category.goal.timeSpent.toFloat() / category.goal.totalTime.toFloat() * 100).toInt()
+                layout_category.progress_percentage_txt.text =
+                   resources.getString(R.string.goal_percentage, ((category.goal.timeSpent.toFloat() / category.goal.totalTime.toFloat()) * 100).toInt())
+            }
+            SWITCH_OFF -> {
                 layout_category.cat_description_txt.text = resources.getString(R.string.goal_empty)
                 layout_category.progress_bar.visibility = View.INVISIBLE
             }

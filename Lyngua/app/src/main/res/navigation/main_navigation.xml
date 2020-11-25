@@ -108,6 +108,7 @@
             android:name="pageNum"
             app:argType="integer" />
     </fragment>
+    <action android:id="@+id/action_global_gallery" app:destination="@id/gallery" />
     <fragment
         android:id="@+id/photoLibrary"
         android:name="com.example.lyngua.views.Gallery.PhotoLibrary"

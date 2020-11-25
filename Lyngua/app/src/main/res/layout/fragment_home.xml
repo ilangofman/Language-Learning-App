@@ -200,7 +200,7 @@
                 android:text="@string/see_all_button"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/linearLayout_recent_album" />
+                app:layout_constraintBottom_toBottomOf="@id/linearLayout_recent_album" />
 
             <LinearLayout
                 android:id="@+id/linearLayout_recent_album"

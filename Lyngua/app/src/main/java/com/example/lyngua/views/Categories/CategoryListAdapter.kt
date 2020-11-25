@@ -66,13 +66,13 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                 val month = currentCategory.goal.time.get(Calendar.MONTH)
                 val day = currentCategory.goal.time.get(Calendar.DAY_OF_MONTH)
                 holder.itemView.cat_description_txt.text =
-                    holder.itemView.resources.getString(R.string.goal_description, currentCategory.goal.totalNumWords - currentCategory.goal.numWordsCompleted, DateFormatSymbols().months[month], day)
+                    holder.itemView.resources.getString(R.string.goal_description_words, currentCategory.goal.totalNumWords - currentCategory.goal.numWordsCompleted, DateFormatSymbols().months[month], day)
             }
             else if(currentCategory.goal.goalType == SWITCH_ON_TIMEGOAL){
                 val month = currentCategory.goal.time.get(Calendar.MONTH)
                 val day = currentCategory.goal.time.get(Calendar.DAY_OF_MONTH)
                 holder.itemView.cat_description_txt.text =
-                    "${currentCategory.goal.totalTime - currentCategory.goal.timeSpent} seconds left to complete by ${DateFormatSymbols().months[month]} $day"
+                    holder.itemView.resources.getString(R.string.goal_description_time, currentCategory.goal.totalTime - currentCategory.goal.timeSpent, DateFormatSymbols().months[month], day)
             }
 
             else if(currentCategory.goal.goalType == SWITCH_OFF){
@@ -106,7 +106,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
                 holder.itemView.progress_bar.progress =
                     (currentCategory.goal.timeSpent.toFloat() / currentCategory.goal.totalTime.toFloat() * 100).toInt()
                 holder.itemView.progress_percentage_txt.text =
-                    "${((currentCategory.goal.timeSpent.toFloat() / currentCategory.goal.totalTime.toFloat()) * 100).toInt()}%"
+                    holder.itemView.resources.getString(R.string.goal_percentage, ((currentCategory.goal.timeSpent.toFloat() / currentCategory.goal.totalTime.toFloat()) * 100).toInt())
             }
             else{
                 holder.itemView.progress_bar.visibility = View.INVISIBLE

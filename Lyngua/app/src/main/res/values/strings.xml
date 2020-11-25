@@ -65,8 +65,9 @@
     <string name="photos_empty">You haven\'t saved any pictures!</string>
     <string name="category_empty">You aren\'t practicing any categories!</string>
     <string name="album_empty">You haven\'t created any albums!</string>
-    <string name="goal_description">%1$d words to complete by %2$s %3$d</string>
-    <string name="goal_percentage">%1$d\%</string>
+    <string name="goal_description_words">%1$d words to complete by %2$s %3$d</string>
+    <string name="goal_description_time">%1$d seconds left to complete by %2$s %3$d</string>
+    <string name="goal_percentage">%1$d%%</string>
     <string name="goal_empty">You have no goals for this category</string>
     <string name="num_words">This is # words: %1$d</string>
 
