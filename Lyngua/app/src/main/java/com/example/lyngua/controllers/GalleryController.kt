@@ -221,7 +221,7 @@ class GalleryController(private var context: Context,
             if (wordsList == null) {
                 print("Unable to get related words")
             } else {
-                var correct = Languages.translate(word, langCode).toString()
+                val correct = Languages.translate(word, langCode).toString()
                 do {
                     var options1Word = wordsList!![Random.nextInt(10, 36)].word
                     var options2Word = wordsList!![Random.nextInt(37, 67)].word

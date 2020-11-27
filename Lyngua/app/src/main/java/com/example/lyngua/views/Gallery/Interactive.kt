@@ -51,6 +51,7 @@ import java.util.concurrent.Executors
 class Interactive : Fragment() {
 
     private lateinit var galleryController: GalleryController
+    private var user: User? = null
 
     private var imageCapture: ImageCapture? = null
     private var imageBitmap: Bitmap? = null
@@ -77,6 +78,7 @@ class Interactive : Fragment() {
                 R.string.app_name
             )
         )
+        user = UserController().readUserInfo(requireContext())
 
         //On back button press if image has been taken close image and display camera again
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
@@ -293,7 +295,17 @@ class Interactive : Fragment() {
                 Log.d("ImageC", "Found: $objectWord, with $confidence")
             }
 
-            displayInteractiveQuestion(objectWord!!)
+            var wordOptions = galleryController.makeQuestionFromWord(
+                objectWord!!,
+                user!!.language.code
+            )
+            if(wordOptions != null) {
+                val correctWord = wordOptions[0]
+                wordOptions = wordOptions.shuffled(Random())
+                val correctOption = wordOptions.indexOf(correctWord) + 1
+
+                displayInteractiveQuestion(objectWord!!, wordOptions, correctOption)
+            }
         }.addOnFailureListener { e ->
             Log.d("ImageC", e.toString())
             Toast.makeText(requireContext(), "Failed To  $e", Toast.LENGTH_SHORT).show()
@@ -301,63 +313,41 @@ class Interactive : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun displayInteractiveQuestion(objectWord: String){
-        val user: User? = UserController().readUserInfo(requireContext())
-        if(user != null) {
+    private fun displayInteractiveQuestion(objectWord: String, wordOptions: List<String>, correctOption: Int){
         //create the question
-        val bottomSheet: BottomSheetDialog =
-        BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+        val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
 
         bottomSheet.setContentView(R.layout.interactive_question_panel)
+        bottomSheet.question_title_interactive.text = objectWord.capitalize(Locale.getDefault())
 
 
-        bottomSheet.question_title_interactive.text = objectWord.capitalize()
-
-        var wrongOptions = galleryController.makeQuestionFromWord(
-            objectWord,
-            user.language.code
-        )
-
-        if(wrongOptions != null) {
-            val correctWord = wrongOptions[0]
-
-            wrongOptions = wrongOptions.shuffled(Random())
-
-            bottomSheet.option_1.text = Html.fromHtml(wrongOptions[0], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-            bottomSheet.option_2.text = Html.fromHtml(wrongOptions[1], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-            bottomSheet.option_3.text = Html.fromHtml(wrongOptions[2], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-            bottomSheet.option_4.text = Html.fromHtml(wrongOptions[3], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-
-            var correctOption = 0
-            if(wrongOptions[0] == correctWord) correctOption = 1
-            if(wrongOptions[1] == correctWord) correctOption = 2
-            if(wrongOptions[2] == correctWord) correctOption = 3
-            if(wrongOptions[3] == correctWord) correctOption = 4
+        bottomSheet.option_1.text = Html.fromHtml(wordOptions[0], Html.FROM_HTML_MODE_LEGACY).toString().capitalize(Locale.getDefault())
+        bottomSheet.option_2.text = Html.fromHtml(wordOptions[1], Html.FROM_HTML_MODE_LEGACY).toString().capitalize(Locale.getDefault())
+        bottomSheet.option_3.text = Html.fromHtml(wordOptions[2], Html.FROM_HTML_MODE_LEGACY).toString().capitalize(Locale.getDefault())
+        bottomSheet.option_4.text = Html.fromHtml(wordOptions[3], Html.FROM_HTML_MODE_LEGACY).toString().capitalize(Locale.getDefault())
 
 
-            bottomSheet.option_1.setOnClickListener{
-                if(correctOption == 1) showCorrectButton(bottomSheet.option_1)
-                else showWrongButton(bottomSheet.option_1)
-            }
-
-            bottomSheet.option_2.setOnClickListener {
-                if(correctOption == 2) showCorrectButton(bottomSheet.option_2)
-                else showWrongButton(bottomSheet.option_2)
-            }
-
-            bottomSheet.option_3.setOnClickListener {
-                if(correctOption == 3) showCorrectButton(bottomSheet.option_3)
-                else showWrongButton(bottomSheet.option_3)
-            }
-
-            bottomSheet.option_4.setOnClickListener {
-                if(correctOption == 4) showCorrectButton(bottomSheet.option_4)
-                else showWrongButton(bottomSheet.option_4)
-            }
-            //              bottomSheet.setCanceledOnTouchOutside(false)
-            bottomSheet.show()
-            }
+        bottomSheet.option_1.setOnClickListener{
+            if(correctOption == 1) showCorrectButton(bottomSheet.option_1)
+            else showWrongButton(bottomSheet.option_1)
         }
+
+        bottomSheet.option_2.setOnClickListener {
+            if(correctOption == 2) showCorrectButton(bottomSheet.option_2)
+            else showWrongButton(bottomSheet.option_2)
+        }
+
+        bottomSheet.option_3.setOnClickListener {
+            if(correctOption == 3) showCorrectButton(bottomSheet.option_3)
+            else showWrongButton(bottomSheet.option_3)
+        }
+
+        bottomSheet.option_4.setOnClickListener {
+            if(correctOption == 4) showCorrectButton(bottomSheet.option_4)
+            else showWrongButton(bottomSheet.option_4)
+        }
+        //              bottomSheet.setCanceledOnTouchOutside(false)
+        bottomSheet.show()
     }
 
     /*
