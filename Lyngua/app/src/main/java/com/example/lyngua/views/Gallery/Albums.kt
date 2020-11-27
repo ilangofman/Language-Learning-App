@@ -51,7 +51,7 @@ class Albums : Fragment() {
         }
 
         //When live album data changes notify adapter to update data and view
-        galleryController.liveAlbumData.observe(viewLifecycleOwner, Observer { albumList ->
+        galleryController.liveAlbumData.observe(viewLifecycleOwner, { albumList ->
             adapter.setData(albumList as MutableList<Album>)
         })
     }

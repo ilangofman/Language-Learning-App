@@ -2,12 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/first_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.account_creation.SetupProfile"
-    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-    >
+    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/bold"
+        android:text="@string/setup_profile_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.123" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView_profile"
@@ -33,46 +46,33 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView_profile" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_email"
+        android:id="@+id/textInput_first_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="75dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="8dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp"
         app:boxStrokeColor="@color/colorBlue"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textInput_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_last_name">
+        app:layout_constraintTop_toBottomOf="@+id/imageView_profile">
+
+
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_email"
+            android:id="@+id/editText_first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:hint="@string/first_name_field"
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/textView_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/setup_profile_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/bold"
-        app:layout_constraintVertical_bias="0.123" />
-
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -95,39 +95,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInput_first_name"
         app:layout_constraintVertical_bias="0.0">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/last_name_field" />
+            android:hint="@string/last_name_field"
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_first_name"
+        android:id="@+id/textInput_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="75dp"
-        android:layout_marginBottom="8dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="176dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp"
         app:boxStrokeColor="@color/colorBlue"
-        app:layout_constraintBottom_toTopOf="@+id/textInput_email"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_profile">
-
+        app:layout_constraintTop_toBottomOf="@+id/textInput_last_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_first_name"
+            android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/first_name_field" />
+            android:hint="Email"
+            android:singleLine="true"
+            android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

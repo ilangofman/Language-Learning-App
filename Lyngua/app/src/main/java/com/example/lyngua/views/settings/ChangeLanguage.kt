@@ -1,17 +1,18 @@
 package com.example.lyngua.views.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lyngua.R
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.Languages
 import com.example.lyngua.models.User.User
+import com.example.lyngua.views.account_creation.LanguageListAdapter
 import com.google.cloud.translate.Language
 import kotlinx.android.synthetic.main.fragment_change_language.*
 import kotlin.concurrent.thread
@@ -20,10 +21,12 @@ import kotlin.concurrent.thread
 class ChangeLanguage : Fragment() {
 
     private var languageModel: Languages = Languages
-    private var languageList: List<Language>? = null
+    private var languageList: MutableList<Language>? = null
     private lateinit var navController: NavController
 
     private var currentLanguage: Language? = null
+    private var previousSelection = -1
+    private var currentSelection = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,32 +39,28 @@ class ChangeLanguage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
         thread {
-            languageList = languageModel.getSupportedAllLanguages()
+            languageList = languageModel.getSupportedAllLanguages()?.toMutableList()
         }.join()
+
         val user: User? = UserController().readUserInfo(requireContext())
         if (user != null) {
             currentLanguage = user.language
         }
 
-        if (currentLanguage != null) {
-            val currentLanguageButton = LanguageButton(requireContext(), currentLanguage!!)
-            currentLanguageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
-            radioGroup_language_list.addView(currentLanguageButton)
-            currentLanguageButton.isChecked = true
+        currentLanguage?.let { language ->
+            languageList?.remove(language)
+            languageList?.add(0, language)
+            currentSelection = 0
         }
 
-        languageList?.forEach { language ->
-            val languageButton = LanguageButton(requireContext(), language)
-            languageButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200)
-            languageButton.setOnClickListener {
-                button_save.visibility = View.VISIBLE
-            }
-            radioGroup_language_list.addView(languageButton)
-        }
+        val adapter = languageList?.let { list -> LanguageListAdapter(list, currentSelection) { languageCallback(it) } }
+        val recyclerView = recyclerView_language_list
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         button_save.setOnClickListener {
-            currentLanguage = view.findViewById<LanguageButton>(radioGroup_language_list.checkedRadioButtonId).language
             if (user != null) {
                 user.language = currentLanguage!!
                 UserController().saveInfo(requireContext(), user)
@@ -69,5 +68,10 @@ class ChangeLanguage : Fragment() {
 
             navController.popBackStack()
         }
+    }
+
+    private fun languageCallback(language: Language) {
+        button_save.visibility = View.VISIBLE
+        currentLanguage = language
     }
 }

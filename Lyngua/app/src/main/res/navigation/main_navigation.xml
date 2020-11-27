@@ -42,7 +42,11 @@
         tools:layout="@layout/fragment_interactive" >
         <action
             android:id="@+id/action_interactive_to_gallery"
-            app:destination="@id/gallery" />
+            app:destination="@id/gallery" >
+            <argument
+                android:name="pageNum"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/stats"
@@ -99,7 +103,12 @@
         android:id="@+id/gallery"
         android:name="com.example.lyngua.views.Gallery.Gallery"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <argument
+            android:name="pageNum"
+            app:argType="integer" />
+    </fragment>
+    <action android:id="@+id/action_global_gallery" app:destination="@id/gallery" />
     <fragment
         android:id="@+id/photoLibrary"
         android:name="com.example.lyngua.views.Gallery.PhotoLibrary"

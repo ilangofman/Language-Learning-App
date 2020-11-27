@@ -1,0 +1,9 @@
+Vatsan Prabhu - Dev Log - Week 8
+
+Dates: Nov 8 to Nov 14, 2020
+
+Work Completed:
+- Created home page with collapsing toolbar that shows users name
+- Added Recent category played to Home fragment for demo purposes
+- Started looking into how to add recent photos and recent album into home fragment
+- Prepared for demo
