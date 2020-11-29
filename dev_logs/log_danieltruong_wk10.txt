@@ -1,0 +1,12 @@
+Daniel Truong -  Dev Log - Week 10
+
+
+Dates: Nov 16 to Nov 22, 2020
+
+Work Completed:
+
+Worked on writing design pattern portion for Deliverable 3
+
+Worked on creating UML for Deliverable 3
+
+
