@@ -2,6 +2,7 @@ package com.example.lyngua.controllers
 
 import android.os.Build
 import android.text.Html
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.lyngua.models.*
 import com.example.lyngua.models.User.User
@@ -70,7 +71,7 @@ class Session(val category: Category, val user: User?) {
                         ArrayList() //List of options to be added to the question object
                     val filterList: ArrayList<Word> =
                         ArrayList() //List of words to ensure no duplicate words are seen as options for the question
-
+                    val optionsMap = mutableMapOf<String, String>()
                     //Loops to add the words for the different options of the question
                     for (i in 1..4) {
 
@@ -81,6 +82,7 @@ class Session(val category: Category, val user: User?) {
                                 else -> word.translated
                             }
                             optionsList.add(option)
+                            optionsMap[word.word] = word.translated
                         }
                         //If we need to set an incorrect option with a random word from the category's word list
                         else {
@@ -112,9 +114,13 @@ class Session(val category: Category, val user: User?) {
                                 0 -> optionsList.add(randWord.word)
                                 else -> optionsList.add(randWord.translated)
                             }
+                            optionsMap[randWord.word] = randWord.translated
 
                         }
                     }
+
+                    val wordMatching = mutableMapOf<String, String>()
+                    wordMatching[word.word] = word.translated
 
                     //Creates a new question object and adds it to the list
                     //The display word depends on if the question being asked will be on english or other language translation
@@ -124,28 +130,25 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
-                                questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption)!!
+                                questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption, optionsMap)!!
                             in 4..6 -> newQuestion =
-                                questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, correctOption)!!
+                                questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
                             else -> newQuestion =
-                                questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption)!!
+                                questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption, optionsMap)!!
                         }
-
                     } else {
 
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
-                            in 0..4 -> newQuestion =
-                                questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption)!!
-                            in 5..7 -> newQuestion =
-                                questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, correctOption)!!
+                            in 0..3 -> newQuestion =
+                                questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption, optionsMap)!!
+                            in 4..6 -> newQuestion =
+                                questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, wordMatching, optionsMap)!!
                             else -> newQuestion =
-                                questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption)!!
-
-
+                                questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption, optionsMap)!!
                         }
-
                     }
+
                     questionsList.add(newQuestion)
                     currentId++
                 }

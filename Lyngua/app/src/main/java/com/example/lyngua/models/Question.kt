@@ -37,7 +37,8 @@ class WordMatching(
     override val word: Word,
     override var displayWord: String,
     override var optionsList: ArrayList<String>,
-    override val correctAnswer: MutableMap<String, String>
+    override val correctAnswer: MutableMap<String, String>,
+    var optionsMap: MutableMap<String, String>
 
 ) : Question{
     override fun getTranslatedWord():String{
@@ -46,7 +47,7 @@ class WordMatching(
 }
 
 class QuestionFactory(){
-    fun createQuestion(typeQuestion: String, word: Word, displayWord: String, optionsList: ArrayList<String>, correctAnswer: Any): Question? {
+    fun createQuestion(typeQuestion: String, word: Word, displayWord: String, optionsList: ArrayList<String>, correctAnswer: Any, optionsMap: MutableMap<String, String>): Question? {
         return when (typeQuestion) {
             "multipleChoice" -> {
                 MultipleChoice(word, displayWord, optionsList, correctAnswer as Int)
@@ -55,7 +56,7 @@ class QuestionFactory(){
                 FillInTheBlank(word, displayWord, optionsList, correctAnswer as String)
             }
             "wordMatching" -> {
-                WordMatching(word, displayWord, optionsList, correctAnswer as MutableMap<String, String>)
+                WordMatching(word, displayWord, optionsList, correctAnswer as MutableMap<String, String>, optionsMap)
             }
             else -> {
                 null
