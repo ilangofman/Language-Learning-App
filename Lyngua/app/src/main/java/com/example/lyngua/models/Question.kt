@@ -47,7 +47,7 @@ class WordMatching(
 }
 
 class QuestionFactory(){
-    fun createQuestion(typeQuestion: String, word: Word, displayWord: String, optionsList: ArrayList<String>, correctAnswer: Any): Question? {
+    fun createQuestion(typeQuestion: String, word: Word, displayWord: String, optionsList: ArrayList<String>, correctAnswer: Any, optionsMap: MutableMap<String, String>): Question? {
         return when (typeQuestion) {
             "multipleChoice" -> {
                 MultipleChoice(word, displayWord, optionsList, correctAnswer as Int)
@@ -55,14 +55,6 @@ class QuestionFactory(){
             "fillIn" -> {
                 FillInTheBlank(word, displayWord, optionsList, correctAnswer as String)
             }
-
-            else -> {
-                null
-            }
-        }
-    }
-    fun createQuestionMatching(typeQuestion: String, word: Word, displayWord: String, optionsList: ArrayList<String>, correctAnswer: Any, optionsMap: MutableMap<String, String>): Question? {
-        return when (typeQuestion) {
             "wordMatching" -> {
                 WordMatching(word, displayWord, optionsList, correctAnswer as MutableMap<String, String>, optionsMap)
             }

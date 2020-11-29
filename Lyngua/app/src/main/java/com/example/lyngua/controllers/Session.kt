@@ -130,22 +130,22 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
-                                questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption)!!
+                                questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption, optionsMap)!!
                             in 4..6 -> newQuestion =
-                                questionFactory.createQuestionMatching("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
+                                questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
                             else -> newQuestion =
-                                questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption)!!
+                                questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption, optionsMap)!!
                         }
                     } else {
 
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
-                                questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption)!!
+                                questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption, optionsMap)!!
                             in 4..6 -> newQuestion =
-                                questionFactory.createQuestionMatching("wordMatching" , word, word.word, optionsList, wordMatching, optionsMap)!!
+                                questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, wordMatching, optionsMap)!!
                             else -> newQuestion =
-                                questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption)!!
+                                questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption, optionsMap)!!
                         }
                     }
 
