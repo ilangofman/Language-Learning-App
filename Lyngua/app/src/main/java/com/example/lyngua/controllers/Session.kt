@@ -22,9 +22,9 @@ class Session(val category: Category, val user: User?) {
         var count = 0
 
         while (newSession.isEmpty()) {
-            //Log.d("SESSION", "HELLLOOOO")
+
             for (word in category.wordsList) {
-                Log.d("SESSION", "${category.sessionNumber} ${word.word} ${word.boxNumber}")
+
                 //Add only the preset number of words for a single session
                 if (category.sessionNumber == word.boxNumber && count < WORDS_PER_SESSION) {
 
