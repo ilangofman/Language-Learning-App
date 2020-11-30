@@ -10,6 +10,7 @@ import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
 
 class Session(val category: Category, val user: User?) {
+
     val WORDS_PER_SESSION = 5
     val questionFactory: QuestionFactory = QuestionFactory()
     //Chooses the words that should be part of the session based on the sessionNumber and boxNumbers
@@ -21,8 +22,9 @@ class Session(val category: Category, val user: User?) {
         var count = 0
 
         while (newSession.isEmpty()) {
+            //Log.d("SESSION", "HELLLOOOO")
             for (word in category.wordsList) {
-
+                Log.d("SESSION", "${category.sessionNumber} ${word.word} ${word.boxNumber}")
                 //Add only the preset number of words for a single session
                 if (category.sessionNumber == word.boxNumber && count < WORDS_PER_SESSION) {
 
@@ -31,10 +33,14 @@ class Session(val category: Category, val user: User?) {
                 }
                 //If a word has yet to be played, or if it is to be in a session but there are already
                 //our a preset number words in the session, then increment the boxNumber so that the word could be in the next session
-                else {
+                else if (category.sessionNumber == word.boxNumber && count > WORDS_PER_SESSION){
                     word.boxNumber++
                 }
+                else if(category.sessionNumber > word.boxNumber){
+                    word.boxNumber = category.sessionNumber + 1
+                }
             }
+
             //If no words are to be in the session, then increment to the next session
             if (newSession.size == 0) {
                 category.sessionNumber++
@@ -130,8 +136,10 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
+                                //questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
                                 questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption, optionsMap)!!
                             in 4..6 -> newQuestion =
+                                //questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption, optionsMap)!!
                                 questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
                             else -> newQuestion =
                                 questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption, optionsMap)!!
@@ -141,8 +149,10 @@ class Session(val category: Category, val user: User?) {
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
+                                //questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, wordMatching, optionsMap)!!
                                 questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption, optionsMap)!!
                             in 4..6 -> newQuestion =
+                                //questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption, optionsMap)!!
                                 questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, wordMatching, optionsMap)!!
                             else -> newQuestion =
                                 questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption, optionsMap)!!
@@ -157,4 +167,10 @@ class Session(val category: Category, val user: User?) {
 
         return questionsList
     }
+
+    companion object{
+        val WORDS_PER_SESSION = 5
+    }
 }
+
+

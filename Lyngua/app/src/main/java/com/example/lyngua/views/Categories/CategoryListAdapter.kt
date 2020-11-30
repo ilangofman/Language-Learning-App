@@ -4,9 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyngua.R
+import com.example.lyngua.controllers.Session.Companion.WORDS_PER_SESSION
 import com.example.lyngua.models.categories.Category
 import com.example.lyngua.views.Categories.PracticeDirections
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
@@ -115,11 +117,20 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
             // the listener for the category selection
             holder.itemView.rowLayout.setOnClickListener {
 
-            // Begins the category practice game session
-            val actionChosen = PracticeDirections.actionPracticeToCategoryGame( currentCategory )
+                if (currentCategory.wordsList.size < WORDS_PER_SESSION) {
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Not enough words in the category to play, please add ${WORDS_PER_SESSION-currentCategory.wordsList.size} more to play",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    // Begins the category practice game session
+                    val actionChosen =
+                        PracticeDirections.actionPracticeToCategoryGame(currentCategory)
 
-                holder.itemView.findNavController().navigate(actionChosen)
+                    holder.itemView.findNavController().navigate(actionChosen)
 
+                }
             }
 
         }
