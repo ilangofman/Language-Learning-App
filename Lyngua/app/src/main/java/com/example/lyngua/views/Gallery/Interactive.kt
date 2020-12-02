@@ -142,7 +142,7 @@ class Interactive : Fragment() {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
@@ -302,7 +302,7 @@ class Interactive : Fragment() {
             for (label in labels) {
                 objectWord = label.text
                 val confidence = label.confidence
-                val index = label.index
+//                val index = label.index
 
                 Log.d("ImageC", "Found: $objectWord, with $confidence")
             }
@@ -324,6 +324,7 @@ class Interactive : Fragment() {
         }
     }
 
+<<<<<<< HEAD
     /*
      * Purpose: Display a bottom sheet for the multiple choice practice of the object identified
      * Input:   None
@@ -333,6 +334,66 @@ class Interactive : Fragment() {
         val bottomSheet = InteractiveQuestion(objectWord!!, wordOptions, correctOption)
         bottomSheet.setTargetFragment(this, REQUEST_CODE_BOTTOM_SHEET)
         bottomSheet.show(parentFragmentManager, "bottomSheetInteractiveQuestion")
+=======
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun displayInteractiveQuestion(objectWord: String){
+        val user: User? = UserController().readUserInfo(requireContext())
+        if(user != null) {
+        //create the question
+        val bottomSheet =
+        BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+
+        bottomSheet.setContentView(R.layout.interactive_question_panel)
+
+
+        bottomSheet.question_title_interactive.text = objectWord.capitalize(Locale.getDefault())
+
+        var wrongOptions = galleryController.makeQuestionFromWord(
+            objectWord,
+            user.language.code
+        )
+
+        if(wrongOptions != null) {
+            val correctWord = wrongOptions[0]
+
+            wrongOptions = wrongOptions.shuffled(Random())
+
+            bottomSheet.option_1.text = Html.fromHtml(wrongOptions[0], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
+            bottomSheet.option_2.text = Html.fromHtml(wrongOptions[1], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
+            bottomSheet.option_3.text = Html.fromHtml(wrongOptions[2], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
+            bottomSheet.option_4.text = Html.fromHtml(wrongOptions[3], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
+
+            var correctOption = 0
+            if(wrongOptions[0] == correctWord) correctOption = 1
+            if(wrongOptions[1] == correctWord) correctOption = 2
+            if(wrongOptions[2] == correctWord) correctOption = 3
+            if(wrongOptions[3] == correctWord) correctOption = 4
+
+
+            bottomSheet.option_1.setOnClickListener{
+                if(correctOption == 1) showCorrectButton(bottomSheet.option_1)
+                else showWrongButton(bottomSheet.option_1)
+            }
+
+            bottomSheet.option_2.setOnClickListener {
+                if(correctOption == 2) showCorrectButton(bottomSheet.option_2)
+                else showWrongButton(bottomSheet.option_2)
+            }
+
+            bottomSheet.option_3.setOnClickListener {
+                if(correctOption == 3) showCorrectButton(bottomSheet.option_3)
+                else showWrongButton(bottomSheet.option_3)
+            }
+
+            bottomSheet.option_4.setOnClickListener {
+                if(correctOption == 4) showCorrectButton(bottomSheet.option_4)
+                else showWrongButton(bottomSheet.option_4)
+            }
+            //              bottomSheet.setCanceledOnTouchOutside(false)
+            bottomSheet.show()
+            }
+        }
+>>>>>>> bb3da032c59d61cee6209b1bc8e475f82e42ef66
     }
 
     /*

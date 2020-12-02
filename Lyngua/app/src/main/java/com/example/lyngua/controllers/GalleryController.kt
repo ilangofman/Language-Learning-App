@@ -144,15 +144,34 @@ class GalleryController(private var context: Context,
             .filter { it.extension == "" && it != appDir }
             .forEach { album ->
                 val albumName = album.name.toUpperCase(Locale.getDefault())
-
                 val coverPhoto :String?  = album.walkBottomUp()
-                    .filter { it.extension == "jpg" }
-                    .elementAtOrNull(0)?.absolutePath
+                    .firstOrNull{ it.extension == "jpg" }?.absolutePath
 
-                albumList.add(Album(albumName, coverPhoto, coverPhoto == null))
+                albumList.add(Album(albumName, coverPhoto))
             }
 
         return albumList
+    }
+
+    /*
+     * Purpose: Get the most recent album
+     * Input:   None
+     * Output:  An album object
+     */
+    fun getRecentAlbum(): Album? {
+        val appDir = getOutputDirectory()
+
+        appDir.walkBottomUp()
+            .firstOrNull { it.extension == "" && it != appDir }
+            .let { album ->
+                if (album == null) return null
+
+                val albumName = album.name.toUpperCase(Locale.getDefault())
+                val coverPhoto :String?  = album.walkBottomUp()
+                    .firstOrNull{ it.extension == "jpg" }?.absolutePath
+
+                return Album(albumName, coverPhoto)
+            }
     }
 
     /*
@@ -214,7 +233,7 @@ class GalleryController(private var context: Context,
     }
 
     fun makeQuestionFromWord(word: String, langCode: String): List<String>? {
-        var wordsList: List<Word>? = null
+        var wordsList: List<Word>?
         var chosenOptionsList: List<String>? = null
         thread {
             wordsList = categoryAPI.getWordsForQuestion(word)

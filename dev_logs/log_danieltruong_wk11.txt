@@ -1,0 +1,10 @@
+Daniel Truong -  Dev Log - Week 11
+
+
+Dates: Nov 23 to Nov 29, 2020
+
+Work Completed:
+
+Helped create presentation slides for Deliverable 3 Examination
+
+Implemented changes to the questionFactory so that the wordMatching Question has the correct members for CategoryGame
