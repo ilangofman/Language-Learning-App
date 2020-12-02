@@ -8,20 +8,14 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.graphics.*
 import android.media.Image
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
 import androidx.activity.addCallback
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -36,13 +30,11 @@ import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.User.User
 import com.example.lyngua.views.Gallery.Dialogs.InteractiveQuestion
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import kotlinx.android.synthetic.main.fragment_interactive.*
-import kotlinx.android.synthetic.main.interactive_question_panel.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -283,7 +275,6 @@ class Interactive : Fragment() {
      * Input:   imageBitmap - bitmap of the image captured
      * Output:  None
      */
-//    @RequiresApi(Build.VERSION_CODES.N)
     private fun startInteractiveModeBlackboard(imageBitmap: Bitmap){
     //        Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
 
