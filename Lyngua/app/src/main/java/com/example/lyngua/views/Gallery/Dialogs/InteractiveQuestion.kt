@@ -30,12 +30,12 @@ class InteractiveQuestion(private val objectWord: String, private val wordOption
         super.onViewCreated(view, savedInstanceState)
         dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
-        question_title_interactive.text = objectWord.capitalize(Locale.getDefault())
+        question_title_interactive.text = objectWord.capitalize()
 
-        option_1.text = wordOptions[0].capitalize(Locale.getDefault())
-        option_2.text = wordOptions[1].capitalize(Locale.getDefault())
-        option_3.text = wordOptions[2].capitalize(Locale.getDefault())
-        option_4.text = wordOptions[3].capitalize(Locale.getDefault())
+        option_1.text = wordOptions[0].capitalize()
+        option_2.text = wordOptions[1].capitalize()
+        option_3.text = wordOptions[2].capitalize()
+        option_4.text = wordOptions[3].capitalize()
 
         option_1.setOnClickListener{
             if(correctOption == 1) showCorrectButton(option_1)

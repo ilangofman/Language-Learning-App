@@ -31,7 +31,7 @@
         android:id="@+id/button_camera_capture"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="25dp"
         android:src="@drawable/ic_capture_white"
         android:scaleType="fitCenter"
         android:background="#00000000"

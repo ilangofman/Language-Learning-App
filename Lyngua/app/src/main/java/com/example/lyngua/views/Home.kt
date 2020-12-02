@@ -154,7 +154,7 @@ class Home : Fragment() {
 
         textView_category_empty.visibility = View.GONE
         layout_category.visibility = View.VISIBLE
-        layout_category.category_name_txt.text = category.name.capitalize(Locale.getDefault())
+        layout_category.category_name_txt.text = category.name.capitalize()
 
         when (category.goal.goalType) {
             SWITCH_ON -> {
@@ -205,6 +205,7 @@ class Home : Fragment() {
 
         layout_album.textView_album_title.text = recent.name
         layout_album.button_album_more.visibility = View.GONE
+        layout_album.button_album_play.visibility = View.GONE
 
         layout_album.setOnClickListener {
             val actionChosen = MainNavigationDirections.actionGlobalAlbumPhotos(recent.name)
