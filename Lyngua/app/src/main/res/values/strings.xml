@@ -37,6 +37,7 @@
     <string name="edit_name_button">Edit Name</string>
     <string name="delete_button">Delete</string>
     <string name="new_album_button">New Album</string>
+    <string name="done_button">Done</string>
 
     <!-- PAGE TITLES AND HEADERS -->
     <string name="sign_up_title">Let\'s Get Started</string>

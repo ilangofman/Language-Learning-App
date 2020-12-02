@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.lyngua.models.Photos.*
+import com.example.lyngua.models.photos.*
 import com.example.lyngua.models.Languages
 import com.example.lyngua.models.categories.CategoryAPI
 import com.example.lyngua.models.words.Word
@@ -50,7 +50,7 @@ class GalleryController(private var context: Context,
      *          word        - String representing image object
      * Output:  Boolean for if save was successful or not
      */
-    fun savePhoto(imageBitmap: Bitmap?, albumName: String, fileName: String, word: String = "test"): Boolean {
+    fun savePhoto(imageBitmap: Bitmap?, albumName: String, fileName: String, word: String, options: List<String>, correctOption: Int): Boolean {
         val rootPath = getOutputDirectory()
         return if (File(rootPath, albumName).exists()) {
             val photoFile = File(File(rootPath, albumName), fileName)
@@ -61,7 +61,7 @@ class GalleryController(private var context: Context,
             outputStream.close()
 
             thread {
-                repository.addPhoto(Photo(photoFile.absolutePath, word))
+                repository.addPhoto(Photo(photoFile.absolutePath, word, options, correctOption))
             }
 
             true
