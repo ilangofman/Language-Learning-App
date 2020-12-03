@@ -84,6 +84,11 @@ class WordMatching : Fragment() {
 
     }
 
+    /*
+        Parts of touchListener and dragListener are made using this website:
+        https://www.vogella.com/tutorials/AndroidDragAndDrop/article.html
+     */
+
     private val touchListener = View.OnTouchListener { v, event ->
         if (event.action == MotionEvent.ACTION_DOWN) {
             val data = ClipData.newPlainText("", "")
@@ -170,7 +175,7 @@ class WordMatching : Fragment() {
     }
 
     private fun evaluateMatches(){
-        Log.d("log", "evaluating...")
+        val question = questionsList[currentQuestionPos] as WordMatching
         val wordList: ArrayList<TextView> = arrayListOf()
         val tvArrayList: ArrayList<TextView> = arrayListOf()
         val rowCheckBools: ArrayList<Boolean> = arrayListOf()
@@ -196,19 +201,25 @@ class WordMatching : Fragment() {
             if (tv.text.toString() == valsList[currentIdx]) {
                 rowCheckBools.add(currentIdx, element = true)
                 numCorrect++
-                // ADD CORRECT ANSWER FOR WORD
+
+                if (tv.text.toString() == question.displayWord)
+                    question.word.correctAnswer()
+
             } else {
                 rowCheckBools.add(currentIdx, element = false)
                 wrongAnsMap[wordList[currentIdx].text.toString()] = valsList[currentIdx]
-                // ADD INCORRECT ANSWER FOR WORD
+
+                if (tv.text.toString() == question.displayWord)
+                    question.word.incorrectAnswer()
             }
         }
 
         Log.d("evaluate", "rowCheckBools: $rowCheckBools")
         Log.d("evaluate", "wrongAnsMap: $wrongAnsMap")
+
+
         setBackground(rowCheckBools)
 
-        // CHECK FOR NEXT QUESTION TYPE
         currentQuestionPos++
 
         Handler().postDelayed({

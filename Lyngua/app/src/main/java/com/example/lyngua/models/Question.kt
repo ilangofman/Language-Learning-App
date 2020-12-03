@@ -54,8 +54,6 @@ class QuestionFactory(){
                 MultipleChoice(word, displayWord, optionsList, correctAnswer as Int)
             }
             "fillIn" -> {
-                Log.d("fill", "word: $word, displayWord: $displayWord, optionsList: $optionsList, correctAnswer: $correctAnswer")
-
                 FillInTheBlank(word, displayWord, optionsList, optionsList[correctAnswer as Int - 1])
             }
             "wordMatching" -> {
