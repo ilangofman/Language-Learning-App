@@ -88,10 +88,10 @@ class Home : Fragment() {
             findNavController().navigate(action)
         }
 
-        button.setOnClickListener {
-            navBar.visibility = View.GONE
-            findNavController().navigate(R.id.action_home_to_start_navigation)
-        }
+//        button.setOnClickListener {
+//            navBar.visibility = View.GONE
+//            findNavController().navigate(R.id.action_home_to_start_navigation)
+//        }
 
 
         initToolbarScroll()
