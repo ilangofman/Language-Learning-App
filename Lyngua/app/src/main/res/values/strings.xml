@@ -73,5 +73,6 @@
 
     <!-- QUESTION TEXT -->
     <string name="question_en">Select The Correct Translation Of The Word</string>
+    <string name="word_matching">Match The Correct Translations To The Words</string>
 
 </resources>
