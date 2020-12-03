@@ -31,7 +31,6 @@ import kotlinx.android.synthetic.main.fragment_multiple_choice.*
 import kotlin.concurrent.thread
 
 class MultipleChoice : Fragment(), View.OnClickListener {
-    // CHANGE THIS
     private val args by navArgs<MultipleChoiceArgs>()
 
     lateinit var navController : NavController

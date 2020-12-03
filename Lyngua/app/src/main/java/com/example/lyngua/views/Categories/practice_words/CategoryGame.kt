@@ -59,8 +59,6 @@ class CategoryGame : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        // REMOVE THIS
-        //navController.navigate(R.id.action_categoryGame_to_wordMatching)
 
         // Get the user to pass to Session class to extrapolate language
         val user: User? = userController.readUserInfo(requireContext())

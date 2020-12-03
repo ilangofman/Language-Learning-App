@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/question_en"
+        android:text="@string/multiple_choice"
         android:textAlignment="center"
         android:paddingTop="75dp"
         android:paddingBottom ="56dp"
