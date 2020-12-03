@@ -72,6 +72,7 @@ class CategoryGame : Fragment() {
 
         Log.d("log", "questionList size: ${questionsList.size}")
 
+        // Using a data class to store game information and to pass to subsequent game fragments.
         val gameSessionData = GameSessionData(questionsList, args.categoryChosen, 0, 0, wrongAnsMap, currentQuestionPos)
 
         when (questionsList[currentQuestionPos]) {

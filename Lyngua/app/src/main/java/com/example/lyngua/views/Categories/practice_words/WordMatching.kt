@@ -72,6 +72,7 @@ class WordMatching : Fragment() {
 
     }
 
+    // Create an OnClickListener to attach to "Evaluate Choices" button
     private val clickListener = View.OnClickListener {
         Log.d("log", "lltop child count: ${lltop.childCount}")
         Log.d("log", "llbottom child count: ${llbottom.childCount}")
@@ -89,6 +90,7 @@ class WordMatching : Fragment() {
         https://www.vogella.com/tutorials/AndroidDragAndDrop/article.html
      */
 
+    // Create an OnTouchListener to attach to View's
     private val touchListener = View.OnTouchListener { v, event ->
         if (event.action == MotionEvent.ACTION_DOWN) {
             val data = ClipData.newPlainText("", "")
@@ -102,6 +104,7 @@ class WordMatching : Fragment() {
         }
     }
 
+    // Create an OnDragListener to attach to the options to drag and drop
     private val dragListener = View.OnDragListener { v, event ->
         val enterShape = resources.getDrawable(R.drawable.drop_selection_background)
         val normalShape = resources.getDrawable(R.drawable.drop_deselection_background)
@@ -150,6 +153,13 @@ class WordMatching : Fragment() {
         }
     }
 
+    /*
+        Name:       displayQuestion
+        Purpose:    To be able to display the 4 different options that the user must match the
+                    translations to.
+        Input:      None
+        Output:     None
+     */
     private fun displayQuestion(){
         val question = questionsList[currentQuestionPos] as WordMatching
         val keyList = ArrayList<String>()
@@ -174,6 +184,14 @@ class WordMatching : Fragment() {
 
     }
 
+    /*
+        Name:       evaluateMatches
+        Purpose:    To check whether the translations that the user has dragged to the
+                    row of the word is correct. It then handles the action to change
+                    game mode fragment based on the next question.
+        Input:      None
+        Output:     None
+     */
     private fun evaluateMatches(){
         val question = questionsList[currentQuestionPos] as WordMatching
         val wordList: ArrayList<TextView> = arrayListOf()
@@ -218,10 +236,12 @@ class WordMatching : Fragment() {
         Log.d("evaluate", "wrongAnsMap: $wrongAnsMap")
 
 
+        // Changing the border on the word rows to indicate correctness
         setBackground(rowCheckBools)
 
         currentQuestionPos++
 
+        // Hold the frame for 2.5 seconds, handle end game and next round scenarios
         Handler().postDelayed({
             if (currentQuestionPos == questionsList.size) {
                 if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON){
@@ -281,6 +301,13 @@ class WordMatching : Fragment() {
 
     }
 
+    /*
+        Name:       setBackground
+        Purpose:    To set the borders of the word rows to indicate whether the user got the
+                    translation correct or not
+        Input:      boolList - an array of booleans, row-wise
+        Output:     None
+     */
     private fun setBackground(boolList: ArrayList<Boolean>) {
         if (boolList[0]) {
             row_one.background = context?.let { ContextCompat.getDrawable(it, R.drawable.correct_table_borders)}

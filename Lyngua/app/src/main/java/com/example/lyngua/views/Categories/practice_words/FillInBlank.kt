@@ -54,9 +54,12 @@ class FillInBlank : Fragment() {
 
         btn_evaluate.setOnClickListener(clickListener)
         displayQuestion()
+
+        // Make the result_text's parent cardview invisible until an answer is given.
         card_view2.visibility = View.INVISIBLE
     }
 
+    // Create an OnClickListener for the "Submit Answer" button
     private val clickListener = View.OnClickListener {
         keyboard_help.visibility = View.GONE
         //Check if text is empty
@@ -67,6 +70,12 @@ class FillInBlank : Fragment() {
         }
     }
 
+    /*
+        Name:       displayQuestion
+        Purpose:    To display the word that requires the user to translate.
+        Input:      None
+        Output:     None
+     */
     private fun displayQuestion() {
         val question = questionsList[currentQuestionPos] as FillInTheBlank
 
@@ -74,9 +83,19 @@ class FillInBlank : Fragment() {
         card_view2.visibility = View.INVISIBLE
     }
 
+    /*
+        Name:       evaluateAnswer
+        Purpose:    To check whether the entered translation is correct/incorrect against the
+                    word displayed. It then handles the action to change
+                    game mode fragment based on the next question.
+        Input:      None
+        Output:     None
+     */
     private fun evaluateAnswer() {
         val question = questionsList[currentQuestionPos] as FillInTheBlank
 
+        // Make the result_text's cardview visible to indicate to the user whether they got
+        // their translation correct or not.
         card_view2.visibility = View.VISIBLE
 
         if (editText_translation.text.toString().toLowerCase() == question.correctAnswer.toLowerCase()) {
@@ -91,6 +110,7 @@ class FillInBlank : Fragment() {
         numDone++
         currentQuestionPos++
 
+        // Hold the frame for 2.5 seconds, handle end game and next round scenarios
         Handler().postDelayed({
             if (currentQuestionPos == questionsList.size) {
                 if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON){
