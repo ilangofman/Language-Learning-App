@@ -8,3 +8,7 @@ Work Completed:
 Implemented the ability to add custom words to a category
 
 Fixed session class to work with new added words
+
+Added tracking of time goal
+
+Worked on D4 deliverable and presentation

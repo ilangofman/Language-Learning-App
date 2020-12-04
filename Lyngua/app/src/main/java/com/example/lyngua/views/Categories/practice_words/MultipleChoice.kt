@@ -178,8 +178,6 @@ class MultipleChoice : Fragment(), View.OnClickListener {
                         args.gameData.categoryChosen.goal.cancelAlarms(requireContext(),args.gameData.categoryChosen)
                     }
 
-
-
                 }
 
                 val categoryController = CategoryController(requireContext())

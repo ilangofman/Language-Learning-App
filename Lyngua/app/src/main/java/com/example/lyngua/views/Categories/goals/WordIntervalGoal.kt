@@ -72,10 +72,9 @@ import kotlin.collections.ArrayList
         //Create the options for the spinner
         var options: MutableList<String> = ArrayList()
         options.add(0, "No Goal")
-        options.add(1, "10 Seconds")
-        options.add(2, "Day")
-        options.add(3, "Week")
-        options.add(4, "Month")
+        options.add(1, "Day")
+        options.add(2, "Week")
+        options.add(3, "Month")
 
         //Create array adapter to display the options list with the spinner
         val arrayAdapter = ArrayAdapter<String>(
@@ -111,21 +110,16 @@ import kotlin.collections.ArrayList
 
                 } else {
 
-                    //Implement the goals time frame here
+                    //Timeframe based on the spinner selected
                     when {
-                        //TODO remove this 10 second spinner after testing done
-                        parent.getItemAtPosition(position) == "10 Seconds" -> {
+                        parent.getItemAtPosition(position) == "Day" -> {
                             timeFrameFlag = 1
                         }
-
-                        parent.getItemAtPosition(position) == "Day" -> {
+                        parent.getItemAtPosition(position) == "Week" -> {
                             timeFrameFlag = 2
                         }
-                        parent.getItemAtPosition(position) == "Week" -> {
-                            timeFrameFlag = 3
-                        }
                         parent.getItemAtPosition(position) == "Month" -> {
-                            timeFrameFlag = 4
+                            timeFrameFlag = 3
                         }
                     }
                     goalType = SWITCH_ON
@@ -158,10 +152,9 @@ import kotlin.collections.ArrayList
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
                 0 -> args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
-                1 -> myCalendar.add(Calendar.SECOND, 60)
-                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
-                3 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-                4 -> myCalendar.add(Calendar.MONTH, 1)
+                1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
+                3 -> myCalendar.add(Calendar.MONTH, 1)
             }
 
             //Creates a goal object based on the options chosen from updating to be put into the database
@@ -224,37 +217,4 @@ import kotlin.collections.ArrayList
             ContextCompat.getDrawable(requireContext(), R.drawable.selected_goal_background_color)
     }
 
-   /* private fun cancelAlarms(){
-        val mAlarmSender: PendingIntent
-        val alarmGoalSender: PendingIntent
-        var broadcastIntent: Intent = Intent(context, GoalNotificationPublisher::class.java)
-        var broadcastIntent1: Intent = Intent(context, GoalUpdatePublisher::class.java)
-
-        //Create bundle to send category and goal information to the broadcast receiver
-        var bundle = Bundle()
-        bundle.putParcelable("category", args.categoryChosen)
-        bundle.putParcelable("goal", args.categoryChosen.goal)
-        broadcastIntent.putExtra("bundle", bundle)
-        broadcastIntent1.putExtra("bundle", bundle)
-
-        //Create pending intent to be able to cancel the alarms set for the specific category
-        mAlarmSender =
-            PendingIntent.getBroadcast(
-                context,
-                args.categoryChosen.id,
-                broadcastIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        alarmGoalSender =
-            PendingIntent.getBroadcast(
-                context,
-                args.categoryChosen.id + 1000,
-                broadcastIntent1,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        val am = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        am.cancel(mAlarmSender)
-        am.cancel(alarmGoalSender)
-    }*/
 }

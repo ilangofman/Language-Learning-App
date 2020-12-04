@@ -48,7 +48,7 @@ class Session(val category: Category, val user: User?) {
                 category.sessionNumber++
             }
         }
-       
+
         return generateQuestions(newSession)
     }
 
