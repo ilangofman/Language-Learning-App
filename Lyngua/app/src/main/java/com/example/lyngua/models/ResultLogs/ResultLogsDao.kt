@@ -25,5 +25,7 @@ interface ResultLogsDao {
     fun readAllData(): LiveData<List<ResultLogs>>
 
     //read data from a certain time
+    @Query("SELECT * FROM result_logs_database WHERE epochTimestamp>:timeFrame ORDER BY id DESC")
+    fun readLogs(timeFrame: Long): List<ResultLogs>
 
 }

@@ -19,5 +19,8 @@ class ResultLogsRepository(private val resultLogsDao: ResultLogsDao) {
         return resultLogsDao.addResult(result)
     }
 
+    fun readLogs(timeFrame: Long): List<ResultLogs> {
+        return resultLogsDao.readLogs(timeFrame)
+    }
 
 }

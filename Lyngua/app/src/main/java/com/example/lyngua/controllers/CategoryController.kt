@@ -88,4 +88,15 @@ class CategoryController(context: Context){
             resultsRepository.addResult(resultLogs)
         }
     }
+
+    fun getResults(timeFrame: Long): List<ResultLogs>?{
+        var results: List<ResultLogs>? = null
+
+        thread{
+            results = resultsRepository.readLogs(timeFrame)
+        }.join()
+
+        return results
+    }
+
 }
