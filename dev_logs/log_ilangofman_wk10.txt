@@ -1,0 +1,11 @@
+Ilan Gofman - Dev Log - Week 10
+
+Dates: Nov 22 to Nov 28, 2020
+
+Work Completed:
+
+Prepared for D3 oral exam. 
+
+Pull request review.
+
+Began working on the statistics page. 
