@@ -24,7 +24,7 @@ class GoalUpdatePublisher() : BroadcastReceiver(){
         var currentCategory = bundle?.getParcelable<Category>("category")
         var currentGoal = bundle?.getParcelable<Goal>("goal")
 
-        Log.d("HELLO","GOAL RESET")
+        Log.d("UPDATE","GOAL RESET")
 
         if (currentCategory != null && currentGoal != null) {
             currentGoal.updateGoal()

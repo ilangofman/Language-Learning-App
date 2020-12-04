@@ -88,6 +88,8 @@ class GoalNotificationPublisher() : BroadcastReceiver() {
 
         val GROUP_GOAL_NOTIFICATION = "GOAL_NOTIFICATION"
 
+        Log.d("UPDATE","GOAL NOTIFICATION")
+
         //Builds the notification and its components
         val builder = NotificationCompat.Builder(this.context!!, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo_notif_light)

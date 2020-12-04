@@ -24,6 +24,8 @@ import com.example.lyngua.models.words.GameSessionData
 import com.example.lyngua.models.words.Results
 import com.example.lyngua.views.Categories.UpdateCategory
 import kotlinx.android.synthetic.main.fragment_fill_in_blank.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FillInBlank : Fragment() {
     private val args by navArgs<FillInBlankArgs>()
@@ -121,6 +123,18 @@ class FillInBlank : Fragment() {
                         args.gameData.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }
+                else if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON_TIMEGOAL){
+                    var currentTime : Long = System.currentTimeMillis()
+                    var timePlayed : Int = (currentTime - args.gameData.sessionTime).toInt()
+
+                    args.gameData.categoryChosen.goal.timeSpent += (timePlayed/1000)
+
+                    if(args.gameData.categoryChosen.goal.timeSpent >= args.gameData.categoryChosen.goal.totalTime){
+                        args.gameData.categoryChosen.goal.goalType = UpdateCategory.SWITCH_OFF
+                        args.gameData.categoryChosen.goal.timeSpent = 0
+                        args.gameData.categoryChosen.goal.cancelAlarms(requireContext(),args.gameData.categoryChosen)
+                    }
+                }
 
                 val categoryController = CategoryController(requireContext())
                 val goal = categoryController.updateCategory(
@@ -143,7 +157,8 @@ class FillInBlank : Fragment() {
                     args.gameData.numWordsDone + numDone,
                     numCorrect,
                     wrongAnsMap,
-                    currentQuestionPos
+                    currentQuestionPos,
+                    args.gameData.sessionTime
                 )
                 Log.d("endround", "${args.gameData.numWordsDone + numDone}")
                 Log.d("endround", "$numCorrect")

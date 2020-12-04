@@ -157,7 +157,7 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
 
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
-                0 -> cancelAlarms()
+                0 -> args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
                 1 -> myCalendar.add(Calendar.SECOND, 60)
                 2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
                 3 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
@@ -207,7 +207,7 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
             confirmation.setMessage("Are you sure you would like to delete this category?")
             confirmation.setPositiveButton("Delete") { _, _ ->
 
-                cancelAlarms()
+                args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
                 categoryController.deleteCategory(args.categoryChosen)
                 Toast.makeText(requireContext(), "Delete Success", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
@@ -225,7 +225,7 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
             ContextCompat.getDrawable(requireContext(), R.drawable.selected_goal_background_color)
     }
 
-    private fun cancelAlarms() {
+    /*private fun cancelAlarms() {
         val mAlarmSender: PendingIntent
         val alarmGoalSender: PendingIntent
         var broadcastIntent: Intent = Intent(context, GoalNotificationPublisher::class.java)
@@ -257,6 +257,6 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
 
         am.cancel(mAlarmSender)
         am.cancel(alarmGoalSender)
-    }
+    }*/
 
 }
