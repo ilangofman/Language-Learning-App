@@ -73,10 +73,9 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
         //Create the options for the spinner
         var options: MutableList<String> = ArrayList()
         options.add(0, "No Goal")
-        options.add(1, "10 Seconds")
-        options.add(2, "Day")
-        options.add(3, "Week")
-        options.add(4, "Month")
+        options.add(1, "Day")
+        options.add(2, "Week")
+        options.add(3, "Month")
 
         //Create array adapter to display the options list with the spinner
         val arrayAdapter = ArrayAdapter<String>(
@@ -111,21 +110,16 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
                     timeGoal = SWITCH_OFF
                 } else {
 
-                    //Implement the goals time frame here
+                    //Timeframe based on the spinner selected
                     when {
-                        //TODO remove this 10 second spinner after testing done
-                        parent.getItemAtPosition(position) == "10 Seconds" -> {
+                        parent.getItemAtPosition(position) == "Day" -> {
                             timeFrameFlag = 1
                         }
-
-                        parent.getItemAtPosition(position) == "Day" -> {
+                        parent.getItemAtPosition(position) == "Week" -> {
                             timeFrameFlag = 2
                         }
-                        parent.getItemAtPosition(position) == "Week" -> {
-                            timeFrameFlag = 3
-                        }
                         parent.getItemAtPosition(position) == "Month" -> {
-                            timeFrameFlag = 4
+                            timeFrameFlag = 3
                         }
                     }
                     goalType = SWITCH_ON_TIMEGOAL
@@ -158,10 +152,9 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
                 0 -> cancelAlarms()
-                1 -> myCalendar.add(Calendar.SECOND, 60)
-                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
-                3 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-                4 -> myCalendar.add(Calendar.MONTH, 1)
+                1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
+                3 -> myCalendar.add(Calendar.MONTH, 1)
             }
 
             //Creates a goal object based on the options chosen from updating to be put into the database

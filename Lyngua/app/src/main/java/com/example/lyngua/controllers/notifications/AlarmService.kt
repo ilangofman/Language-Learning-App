@@ -27,10 +27,9 @@ class AlarmService(context: Context, category: Category, goal: Goal) {
         //Sets the proper time to send the notification for goal
         when (goal.timeFrame) {
             0 -> Calendar.getInstance()
-            1 -> notifCalendar.add(Calendar.SECOND, 30)
-            2 -> notifCalendar.add(Calendar.HOUR, 18)
-            3 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 6)
-            4 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
+            1 -> notifCalendar.add(Calendar.HOUR, 18)
+            2 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 6)
+            3 -> notifCalendar.add(Calendar.DAY_OF_MONTH, 26)
         }
 
         val firstTime: Long = goalCalendar.getTimeInMillis()
