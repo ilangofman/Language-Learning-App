@@ -1,5 +1,6 @@
 package com.example.lyngua.models
 
+import android.util.Log
 import com.example.lyngua.models.words.Word
 
 interface Question {
@@ -53,7 +54,7 @@ class QuestionFactory(){
                 MultipleChoice(word, displayWord, optionsList, correctAnswer as Int)
             }
             "fillIn" -> {
-                FillInTheBlank(word, displayWord, optionsList, correctAnswer as String)
+                FillInTheBlank(word, displayWord, optionsList, optionsList[correctAnswer as Int - 1])
             }
             "wordMatching" -> {
                 WordMatching(word, displayWord, optionsList, correctAnswer as MutableMap<String, String>, optionsMap)

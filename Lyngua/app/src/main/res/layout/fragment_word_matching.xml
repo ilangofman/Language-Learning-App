@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".views.Categories.practice_words.WordMatching">
+
+    <TextView
+        android:id="@+id/question_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/regular"
+        android:gravity="center"
+        android:paddingTop="75dp"
+        android:paddingBottom="56dp"
+        android:text="@string/word_matching"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/wordsTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        app:layout_constraintTop_toBottomOf="@+id/question_view">
+
+        <TableRow
+            android:id="@+id/row_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/table_borders">
+
+            <LinearLayout
+                android:id="@+id/row_11"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="WORD ONE" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row_12"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_borders">
+
+            <LinearLayout
+                android:id="@+id/row_21"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="WORD TWO" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row_22"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_borders">
+
+            <LinearLayout
+                android:id="@+id/row_31"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="WORD THREE" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row_32"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row_four"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_borders">
+
+            <LinearLayout
+                android:id="@+id/row_41"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="WORD FOUR" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row_42"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/wordsChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/wordsTable"
+        tools:layout_editor_absoluteX="16dp">
+
+        <LinearLayout
+            android:id="@+id/lltop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/option1"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="WORD ONE" />
+
+            <TextView
+                android:id="@+id/option2"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="WORD TWO" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llbottom"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:id="@+id/option3"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="WORD THREE" />
+
+            <TextView
+                android:id="@+id/option4"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="WORD FOUR" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_evaluate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Evaluate Choices"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/wordsTable"
+        app:layout_constraintStart_toStartOf="@+id/wordsTable"
+        app:layout_constraintTop_toBottomOf="@+id/wordsTable" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
