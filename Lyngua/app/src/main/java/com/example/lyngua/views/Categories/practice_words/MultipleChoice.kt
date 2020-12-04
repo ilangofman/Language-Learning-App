@@ -3,7 +3,6 @@ package com.example.lyngua.views.Categories.practice_words
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,19 +15,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
-import com.example.lyngua.controllers.Session
-import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.FillInTheBlank
 import com.example.lyngua.models.MultipleChoice
 import com.example.lyngua.models.Question
-import com.example.lyngua.models.User.User
 import com.example.lyngua.models.WordMatching
 import com.example.lyngua.models.words.GameSessionData
 import com.example.lyngua.models.words.Results
 import com.example.lyngua.views.Categories.UpdateCategory
-import kotlinx.android.synthetic.main.fragment_category_game.*
 import kotlinx.android.synthetic.main.fragment_multiple_choice.*
-import kotlin.concurrent.thread
 
 class MultipleChoice : Fragment(), View.OnClickListener {
     private val args by navArgs<MultipleChoiceArgs>()
@@ -175,7 +169,7 @@ class MultipleChoice : Fragment(), View.OnClickListener {
                     args.gameData.categoryChosen.goal
                 )
 
-                val results = Results(wrongAnsMap, numCorrect, args.gameData.numWordsDone + numDone)
+                val results = Results(args.gameData.categoryChosen.id,args.gameData.categoryChosen.name,System.currentTimeMillis()/1000 , wrongAnsMap, numCorrect, args.gameData.numWordsDone + numDone)
                 val action = MultipleChoiceDirections.actionMultipleChoiceToCategoryPracticeResults(results)
                 navController.navigate(action)
 

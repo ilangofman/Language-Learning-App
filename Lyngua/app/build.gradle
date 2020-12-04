@@ -118,4 +118,7 @@ dependencies {
     implementation 'com.google.mlkit:image-labeling:17.0.0'
     // Image labeling feature with custom classifier support
     implementation 'com.google.mlkit:image-labeling-custom:16.2.1'
+
+    implementation 'com.llollox:androidtoggleswitch:2.0.1'
+
 }

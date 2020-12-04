@@ -3,8 +3,12 @@ package com.example.lyngua.controllers
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.lyngua.models.ResultLogs.ResultLogs
+import com.example.lyngua.models.ResultLogs.ResultLogsDatabase
+import com.example.lyngua.models.ResultLogs.ResultLogsRepository
 import com.example.lyngua.models.categories.*
 import com.example.lyngua.models.goals.Goal
+import com.example.lyngua.models.words.Results
 import com.example.lyngua.models.words.Word
 import java.util.*
 import kotlin.concurrent.thread
@@ -13,11 +17,15 @@ class CategoryController(context: Context){
 
     val readAllData: LiveData<List<Category>>
     private val repository: CategoryRepository
+    private val resultsRepository: ResultLogsRepository
 
     init{
         val categoryDao = CategoryDatabase.getDatabase(context).categoryDao()
         repository = CategoryRepository(categoryDao)
         readAllData = repository.readAllData
+
+        val resultsDao = ResultLogsDatabase.getDatabase(context).resultLogsDao()
+        resultsRepository = ResultLogsRepository(resultsDao)
     }
 
 
@@ -71,5 +79,13 @@ class CategoryController(context: Context){
 
     fun getAllCategories(){
 
+    }
+
+
+    fun logResults(result: Results){
+        val resultLogs: ResultLogs = ResultLogs(0, result.catId, result.catName, result.epochTimestamp, result.numCorrect, result.numQuestions)
+        thread{
+            resultsRepository.addResult(resultLogs)
+        }
     }
 }

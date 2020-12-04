@@ -126,7 +126,6 @@ class Session(val category: Category, val user: User?) {
                     //The display word depends on if the question being asked will be on english or other language translation
                     val newQuestion: Question
                     if (word.typeFlag == 0) {
-
                         //Depending on what streak the word is on, create the specific inherited question type
                         when (word.streak) {
                             in 0..3 -> newQuestion =
@@ -157,4 +156,6 @@ class Session(val category: Category, val user: User?) {
 
         return questionsList
     }
+
+
 }

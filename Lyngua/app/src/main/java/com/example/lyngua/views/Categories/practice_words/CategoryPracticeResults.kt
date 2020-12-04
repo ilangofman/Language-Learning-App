@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
+import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.views.Categories.practice_words.CategoryPracticeResultsArgs
 import kotlinx.android.synthetic.main.fragment_category_results.*
+import java.util.*
 
 class CategoryPracticeResults : Fragment() {
     private val args by navArgs<CategoryPracticeResultsArgs>()
+    lateinit var categoryController: CategoryController
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,14 +28,13 @@ class CategoryPracticeResults : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        categoryController = CategoryController(requireContext())
         setResultText()
+
+        categoryController.logResults(args.currentResults)
         setWordList()
     }
 
-//    private fun logResult(){
-//        Log.d()
-//    }
 
     /*
     Function:   setResultText
