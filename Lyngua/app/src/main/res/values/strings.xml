@@ -73,7 +73,7 @@
 
     <!-- QUESTION TEXT -->
     <string name="multiple_choice">Select The Correct Translation Of The Word</string>
-    <string name="word_matching">Match The Correct Translations To The Words</string>
+    <string name="word_matching">Match The Correct Translations To The Words By Dragging The Options</string>
     <string name="fill_in">Type In The Translation To The Word Below</string>
     <string name="fill_in_hint">Enter translation here.</string>
     <string name="keyboard_hint">Hint: You may need to add the keyboard layout of your language of choice through your keyboard settings.</string>
