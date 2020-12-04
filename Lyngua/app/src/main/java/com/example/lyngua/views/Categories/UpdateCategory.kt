@@ -30,6 +30,7 @@ class UpdateCategory : Fragment() {
     private val args by navArgs<UpdateCategoryArgs>()
     private lateinit var updateCategoryAdapter: UpdateCategoryAdapter
     private lateinit var viewPager: ViewPager2
+    private lateinit var categoryController: CategoryController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +52,15 @@ class UpdateCategory : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        categoryController = CategoryController(requireContext())
+
+        button_add_word.setOnClickListener{
+            val alertSheet = AddWord(args)
+
+            alertSheet.setTargetFragment(this, REQUESTCODE)
+            alertSheet.show(parentFragmentManager, "alertSheetAddWord")
+        }
+
         TabLayoutMediator(tabLayout_goal, viewPager_goal) { tab, position ->
             tab.text = (viewPager_goal.adapter as UpdateCategoryAdapter).fragmentNames[position]
         }.attach()
@@ -60,6 +70,7 @@ class UpdateCategory : Fragment() {
         const val  SWITCH_ON_TIMEGOAL = 2
         const val  SWITCH_ON: Int = 1
         const val  SWITCH_OFF: Int = 0
+        const val  REQUESTCODE = 100
     }
 
 }
