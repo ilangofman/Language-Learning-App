@@ -8,22 +8,21 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <com.llollox.androidtoggleswitch.widgets.ToggleSwitch
+    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
         android:id="@+id/stats_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="42dp"
-        android:layout_marginEnd="16dp"
-        app:checkedBackgroundColor="@color/colorPrimary"
+        app:activeBgColor="@color/colorPrimary"
+        app:inactiveBgColor="@color/lightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
+        app:toggleWidth="90dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:textToggleCenter="Month"
         app:textToggleLeft="Week"
-        app:textToggleRight="Year"
-        app:uncheckedBackgroundColor="@color/lightGray" />
+        app:textToggleRight="Year" />
 
     <TextView
         android:id="@+id/textView3"
@@ -42,19 +41,19 @@
         android:id="@+id/stats_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="166dp"
-        android:text="TextView"
+        android:fontFamily="@font/bold"
+        android:text="Breakdown of Categories Practiced"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stats_switch" />
 
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stats_text_view" />

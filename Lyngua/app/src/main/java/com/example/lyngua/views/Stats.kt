@@ -4,20 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
+import belka.us.androidtoggleswitch.widgets.BaseToggleSwitch
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.chart.common.listener.Event
-import com.anychart.chart.common.listener.ListenersInterface
-import com.anychart.enums.Align
-import com.anychart.enums.LegendLayout
+import com.anychart.palettes.RangeColors
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.models.ResultLogs.ResultLogs
 import kotlinx.android.synthetic.main.fragment_stats.*
+
 
 /*
 Source for the pie chart library: https://github.com/AnyChart/AnyChart-Android/blob/master/sample/src/main/java/com/anychart/sample/charts/PieChartActivity.java
@@ -36,67 +35,97 @@ class Stats : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         categoryController = CategoryController(requireContext())
 
-        stats_switch.setCheckedPosition(0)
-        showStatsWeek(getTimeFrame(0))
+
+        stats_switch.checkedTogglePosition = 0
+        showStats(getTimeFrame(0))
+
+        stats_switch.setOnToggleSwitchChangeListener { position, isChecked ->
+            val pos = stats_switch.getCheckedTogglePosition()
+            if(pos == 0) showStats(getTimeFrame(0))
+            else if(pos == 1)   showStats(getTimeFrame(1))
+            else showStats(getTimeFrame(2))
+        }
+
+
+//
+//        private fun ToggleSwitch.onChangeListener(value: () -> Unit) {
+//            val pos = stats_switch.getCheckedPosition()
+//            if(pos == 0) showStats(getTimeFrame(0))
+//            else if(pos == 0)   showStats(getTimeFrame(1))
+//            else showStats(getTimeFrame(2))
+//        }
+//
+//        {
+//            val pos = stats_switch.getCheckedPosition()
+//            if(pos == 0) showStats(getTimeFrame(0))
+//            else if(pos == 0)   showStats(getTimeFrame(1))
+//            else showStats(getTimeFrame(2))
+//        }
 
     }
 
-    private fun showStatsWeek(timeFrame: Long){
+    private fun showStats(timeFrame: Long){
         var results: List<ResultLogs>? = categoryController.getResults(timeFrame)
         var str = ""
         if(results != null) {
-            for(result in results) {
-                str += result.catName.toString() + "\n"
-            }
-            stats_text_view.text = str
-            pieChart()
+            print("IALNANAN" + timeFrame)
+            pieChart(results)
         }
     }
 
 
-    private fun pieChart(){
+    private fun pieChart(results: List<ResultLogs>){
 
         val anyChartView: AnyChartView = any_chart_view
+
         anyChartView.setProgressBar(progress_bar)
 
         val pie = AnyChart.pie()
 
-        pie.setOnClickListener(object : ListenersInterface.OnClickListener(arrayOf("x", "value")) {
-            override fun onClick(event: Event) {
-                Toast.makeText(
-                    requireContext(),
-                    event.getData().get("x").toString() + ":" + event.getData().get("value"),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
 
+
+        var categoryResults = results.groupBy { it.catId }
         val data: MutableList<DataEntry> = ArrayList()
-        data.add(ValueDataEntry("Apples", 6371664))
-        data.add(ValueDataEntry("Pears", 789622))
-        data.add(ValueDataEntry("Bananas", 7216301))
-        data.add(ValueDataEntry("Grapes", 1486621))
-        data.add(ValueDataEntry("Oranges", 1200000))
 
+        categoryResults.forEach {
+            var total = 0
+            it.value.map{ cat -> total += cat.numQuestions}
+            println("Group b=${it.key}: ${it.value}, total ${total}")
+            data.add(ValueDataEntry(it.value[0].catName, total))
+
+        }
+
+        val palette = RangeColors.instantiate()
+        palette.items("#692fa8", "#d9c7ed")
+        palette.count(categoryResults.size)
+        pie.palette(palette)
+
+        pie.legend().enabled(false)
         pie.data(data)
 
-        pie.title("Breakdown of Words Practiced")
+//        pie.title("Breakdown of Words Practiced")
 
 
         anyChartView.setChart(pie)
     }
 
     private fun getTimeFrame(position: Int): Long{
+        val now = System.currentTimeMillis()/1000
+
         return if(position == 0){
             //stats for one week:
-            60*60*24*7
+            now - 60*60*24*7
         }else if(position == 1){
             //stats for one month
-            60*60*24*30
+            now - 60*60*24*30
         }else{
             //stats for one year
-            60*60*24*365
+            now - 60*60*24*365
         }
 
     }
+
+
+
 }
+
