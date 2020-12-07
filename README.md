@@ -13,7 +13,7 @@
 
 Lyngua is an app that is designed to create a unique experience for people learning new language vocabulary. It will accelerate learning a new language because it will let the user tailor the vocabulary practiced in the app to their environment.
 
-The app will is made up of two modes, categorical and interactive. The categorical mode allows
+The app is made up of two modes, practice and interactive. The practice mode allows
 users to self-select any type of category for vocabulary practice. Interactive mode allows you to
 learn a new language in a way that applies to your daily life. Using machine learning and object
 identification, Lyngua recognizes when you point your camera towards an object and quickly
