@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/screenshots/logo.png">
+  <a href="https://github.com/ilangofman/Language-Learning-App/blob/master/screenshots/logo.PNG">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 </p>
