@@ -1,10 +1,6 @@
 package com.example.lyngua.views.Categories.goals
 
-import android.app.AlarmManager
 import android.app.AlertDialog
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
-import com.example.lyngua.controllers.notifications.GoalUpdatePublisher
-import com.example.lyngua.controllers.notifications.GoalNotificationPublisher
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
@@ -163,10 +157,10 @@ import kotlin.collections.ArrayList
                 timeFrameFlag,
                 notificationFlag,
                 goalType,
-                args.categoryChosen.goal.numWordsCompleted,
-                wordGoalCount,
                 0,
-                0
+                wordGoalCount,
+                0.0,
+                0.0
             )
 
             val result = categoryController.updateCategory(
@@ -184,6 +178,9 @@ import kotlin.collections.ArrayList
                     AlarmService(requireActivity().applicationContext, args.categoryChosen, goal)
 
                 alarm.startAlarm()
+            }
+            if (notificationFlag == SWITCH_OFF){
+                args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
             }
 
             if (result) {

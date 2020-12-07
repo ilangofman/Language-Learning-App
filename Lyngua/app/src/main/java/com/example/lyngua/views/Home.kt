@@ -173,9 +173,9 @@ class Home : Fragment() {
                 layout_category.cat_description_txt.text =
                     resources.getString(R.string.goal_description_time, category.goal.totalTime - category.goal.timeSpent, DateFormatSymbols().months[month], day)
                 layout_category.progress_bar.progress =
-                    (category.goal.timeSpent.toFloat() / category.goal.totalTime.toFloat() * 100).toInt()
+                    (category.goal.timeSpent / category.goal.totalTime * 100).toInt()
                 layout_category.progress_percentage_txt.text =
-                   resources.getString(R.string.goal_percentage, ((category.goal.timeSpent.toFloat() / category.goal.totalTime.toFloat()) * 100).toInt())
+                   resources.getString(R.string.goal_percentage, ((category.goal.timeSpent / category.goal.totalTime) * 100).toInt())
             }
             SWITCH_OFF -> {
                 layout_category.cat_description_txt.text = resources.getString(R.string.goal_empty)

@@ -1,10 +1,6 @@
 package com.example.lyngua.views.Categories.goals
 
-import android.app.AlarmManager
 import android.app.AlertDialog
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
-import com.example.lyngua.controllers.notifications.GoalUpdatePublisher
-import com.example.lyngua.controllers.notifications.GoalNotificationPublisher
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
@@ -58,8 +52,8 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
         }
 
         //Sets the word count for goal based on last update of category
-        if (args.categoryChosen.goal.totalTime != 0) {
-            view.words_goal_count_text.setText(args.categoryChosen.goal.totalTime.toString())
+        if (args.categoryChosen.goal.totalTime != 0.0) {
+            view.words_goal_count_text.setText(args.categoryChosen.goal.totalTime.toInt().toString())
         }
 
         //If notifications were enabled before, ensures the box is checked
@@ -165,8 +159,8 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
                 goalType,
                 0,
                 0,
-                args.categoryChosen.goal.timeSpent,
-                timeGoal
+                0.0,
+                timeGoal.toDouble()
 
             )
 
@@ -185,6 +179,9 @@ class TimeIntervalGoal(arg: UpdateCategoryArgs) : Fragment() {
                     AlarmService(requireActivity().applicationContext, args.categoryChosen, goal)
 
                 alarm.startAlarm()
+            }
+            if (notificationFlag == SWITCH_OFF){
+                args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
             }
 
             if (result) {

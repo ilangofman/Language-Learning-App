@@ -22,8 +22,8 @@ open class Goal(
     var goalType: Int,
     var numWordsCompleted: Int,
     var totalNumWords: Int,
-    var timeSpent: Int,
-    var totalTime: Int
+    var timeSpent: Double,
+    var totalTime: Double
 
 ) : Parcelable {
 
@@ -39,7 +39,7 @@ open class Goal(
 
         time = myCalendar
         numWordsCompleted = 0
-        timeSpent = 0
+        timeSpent = 0.0
 
     }
 

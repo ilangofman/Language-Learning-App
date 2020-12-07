@@ -125,13 +125,13 @@ class FillInBlank : Fragment() {
                 }
                 else if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON_TIMEGOAL){
                     var currentTime : Long = System.currentTimeMillis()
-                    var timePlayed : Int = (currentTime - args.gameData.sessionTime).toInt()
+                    var timePlayed : Double = (currentTime - args.gameData.sessionTime).toDouble()
 
-                    args.gameData.categoryChosen.goal.timeSpent += (timePlayed/1000)
+                    args.gameData.categoryChosen.goal.timeSpent += (timePlayed/1000/60)
 
                     if(args.gameData.categoryChosen.goal.timeSpent >= args.gameData.categoryChosen.goal.totalTime){
                         args.gameData.categoryChosen.goal.goalType = UpdateCategory.SWITCH_OFF
-                        args.gameData.categoryChosen.goal.timeSpent = 0
+                        args.gameData.categoryChosen.goal.timeSpent = 0.0
                         args.gameData.categoryChosen.goal.cancelAlarms(requireContext(),args.gameData.categoryChosen)
                     }
                 }
