@@ -8,6 +8,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.lyngua.MainNavigationDirections
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
 import kotlinx.android.synthetic.main.fragment_photo_library.*
@@ -36,14 +37,19 @@ class PhotoLibrary(private val albumName: String = "") : Fragment() {
             findNavController().popBackStack()
         }
 
-        button_back.setOnClickListener {
+        toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
 
         callback.isEnabled = false
         if (parentFragmentManager.fragments.size == 1) {
             callback.isEnabled = true
-            button_back.visibility = View.VISIBLE
+            toolbar.visibility = View.VISIBLE
+            toolbar.title = albumName
+            button_play.setOnClickListener {
+                val action = MainNavigationDirections.actionGlobalPhotoPractice(galleryController.getPhotos(albumName).toTypedArray())
+                findNavController().navigate(action)
+            }
         }
 
         //Send album name to controller to get photos for specified album
@@ -53,7 +59,7 @@ class PhotoLibrary(private val albumName: String = "") : Fragment() {
 
         //SpannedGridLayoutManager has a bug when recyclerview only has 1 item
         // so in this case just use GridLayoutManager
-        if (adapter.itemCount > 1) photoGrid.layoutManager = layoutManager
+        if (adapter.itemCount > 1) photoGrid.layoutManager = SpannedGridLayoutManager(3, 0.75F)//layoutManager
         else photoGrid.layoutManager = GridLayoutManager(requireContext(), 2)
 
         photoGrid.addItemDecoration(SpaceItemDecorator(left = 1, top = 1, right = 1, bottom = 1))

@@ -8,10 +8,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyngua.MainNavigationDirections
 import com.example.lyngua.R
-import com.example.lyngua.models.Photos.Album
+import com.example.lyngua.models.photos.Album
 import kotlinx.android.synthetic.main.custom_gallery_album.view.*
 
-class AlbumAdapter(private var albumList:MutableList<Album>, private var callback:(albumName: String) -> Unit): RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+class AlbumAdapter(private var albumList:MutableList<Album>, private var moreCallback:(albumName: String) -> Unit, private var playCallback:(albumName: String) -> Unit): RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -34,14 +34,19 @@ class AlbumAdapter(private var albumList:MutableList<Album>, private var callbac
 
         //On click - Open album and show photos
         holder.itemView.imageView_gallery.setOnClickListener {
-            val actionChosen = MainNavigationDirections.actionGlobalAlbumPhotos(currentAlbum.name)
-            holder.itemView.findNavController().navigate(actionChosen)
+            val action = MainNavigationDirections.actionGlobalAlbumPhotos(currentAlbum.name)
+            holder.itemView.findNavController().navigate(action)
         }
 
         //More button - Run the callback function to open the bottom sheet
         holder.itemView.button_album_more.setOnClickListener {
-            callback(currentAlbum.name)
+            moreCallback(currentAlbum.name)
             notifyDataSetChanged()
+        }
+
+        //Play button - Start practicing album
+        holder.itemView.button_album_play.setOnClickListener {
+            playCallback(currentAlbum.name)
         }
     }
 

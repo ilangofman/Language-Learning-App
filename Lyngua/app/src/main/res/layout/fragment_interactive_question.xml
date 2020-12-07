@@ -2,12 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rowLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/interactive_question_shape"
-    android:padding="24sp"
-    >
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    android:theme="@style/Theme.DoNotDim"
+    tools:context=".views.Gallery.Dialogs.InteractiveQuestion">
 
     <TextView
         android:id="@+id/question_title_interactive"
@@ -17,68 +16,72 @@
         android:text="Obeject Name"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/option_1"
         android:layout_width="142dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape_question"
+        android:fontFamily="@font/regular"
         android:text="Button"
         android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/option_3"
         app:layout_constraintEnd_toStartOf="@+id/option_2"
         app:layout_constraintStart_toStartOf="parent"
-        android:fontFamily="@font/regular"
-        android:background="@drawable/button_shape_question"
         app:layout_constraintTop_toBottomOf="@+id/question_title_interactive" />
 
     <Button
         android:id="@+id/option_3"
         android:layout_width="142dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_shape_question"
+        android:fontFamily="@font/regular"
         android:text="Button"
         android:textAllCaps="false"
-        android:fontFamily="@font/regular"
         app:layout_constraintEnd_toStartOf="@+id/option_4"
-        app:layout_constraintStart_toStartOf="@+id/option_1"
-        android:background="@drawable/button_shape_question"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/option_1" />
 
     <Button
         android:id="@+id/option_2"
         android:layout_width="142dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_shape_question"
+        android:fontFamily="@font/regular"
         android:text="Button"
         android:textAllCaps="false"
-        android:fontFamily="@font/regular"
+        app:layout_constraintBottom_toTopOf="@+id/option_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/option_1"
-        android:background="@drawable/button_shape_question"
         app:layout_constraintTop_toBottomOf="@+id/question_title_interactive" />
 
     <Button
         android:id="@+id/option_4"
         android:layout_width="142dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_shape_question"
+        android:fontFamily="@font/regular"
         android:text="Button"
         android:textAllCaps="false"
-        android:fontFamily="@font/regular"
-        app:layout_constraintEnd_toEndOf="@+id/option_2"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/option_3"
-        android:background="@drawable/button_shape_question"
         app:layout_constraintTop_toBottomOf="@+id/option_2" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -163,6 +163,15 @@
         android:id="@+id/WordIntervalGoal"
         android:name="com.example.lyngua.views.Categories.goals.WordIntervalGoal"
         android:label="WordIntervalGoal" />
+    <fragment
+        android:id="@+id/photoPractice"
+        android:name="com.example.lyngua.views.Gallery.PhotoPractice"
+        android:label="fragment_photo_practice"
+        tools:layout="@layout/fragment_photo_practice" >
+        <argument
+            android:name="photoList"
+            app:argType="com.example.lyngua.models.photos.Photo[]" />
+    </fragment><action android:id="@+id/action_global_photoPractice" app:destination="@id/photoPractice"/>
 
 
 </navigation>
