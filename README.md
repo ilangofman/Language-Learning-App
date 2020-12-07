@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/ilangofman/Language-Learning-App/blob/master/screenshots/logo.PNG">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="screenshots/logo.PNG" alt="Logo">
   </a>
 </p>
 
