@@ -1,0 +1,12 @@
+Ilan Gofman - Dev Log - Week 11
+
+Dates: Nov 29 to Dec 6, 2020
+
+Work Completed:
+
+Finished working on the statistics page.
+  - Included a pie chart to provide a breakdown of how much of each category has been practiced.
+  - Ability to switch between a week, month and year of stats. 
+  - To do this, required a new logging system to keep track of past games in the database. 
+  
+Worked on the 4th deliverable document and also filmed some clips for the video. 

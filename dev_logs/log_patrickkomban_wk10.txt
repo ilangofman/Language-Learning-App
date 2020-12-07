@@ -1,0 +1,13 @@
+Week 10 Development Log - Patrick Komban
+
+Dates: Nov 22 to Nov 28, 2020
+
+Work Completed:
+
+- Finished work on the scenario diagrams as specified in the D1 document. 
+
+- Preparing for D3 oral exam.
+
+- Still trying to figure out navigation between different practice game modes. Tried a few things which did not work as intended, and didn't appropriately support data passage throughout the game session. 
+
+- Playing around with dragging and dropping in Android to incorporate into word matching game mode.

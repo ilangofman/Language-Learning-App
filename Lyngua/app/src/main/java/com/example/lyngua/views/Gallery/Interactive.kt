@@ -8,19 +8,14 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.graphics.*
 import android.media.Image
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -33,14 +28,13 @@ import com.example.lyngua.views.Gallery.Dialogs.CreateAlbum
 import com.example.lyngua.views.Gallery.Dialogs.SaveToAlbum
 import com.example.lyngua.controllers.UserController
 import com.example.lyngua.models.User.User
+import com.example.lyngua.views.Gallery.Dialogs.InteractiveQuestion
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import kotlinx.android.synthetic.main.fragment_interactive.*
-import kotlinx.android.synthetic.main.interactive_question_panel.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,15 +45,19 @@ import java.util.concurrent.Executors
 class Interactive : Fragment() {
 
     private lateinit var galleryController: GalleryController
+    private var user: User? = null
 
     private var imageCapture: ImageCapture? = null
     private var imageBitmap: Bitmap? = null
     private lateinit var fileName: String
     private var objectWord: String? = null
+    private var wordOptions: List<String> = listOf()
+    private var correctOption = -1
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     lateinit var navBar: BottomNavigationView
+    private lateinit var callback: OnBackPressedCallback
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,16 +75,11 @@ class Interactive : Fragment() {
                 R.string.app_name
             )
         )
+        user = UserController().readUserInfo(requireContext())
 
         //On back button press if image has been taken close image and display camera again
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            imageView.setImageDrawable(null)
-            viewFinder.visibility = View.VISIBLE
-            button_camera_capture.visibility = View.VISIBLE
-            button_close.visibility = View.GONE
-            button_save.visibility = View.GONE
-
-            this.isEnabled = false
+        callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            bringBackCamera()
         }
 
         // Request camera permissions
@@ -104,13 +97,7 @@ class Interactive : Fragment() {
 
         //Close button - Show camera and hide buttons
         button_close.setOnClickListener {
-            imageView.setImageDrawable(null)
-            viewFinder.visibility = View.VISIBLE
-            button_camera_capture.visibility = View.VISIBLE
-            button_close.visibility = View.GONE
-            button_save.visibility = View.GONE
-            callback.isEnabled = false
-            objectWord = null
+            bringBackCamera()
         }
 
         //Save button - Display save to album dialog
@@ -129,6 +116,11 @@ class Interactive : Fragment() {
             findNavController().navigate(R.id.action_interactive_to_gallery)
         }
 
+        //Identify button - bring up multiple choice bottom sheet again
+        button_identify.setOnClickListener {
+            displayInteractiveQuestion()
+        }
+
         outputDirectory = galleryController.getOutputDirectory()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -142,7 +134,7 @@ class Interactive : Fragment() {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
-        cameraProviderFuture.addListener({
+        cameraProviderFuture.addListener(Runnable{
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
@@ -175,7 +167,7 @@ class Interactive : Fragment() {
     /*
      * Purpose: Capture photo and display on the ImageView
      * Input:   None
-     * Output:   None
+     * Output:  None
      */
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
@@ -188,17 +180,17 @@ class Interactive : Fragment() {
             ImageCapture.OnImageCapturedCallback() {
 
                 //When image is captured convert to bitmap, display the image and show buttons for options
-                @RequiresApi(Build.VERSION_CODES.N)
+//                @RequiresApi(Build.VERSION_CODES.N)
                 @SuppressLint("UnsafeExperimentalUsageError")
                 override fun onCaptureSuccess(image: ImageProxy) {
                     imageBitmap = image.image?.toBitmap()
                     imageView.setImageBitmap(imageBitmap)
-                    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
                     viewFinder.visibility = View.GONE
                     button_camera_capture.visibility = View.GONE
                     button_close.visibility = View.VISIBLE
                     button_save.visibility = View.VISIBLE
+                    button_identify.visibility = View.VISIBLE
                     // Use the image, then make sure to close it.
                     image.close()
 
@@ -215,6 +207,23 @@ class Interactive : Fragment() {
         )
     }
 
+    /*
+     * Purpose: Hide the ImageView and bring the camera view back
+     * Input:   None
+     * Output:  None
+     */
+    private fun bringBackCamera() {
+        imageView.setImageDrawable(null)
+        viewFinder.visibility = View.VISIBLE
+        button_camera_capture.visibility = View.VISIBLE
+        button_close.visibility = View.GONE
+        button_save.visibility = View.GONE
+        button_identify.visibility = View.GONE
+        callback.isEnabled = false
+        objectWord = null
+        wordOptions = listOf()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -226,13 +235,10 @@ class Interactive : Fragment() {
                 val albumName = data.extras?.getString("albumName")!!
 
                 //Show camera once image is saved to album
-                if (galleryController.savePhoto(imageBitmap, albumName, fileName, objectWord!!)) {
+                if (galleryController.savePhoto(imageBitmap, albumName, fileName, objectWord!!, wordOptions, correctOption)) {
                     Toast.makeText(requireContext(), "Photo saved in $albumName", Toast.LENGTH_SHORT).show()
 
-                    viewFinder.visibility = View.VISIBLE
-                    button_camera_capture.visibility = View.VISIBLE
-                    button_close.visibility = View.GONE
-                    button_save.visibility = View.GONE
+                    bringBackCamera()
                 } else {
                     Toast.makeText(requireContext(), "Album not found", Toast.LENGTH_SHORT).show()
                 }
@@ -264,7 +270,11 @@ class Interactive : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+    /*
+     * Purpose: Start the blackboard for interactive mode
+     * Input:   imageBitmap - bitmap of the image captured
+     * Output:  None
+     */
     private fun startInteractiveModeBlackboard(imageBitmap: Bitmap){
     //        Toast.makeText(requireContext(), "Bitmap not null",Toast.LENGTH_SHORT).show()
 
@@ -293,71 +303,32 @@ class Interactive : Fragment() {
                 Log.d("ImageC", "Found: $objectWord, with $confidence")
             }
 
-            displayInteractiveQuestion(objectWord!!)
+            galleryController.makeQuestionFromWord(objectWord!!, user!!.language.code)?.let {
+                wordOptions = it
+            }
+
+            if (wordOptions.isNotEmpty()) {
+                val correctWord = wordOptions[0]
+                wordOptions = wordOptions.shuffled(Random())
+                correctOption = wordOptions.indexOf(correctWord) + 1
+
+                displayInteractiveQuestion()
+            }
         }.addOnFailureListener { e ->
             Log.d("ImageC", e.toString())
             Toast.makeText(requireContext(), "Failed To  $e", Toast.LENGTH_SHORT).show()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun displayInteractiveQuestion(objectWord: String){
-        val user: User? = UserController().readUserInfo(requireContext())
-        if(user != null) {
-        //create the question
-        val bottomSheet =
-        BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
-
-        bottomSheet.setContentView(R.layout.interactive_question_panel)
-
-
-        bottomSheet.question_title_interactive.text = objectWord.capitalize(Locale.getDefault())
-
-        var wrongOptions = galleryController.makeQuestionFromWord(
-            objectWord,
-            user.language.code
-        )
-
-        if(wrongOptions != null) {
-            val correctWord = wrongOptions[0]
-
-            wrongOptions = wrongOptions.shuffled(Random())
-
-            bottomSheet.option_1.text = Html.fromHtml(wrongOptions[0], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-            bottomSheet.option_2.text = Html.fromHtml(wrongOptions[1], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-            bottomSheet.option_3.text = Html.fromHtml(wrongOptions[2], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-            bottomSheet.option_4.text = Html.fromHtml(wrongOptions[3], Html.FROM_HTML_MODE_LEGACY).toString().capitalize()
-
-            var correctOption = 0
-            if(wrongOptions[0] == correctWord) correctOption = 1
-            if(wrongOptions[1] == correctWord) correctOption = 2
-            if(wrongOptions[2] == correctWord) correctOption = 3
-            if(wrongOptions[3] == correctWord) correctOption = 4
-
-
-            bottomSheet.option_1.setOnClickListener{
-                if(correctOption == 1) showCorrectButton(bottomSheet.option_1)
-                else showWrongButton(bottomSheet.option_1)
-            }
-
-            bottomSheet.option_2.setOnClickListener {
-                if(correctOption == 2) showCorrectButton(bottomSheet.option_2)
-                else showWrongButton(bottomSheet.option_2)
-            }
-
-            bottomSheet.option_3.setOnClickListener {
-                if(correctOption == 3) showCorrectButton(bottomSheet.option_3)
-                else showWrongButton(bottomSheet.option_3)
-            }
-
-            bottomSheet.option_4.setOnClickListener {
-                if(correctOption == 4) showCorrectButton(bottomSheet.option_4)
-                else showWrongButton(bottomSheet.option_4)
-            }
-            //              bottomSheet.setCanceledOnTouchOutside(false)
-            bottomSheet.show()
-            }
-        }
+    /*
+     * Purpose: Display a bottom sheet for the multiple choice practice of the object identified
+     * Input:   None
+     * Output:  None
+     */
+    private fun displayInteractiveQuestion(){
+        val bottomSheet = InteractiveQuestion(objectWord!!, wordOptions, correctOption)
+        bottomSheet.setTargetFragment(this, REQUEST_CODE_BOTTOM_SHEET)
+        bottomSheet.show(parentFragmentManager, "bottomSheetInteractiveQuestion")
     }
 
     /*
@@ -396,25 +367,10 @@ class Interactive : Fragment() {
     companion object {
         private const val TAG = "Interactive"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private const val REQUEST_CODE_DIALOG = 11
+        private const val REQUEST_CODE_PERMISSIONS = 100
+        private const val REQUEST_CODE_DIALOG = 101
+        private const val REQUEST_CODE_BOTTOM_SHEET = 102
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-    }
-
-    private fun showCorrectButton(button: Button){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            button.background.colorFilter = BlendModeColorFilter(ContextCompat.getColor(requireContext(), R.color.green), BlendMode.SRC_ATOP)
-        } else {
-            button.background.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), PorterDuff.Mode.SRC_ATOP)
-        }
-
-    }
-    private fun showWrongButton(button: Button){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            button.background.colorFilter = BlendModeColorFilter(ContextCompat.getColor(requireContext(), R.color.red), BlendMode.SRC_ATOP)
-        } else {
-            button.background.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), PorterDuff.Mode.SRC_ATOP)
-        }
     }
 
     /*

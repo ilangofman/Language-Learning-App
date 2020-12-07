@@ -52,6 +52,18 @@
         app:layout_constraintEnd_toEndOf="@id/album_cover"
         app:layout_constraintTop_toTopOf="@id/album_cover" />
 
+    <ImageButton
+        android:id="@+id/button_album_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="#00000000"
+        android:src="@drawable/ic_play_white"
+        android:layout_gravity="bottom"
+        app:layout_constraintEnd_toEndOf="@id/album_cover"
+        app:layout_constraintBottom_toBottomOf="@id/album_cover" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
