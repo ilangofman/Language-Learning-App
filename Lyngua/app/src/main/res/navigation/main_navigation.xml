@@ -5,7 +5,7 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/home">
 
-    <include app:graph="@navigation/start_navigation"/>
+    <include app:graph="@navigation/start_navigation" />
 
     <fragment
         android:id="@+id/home"
@@ -23,7 +23,7 @@
         android:id="@+id/practice"
         android:name="com.example.lyngua.views.Categories.Practice"
         android:label="fragment_practice"
-        tools:layout="@layout/fragment_practice" >
+        tools:layout="@layout/fragment_practice">
         <action
             android:id="@+id/action_practice_to_addCategory"
             app:destination="@id/addCategory" />
@@ -39,10 +39,10 @@
         android:id="@+id/interactive"
         android:name="com.example.lyngua.views.Gallery.Interactive"
         android:label="fragment_interactive"
-        tools:layout="@layout/fragment_interactive" >
+        tools:layout="@layout/fragment_interactive">
         <action
             android:id="@+id/action_interactive_to_gallery"
-            app:destination="@id/gallery" >
+            app:destination="@id/gallery">
             <argument
                 android:name="pageNum"
                 android:defaultValue="0" />
@@ -54,16 +54,16 @@
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
     <fragment
-    android:id="@+id/more"
-    android:name="com.example.lyngua.views.AccountSettings"
-    android:label="fragment_more"
-    tools:layout="@layout/fragment_more">
-    <action
-        android:id="@+id/action_more_to_personalDetails"
-        app:destination="@id/personalDetails" />
-    <action
-        android:id="@+id/action_more_to_changeLanguage"
-        app:destination="@id/changeLanguage" />
+        android:id="@+id/more"
+        android:name="com.example.lyngua.views.AccountSettings"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more">
+        <action
+            android:id="@+id/action_more_to_personalDetails"
+            app:destination="@id/personalDetails" />
+        <action
+            android:id="@+id/action_more_to_changeLanguage"
+            app:destination="@id/changeLanguage" />
 
     </fragment>
 
@@ -71,7 +71,7 @@
         android:id="@+id/addCategory"
         android:name="com.example.lyngua.views.Categories.addCategory"
         android:label="fragment_add_category"
-        tools:layout="@layout/fragment_add_category" >
+        tools:layout="@layout/fragment_add_category">
         <action
             android:id="@+id/action_addCategory_to_practice"
             app:destination="@id/practice" />
@@ -79,7 +79,7 @@
     <fragment
         android:id="@+id/updateCategoryFragment"
         android:name="com.example.lyngua.views.Categories.UpdateCategory"
-        android:label="Update Category Fragment" >
+        android:label="Update Category Fragment">
         <action
             android:id="@+id/action_updateCategoryFragment_to_practice"
             app:destination="@id/practice" />
@@ -103,12 +103,14 @@
         android:id="@+id/gallery"
         android:name="com.example.lyngua.views.Gallery.Gallery"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" >
+        tools:layout="@layout/fragment_gallery">
         <argument
             android:name="pageNum"
             app:argType="integer" />
     </fragment>
-    <action android:id="@+id/action_global_gallery" app:destination="@id/gallery" />
+    <action
+        android:id="@+id/action_global_gallery"
+        app:destination="@id/gallery" />
     <fragment
         android:id="@+id/photoLibrary"
         android:name="com.example.lyngua.views.Gallery.PhotoLibrary"
@@ -123,17 +125,19 @@
         android:id="@+id/albumPhotos"
         android:name="com.example.lyngua.views.Gallery.AlbumPhotos"
         android:label="fragment_album_photos"
-        tools:layout="@layout/fragment_album_photos" >
+        tools:layout="@layout/fragment_album_photos">
         <argument
             android:name="albumName"
             app:argType="string" />
     </fragment>
-    <action android:id="@+id/action_global_albumPhotos" app:destination="@id/albumPhotos" />
+    <action
+        android:id="@+id/action_global_albumPhotos"
+        app:destination="@id/albumPhotos" />
     <fragment
         android:id="@+id/categoryGame"
         android:name="com.example.lyngua.views.Categories.practice_words.CategoryGame"
         android:label="fragment_category_game"
-        tools:layout="@layout/fragment_category_game" >
+        tools:layout="@layout/fragment_category_game">
         <argument
             android:name="categoryChosen"
             app:argType="com.example.lyngua.models.categories.Category" />
@@ -141,13 +145,22 @@
             android:id="@+id/action_categoryGame_to_categoryResults"
             app:destination="@id/CategoryPracticeResults"
             app:popUpTo="@id/practice"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_categoryGame_to_wordMatching"
+            app:destination="@id/wordMatching" />
+        <action
+            android:id="@+id/action_categoryGame_to_multipleChoice"
+            app:destination="@id/multipleChoice" />
+        <action
+            android:id="@+id/action_categoryGame_to_fillInBlank"
+            app:destination="@id/fillInBlank" />
     </fragment>
     <fragment
         android:id="@+id/CategoryPracticeResults"
         android:name="com.example.lyngua.views.Categories.practice_words.CategoryPracticeResults"
         android:label="fragment_category_results"
-        tools:layout="@layout/fragment_category_results" >
+        tools:layout="@layout/fragment_category_results">
         <action
             android:id="@+id/action_categoryResults_to_practice"
             app:destination="@id/practice" />
@@ -167,11 +180,76 @@
         android:id="@+id/photoPractice"
         android:name="com.example.lyngua.views.Gallery.PhotoPractice"
         android:label="fragment_photo_practice"
-        tools:layout="@layout/fragment_photo_practice" >
+        tools:layout="@layout/fragment_photo_practice">
         <argument
             android:name="photoList"
             app:argType="com.example.lyngua.models.photos.Photo[]" />
-    </fragment><action android:id="@+id/action_global_photoPractice" app:destination="@id/photoPractice"/>
-
+    </fragment>
+    <action
+        android:id="@+id/action_global_photoPractice"
+        app:destination="@id/photoPractice" />
+    <fragment
+        android:id="@+id/wordMatching"
+        android:name="com.example.lyngua.views.Categories.practice_words.WordMatching"
+        android:label="fragment_word_matching"
+        tools:layout="@layout/fragment_word_matching">
+        <argument
+            android:name="gameData"
+            app:argType="com.example.lyngua.models.words.GameSessionData" />
+        <action
+            android:id="@+id/action_wordMatching_self"
+            app:destination="@id/wordMatching" />
+        <action
+            android:id="@+id/action_wordMatching_to_multipleChoice"
+            app:destination="@id/multipleChoice" />
+        <action
+            android:id="@+id/action_wordMatching_to_CategoryPracticeResults"
+            app:destination="@id/CategoryPracticeResults" />
+        <action
+            android:id="@+id/action_wordMatching_to_fillInBlank"
+            app:destination="@id/fillInBlank" />
+    </fragment>
+    <fragment
+        android:id="@+id/multipleChoice"
+        android:name="com.example.lyngua.views.Categories.practice_words.MultipleChoice"
+        android:label="fragment_multiple_choice"
+        tools:layout="@layout/fragment_multiple_choice">
+        <argument
+            android:name="gameData"
+            app:argType="com.example.lyngua.models.words.GameSessionData" />
+        <action
+            android:id="@+id/action_multipleChoice_to_wordMatching"
+            app:destination="@id/wordMatching" />
+        <action
+            android:id="@+id/action_multipleChoice_self"
+            app:destination="@id/multipleChoice" />
+        <action
+            android:id="@+id/action_multipleChoice_to_CategoryPracticeResults"
+            app:destination="@id/CategoryPracticeResults" />
+        <action
+            android:id="@+id/action_multipleChoice_to_fillInBlank"
+            app:destination="@id/fillInBlank" />
+    </fragment>
+    <fragment
+        android:id="@+id/fillInBlank"
+        android:name="com.example.lyngua.views.Categories.practice_words.FillInBlank"
+        android:label="fragment_fill_in_blank"
+        tools:layout="@layout/fragment_fill_in_blank">
+        <argument
+            android:name="gameData"
+            app:argType="com.example.lyngua.models.words.GameSessionData" />
+        <action
+            android:id="@+id/action_fillInBlank_to_wordMatching"
+            app:destination="@id/wordMatching" />
+        <action
+            android:id="@+id/action_fillInBlank_to_multipleChoice"
+            app:destination="@id/multipleChoice" />
+        <action
+            android:id="@+id/action_fillInBlank_self"
+            app:destination="@id/fillInBlank" />
+        <action
+            android:id="@+id/action_fillInBlank_to_CategoryPracticeResults"
+            app:destination="@id/CategoryPracticeResults" />
+    </fragment>
 
 </navigation>
