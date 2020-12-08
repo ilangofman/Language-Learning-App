@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.DoNotDim"
-    tools:context=".views.Gallery.Interactive">
+    tools:context=".views.Gallery.PhotoPractice">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,28 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/viewFinder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageButton
-        android:id="@+id/button_camera_capture"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_capture_white"
-        android:scaleType="fitCenter"
-        android:background="#00000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
     <ImageButton
         android:id="@+id/button_close"
         android:layout_width="36dp"
@@ -48,46 +26,31 @@
         android:src="@drawable/ic_close_white"
         android:scaleType="fitCenter"
         android:background="#00000000"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_save"
+        android:id="@+id/button_next"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
-        android:src="@drawable/ic_save_white"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/ic_arrow_forward_white"
         android:scaleType="fitCenter"
         android:background="#00000000"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/button_gallery"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:src="@drawable/ic_gallery_white"
-        android:scaleType="fitCenter"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_save" />
 
     <ImageButton
         android:id="@+id/button_identify"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/ic_target_white"
         android:scaleType="fitCenter"
         android:background="#00000000"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_gallery" />
+        app:layout_constraintTop_toBottomOf="@id/button_next" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

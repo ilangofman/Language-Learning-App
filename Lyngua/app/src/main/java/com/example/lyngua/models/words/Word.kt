@@ -36,7 +36,7 @@ class Word (
         typeFlag = (0..1).random()
         correctGuesses = 0
         totalGuesses = 0
-        EF = 2.5
+        EF = 2.0
         streak = 0
     }
 
@@ -50,7 +50,7 @@ class Word (
         typeFlag = (0..1).random()
         correctGuesses = 0
         totalGuesses = 0
-        EF = 2.5
+        EF = 2.0
         streak = 0
     }
 
@@ -105,8 +105,11 @@ class Word (
         //Produces a new easiness factor
         EF = EF - 0.8 + 0.28*quality-0.02*quality.pow(2)
         //If easiness factor is too small, then reset it
-        if(EF < 1.5){
-            EF = 1.5
+        if(EF < 1.4){
+            EF = 1.4
+        }
+        else if(EF > 2){
+            EF = 2.0
         }
 
         return (boxNumber * EF).roundToInt()

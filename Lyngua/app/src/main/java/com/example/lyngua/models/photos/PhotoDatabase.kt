@@ -1,4 +1,4 @@
-package com.example.lyngua.models.Photos
+package com.example.lyngua.models.photos
 
 import android.content.Context
 import androidx.room.*
@@ -14,9 +14,10 @@ https://www.youtube.com/watch?v=3USvr1Lz8g8
 
 @Database(
     entities = [Photo::class],
-    version = 8,
+    version = 10,
     exportSchema = false )
 
+@TypeConverters(PhotoTypeConverter::class)
 abstract class PhotoDatabase: RoomDatabase() {
 
     abstract fun photoDao(): PhotoDao

@@ -1,0 +1,8 @@
+Vatsan Prabhu - Dev Log - Week 10
+
+Dates: Nov 22 to Nov 28, 2020
+
+Work Completed:
+- Finished up work for D3 document
+- Prepared for and attended D3 oral exam
+- Modified interactove mode to separate blackboard function from displaying interactive question
