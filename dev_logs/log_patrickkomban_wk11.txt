@@ -1,0 +1,11 @@
+Week 11 Development Log - Patrick Komban
+
+Dates: Nov 29 to Dec 5, 2020
+
+Work Completed:
+
+- Created the UI and implemented the game logic for word matching and fill in the blank game modes. Admittedly, this took longer than expected from my end and felt that I unnecessarily complicated how the game program flow should be. 
+
+- Used NavHost for communicating between the different game modes with regards to the game session data. Now, depending on the question type determined by the word streak algorithm implemented by Daniel, it will take the user to the appropriate game mode. 
+
+- Brainstorming for app video and preparing for D4.

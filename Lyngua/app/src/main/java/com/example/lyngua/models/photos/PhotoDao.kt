@@ -1,4 +1,4 @@
-package com.example.lyngua.models.Photos
+package com.example.lyngua.models.photos
 
 import androidx.room.*
 
@@ -7,6 +7,7 @@ import androidx.room.*
 * Here all the different queries are listed.
 * */
 @Dao
+@TypeConverters(PhotoTypeConverter::class)
 interface PhotoDao{
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

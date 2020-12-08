@@ -79,4 +79,8 @@
         <item name="cornerSizeTopLeft">36dp</item>
         <item name="background">@drawable/interactive_question_shape</item>
     </style>
+
+    <style name="Theme.DoNotDim" parent="android:Theme">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

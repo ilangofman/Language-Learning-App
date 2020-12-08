@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lyngua.MainNavigationDirections
 import com.example.lyngua.R
-import com.example.lyngua.models.Photos.Photo
+import com.example.lyngua.models.photos.Photo
 import kotlinx.android.synthetic.main.custom_gallery_image.view.*
 
 class PhotoLibraryAdapter(private var photoList: MutableList<Photo>) : RecyclerView.Adapter<PhotoLibraryAdapter.ViewHolder>() {
@@ -20,12 +22,17 @@ class PhotoLibraryAdapter(private var photoList: MutableList<Photo>) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentImageUri = Uri.parse(photoList[position].uriString)
-        holder.itemView.imageView_gallery.setImageURI(currentImageUri)
+        val currentPhoto = photoList[position]
+        holder.itemView.imageView_gallery.setImageURI(Uri.parse(currentPhoto.uriString))
 
         //On click - TODO()
         holder.itemView.imageView_gallery.setOnClickListener {
-            Log.d("GalleryAdapter", "Image: $currentImageUri clicked")
+            Log.d("GalleryAdapter", "Image: ${currentPhoto.word} clicked")
+
+            Log.d("GalleryAdapter", "\nWord = ${currentPhoto.word}\nOptions = ${currentPhoto.options}")
+
+            val action = MainNavigationDirections.actionGlobalPhotoPractice(arrayOf(currentPhoto))
+            holder.itemView.findNavController().navigate(action)
         }
     }
 

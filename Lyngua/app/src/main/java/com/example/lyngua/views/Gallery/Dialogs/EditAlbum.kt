@@ -10,7 +10,7 @@ import com.example.lyngua.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_edit_album.*
 
-class EditAlbum() : BottomSheetDialogFragment() {
+class EditAlbum : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
