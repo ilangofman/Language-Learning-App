@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isInvisible
-import androidx.navigation.NavArgs
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -147,7 +144,7 @@ class FillInBlank : Fragment() {
                 )
 
 
-                val results = Results(wrongAnsMap, numCorrect, args.gameData.numWordsDone + numDone)
+                val results = Results(args.gameData.categoryChosen.id, args.gameData.categoryChosen.name,System.currentTimeMillis()/1000 , wrongAnsMap, numCorrect, args.gameData.numWordsDone + numDone)
                 val action = FillInBlankDirections.actionFillInBlankToCategoryPracticeResults(results)
                 navController.navigate(action)
             } else {

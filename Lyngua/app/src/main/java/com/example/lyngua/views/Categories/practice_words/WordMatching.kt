@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
-import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -22,13 +21,13 @@ import com.example.lyngua.models.Question
 import com.example.lyngua.models.WordMatching
 import com.example.lyngua.models.words.GameSessionData
 import com.example.lyngua.models.words.Results
-import com.example.lyngua.models.words.Word
 import com.example.lyngua.views.Categories.UpdateCategory
 import kotlinx.android.synthetic.main.fragment_word_matching.*
 import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
+
 
 class WordMatching : Fragment() {
     private val args by navArgs<WordMatchingArgs>()
@@ -278,7 +277,7 @@ class WordMatching : Fragment() {
                 )
 
 
-                val results = Results(wrongAnsMap, numCorrect, args.gameData.numWordsDone + numWordsToMatch)
+                val results = Results( args.gameData.categoryChosen.id,args.gameData.categoryChosen.name,System.currentTimeMillis()/1000 , wrongAnsMap, numCorrect, args.gameData.numWordsDone + numWordsToMatch)
                 val action = WordMatchingDirections.actionWordMatchingToCategoryPracticeResults(results)
                 navController.navigate(action)
             } else {
