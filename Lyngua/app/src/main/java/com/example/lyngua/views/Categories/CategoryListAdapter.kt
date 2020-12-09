@@ -100,7 +100,7 @@ class CategoryListAdapter: RecyclerView.Adapter<CategoryListAdapter.MyViewHolder
 
             if(currentCategory.goal.goalType == SWITCH_ON) {
                 holder.itemView.progress_bar.progress =
-                    (currentCategory.goal.numWordsCompleted / currentCategory.goal.totalNumWords * 100).toInt()
+                    (currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat() * 100).toInt()
                 holder.itemView.progress_percentage_txt.text =
                     holder.itemView.resources.getString(R.string.goal_percentage, ((currentCategory.goal.numWordsCompleted.toFloat() / currentCategory.goal.totalNumWords.toFloat()) * 100).toInt())
             }
