@@ -1,0 +1,9 @@
+Week 8 Development Log - Patrick Komban
+
+Dates: Nov 8 to Nov 14, 2020
+
+Work Completed:
+
+- Preparing for demo. 
+
+- Working on minor fixes with UI and other practice mode and session class related work.

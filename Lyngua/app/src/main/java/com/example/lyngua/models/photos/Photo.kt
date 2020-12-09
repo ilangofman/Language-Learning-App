@@ -1,4 +1,4 @@
-package com.example.lyngua.models.Photos
+package com.example.lyngua.models.photos
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -12,4 +12,6 @@ data class Photo(
     @PrimaryKey
     @ColumnInfo(name="uriString")   val uriString: String,
     @ColumnInfo(name="word")        val word: String,
+    @ColumnInfo(name="options")     val options: List<String>,
+    @ColumnInfo(name="correct")     val correct: Int,
 ): Parcelable

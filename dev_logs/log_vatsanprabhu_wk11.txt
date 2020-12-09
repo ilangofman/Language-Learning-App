@@ -1,0 +1,9 @@
+Vatsan Prabhu - Dev Log - Week 11
+
+Dates: Nov 29 to Dec 5, 2020
+
+Work Completed:
+- Removed programmatic creation of interactive question bottom sheet and created a bottomSheetDialogFragment for interactive question
+- Created photoPractice fragment for practicing gallery photos as individual photos or as albums
+- Small UI changes
+- Started working on D4 Video

@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.lyngua.MainNavigationDirections
 import com.example.lyngua.R
 import com.example.lyngua.controllers.GalleryController
-import com.example.lyngua.models.Photos.Album
+import com.example.lyngua.models.photos.Album
 import com.example.lyngua.views.Gallery.Dialogs.*
 import kotlinx.android.synthetic.main.fragment_albums.*
 
@@ -36,7 +38,7 @@ class Albums : Fragment() {
 
         val albums = galleryController.getAlbums()
 
-        val adapter = AlbumAdapter(albums) { moreButtonCallback(it) }
+        val adapter = AlbumAdapter(albums, {moreButtonCallback(it)}, {playButtonCallback(it)})
         val albumGrid = recyclerView_album_grid
         albumGrid.adapter = adapter
         albumGrid.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -51,7 +53,7 @@ class Albums : Fragment() {
         }
 
         //When live album data changes notify adapter to update data and view
-        galleryController.liveAlbumData.observe(viewLifecycleOwner, { albumList ->
+        galleryController.liveAlbumData.observe(viewLifecycleOwner, Observer { albumList ->
             adapter.setData(albumList as MutableList<Album>)
         })
     }
@@ -67,6 +69,16 @@ class Albums : Fragment() {
 
         bottomSheet.setTargetFragment(this, REQUEST_CODE_BOTTOM_SHEET)
         bottomSheet.show(parentFragmentManager, "bottomSheetEditAlbum")
+    }
+
+    /*
+     * Purpose: Navigate to PracticePhotos to start practicing album
+     * Input:   albumName   - String for the album name
+     * Output:  None
+     */
+    private fun playButtonCallback(albumName: String) {
+        val action = MainNavigationDirections.actionGlobalPhotoPractice(galleryController.getPhotos(albumName).toTypedArray())
+        findNavController().navigate(action)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

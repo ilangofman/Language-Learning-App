@@ -1,0 +1,11 @@
+Week 9 Development Log - Patrick Komban
+
+Dates: Nov 15 to Nov 21, 2020
+
+Work Completed:
+
+- Looking into incorporating different game modes such as word matching and fill in the blank, as specified in D1. 
+
+- Figuring out how to traverse through the 3 different modes, looking into parent and child fragment as possible implementation method
+
+- Started work on creating scenario diagrams for the 2 scenarios specified in D1.

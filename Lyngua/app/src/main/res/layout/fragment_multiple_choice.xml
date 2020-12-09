@@ -17,7 +17,7 @@
         android:gravity="center"
         android:text="@string/multiple_choice"
         android:textAlignment="center"
-        android:paddingTop="75dp"
+        android:paddingTop="50dp"
         android:paddingBottom ="56dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
