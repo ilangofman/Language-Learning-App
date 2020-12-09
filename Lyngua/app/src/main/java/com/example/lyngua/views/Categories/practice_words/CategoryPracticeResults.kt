@@ -51,13 +51,13 @@ class CategoryPracticeResults : Fragment() {
 
         when {
             percentage >= 80 -> {
-                result_text.text = "Well done! Your score was ${percentage}%"
+                result_text.text = "Well done! Your score was ${"%.2f".format(percentage)}%"
             }
             percentage >= 60 -> {
-                result_text.text = "Not bad! Your score was ${percentage}%"
+                result_text.text = "Not bad! Your score was ${"%.2f".format(percentage)}%"
             }
             else -> {
-                result_text.text = "Needs work! Your score was ${percentage}%"
+                result_text.text = "Needs work! Your score was ${"%.2f".format(percentage)}%"
             }
         }
     }

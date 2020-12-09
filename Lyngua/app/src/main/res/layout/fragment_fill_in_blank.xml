@@ -14,15 +14,16 @@
         android:id="@+id/question_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/regular"
         android:gravity="center"
+        android:paddingTop="30dp"
+        android:paddingBottom="36dp"
         android:text="@string/fill_in"
         android:textAlignment="center"
-        android:paddingTop="75dp"
-        android:paddingBottom ="56dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:fontFamily="@font/regular"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
@@ -69,6 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:text="Submit Answer"
         app:layout_constraintEnd_toEndOf="@+id/editText_translation"
         app:layout_constraintStart_toStartOf="@+id/editText_translation"

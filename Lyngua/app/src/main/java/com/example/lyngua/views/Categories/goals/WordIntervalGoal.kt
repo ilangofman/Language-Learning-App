@@ -148,7 +148,6 @@ import kotlin.collections.ArrayList
                 0 -> args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
                 1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
                 2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-                //3 -> myCalendar.add(Calendar.MONTH, 1)
                 3 -> myCalendar.add(Calendar.MINUTE, 2)
             }
 
