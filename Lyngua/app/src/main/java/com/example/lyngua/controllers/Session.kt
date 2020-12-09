@@ -10,8 +10,7 @@ import com.example.lyngua.models.categories.Category
 import com.example.lyngua.models.words.Word
 
 class Session(val category: Category, val user: User?) {
-
-    val WORDS_PER_SESSION = 5
+    val WORDS_PER_SESSION = 3
     val questionFactory: QuestionFactory = QuestionFactory()
     //Chooses the words that should be part of the session based on the sessionNumber and boxNumbers
     //Input parameter is the category that is being played
@@ -22,7 +21,6 @@ class Session(val category: Category, val user: User?) {
         var count = 0
 
         while (newSession.isEmpty()) {
-
             for (word in category.wordsList) {
 
                 //Add only the preset number of words for a single session
@@ -33,14 +31,10 @@ class Session(val category: Category, val user: User?) {
                 }
                 //If a word has yet to be played, or if it is to be in a session but there are already
                 //our a preset number words in the session, then increment the boxNumber so that the word could be in the next session
-                else if (category.sessionNumber == word.boxNumber && count > WORDS_PER_SESSION){
+                else {
                     word.boxNumber++
                 }
-                else if(category.sessionNumber > word.boxNumber){
-                    word.boxNumber = category.sessionNumber + 1
-                }
             }
-
             //If no words are to be in the session, then increment to the next session
             if (newSession.size == 0) {
                 category.sessionNumber++
@@ -57,6 +51,7 @@ class Session(val category: Category, val user: User?) {
         val questionsList: ArrayList<Question> = ArrayList()
         var randWord: Word
         var correctOption: Int
+        var counter = 0
 
         //Loops through the list of words for the category
         for (word in category.wordsList) {
@@ -134,24 +129,28 @@ class Session(val category: Category, val user: User?) {
                     if (word.typeFlag == 0) {
 
                         //Depending on what streak the word is on, create the specific inherited question type
-                        when (word.streak) {
-                            in 0..3 -> newQuestion =
+                        counter++
+                        when (counter) {
+                            1 -> newQuestion =
                                 questionFactory.createQuestion("multipleChoice" , word, word.translated, optionsList, correctOption, optionsMap)!!
-                            in 4..6 -> newQuestion =
-                                questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
-                            else -> newQuestion =
-                                questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption, optionsMap)!!
+                            2 ->    newQuestion = questionFactory.createQuestion("wordMatching" , word, word.translated, optionsList, wordMatching, optionsMap)!!
+                            else -> {
+                                newQuestion = questionFactory.createQuestion("fillIn" , word, word.translated, optionsList, correctOption, optionsMap)!!
+
+                                counter = 0}
+
                         }
                     } else {
-
+                        counter++
                         //Depending on what streak the word is on, create the specific inherited question type
-                        when (word.streak) {
-                            in 0..3 -> newQuestion =
+                        when (counter) {
+                           1 -> newQuestion =
                                 questionFactory.createQuestion("multipleChoice" , word, word.word, optionsList, correctOption, optionsMap)!!
-                            in 4..6 -> newQuestion =
+                            2 -> newQuestion =
                                 questionFactory.createQuestion("wordMatching" , word, word.word, optionsList, wordMatching, optionsMap)!!
-                            else -> newQuestion =
-                                questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption, optionsMap)!!
+                            else ->{ newQuestion = questionFactory.createQuestion("fillIn" , word, word.word, optionsList, correctOption, optionsMap)!!
+                                counter = 0
+                            }
                         }
                     }
 
@@ -165,8 +164,10 @@ class Session(val category: Category, val user: User?) {
     }
 
     companion object{
-        val WORDS_PER_SESSION = 5
+        val WORDS_PER_SESSION = 3
     }
+
+
 }
 
 

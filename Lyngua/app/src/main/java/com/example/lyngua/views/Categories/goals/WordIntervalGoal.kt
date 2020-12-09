@@ -154,7 +154,7 @@ import kotlin.collections.ArrayList
                 0 -> cancelAlarms()
                 1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
                 2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
-                3 -> myCalendar.add(Calendar.MONTH, 1)
+                3 -> myCalendar.add(Calendar.MINUTE, 2)
             }
 
             //Creates a goal object based on the options chosen from updating to be put into the database

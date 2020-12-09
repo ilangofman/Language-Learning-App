@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.lyngua.R
+import com.example.lyngua.controllers.CategoryController
 import com.example.lyngua.views.Categories.practice_words.CategoryPracticeResultsArgs
 import kotlinx.android.synthetic.main.fragment_category_results.*
+import java.util.*
 
 class CategoryPracticeResults : Fragment() {
     private val args by navArgs<CategoryPracticeResultsArgs>()
+    lateinit var categoryController: CategoryController
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,14 +28,13 @@ class CategoryPracticeResults : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        categoryController = CategoryController(requireContext())
         setResultText()
+
+        categoryController.logResults(args.currentResults)
         setWordList()
     }
 
-//    private fun logResult(){
-//        Log.d()
-//    }
 
     /*
     Function:   setResultText
@@ -48,13 +51,13 @@ class CategoryPracticeResults : Fragment() {
 
         when {
             percentage >= 80 -> {
-                result_text.text = "Well done! Your score was ${percentage}%"
+                result_text.text = "Well done! Your score was ${"%.2f".format(percentage)}%"
             }
             percentage >= 60 -> {
-                result_text.text = "Not bad! Your score was ${percentage}%"
+                result_text.text = "Not bad! Your score was ${"%.2f".format(percentage)}%"
             }
             else -> {
-                result_text.text = "Needs work! Your score was ${percentage}%"
+                result_text.text = "Needs work! Your score was ${"%.2f".format(percentage)}%"
             }
         }
     }

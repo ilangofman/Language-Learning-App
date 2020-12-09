@@ -118,4 +118,8 @@ dependencies {
     implementation 'com.google.mlkit:image-labeling:17.0.0'
     // Image labeling feature with custom classifier support
     implementation 'com.google.mlkit:image-labeling-custom:16.2.1'
+
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
 }
