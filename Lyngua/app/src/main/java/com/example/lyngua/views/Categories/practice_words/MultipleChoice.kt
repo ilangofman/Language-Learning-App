@@ -81,6 +81,7 @@ class MultipleChoice : Fragment(), View.OnClickListener {
 
         for (op in optionsList){
             op.background = context?.let { ContextCompat.getDrawable(it, R.drawable.mcq_options_border) }
+            op.isClickable = true
         }
     }
 
@@ -128,6 +129,11 @@ class MultipleChoice : Fragment(), View.OnClickListener {
      */
     private fun evaluateChoice(choice: TextView) {
         val question = questionsList[currentQuestionPos] as MultipleChoice
+
+        // Make the TextView options unclickable
+        for (op in optionsList) {
+            op.isClickable = false
+        }
 
         // Check whether the choice was right or not, and draw the appropriate
         // option boxes given the correct or incorrect choice.
