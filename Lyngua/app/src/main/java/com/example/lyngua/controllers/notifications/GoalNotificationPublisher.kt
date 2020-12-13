@@ -80,13 +80,15 @@ class GoalNotificationPublisher() : BroadcastReceiver() {
         //Sets message based on type of goal set
         var message: String
         if (currentGoal.goalType == SWITCH_ON){
-            message = "You have a word goal ending soon!"
+            message = "Your word goal for ${currentCategory.name} has ended"
         }
         else{
-            message = "You have a time goal ending soon!"
+            message = "Your time goal for ${currentCategory.name} has ended"
         }
 
         val GROUP_GOAL_NOTIFICATION = "GOAL_NOTIFICATION"
+
+        Log.d("UPDATE","GOAL NOTIFICATION")
 
         //Builds the notification and its components
         val builder = NotificationCompat.Builder(this.context!!, CHANNEL_ID)

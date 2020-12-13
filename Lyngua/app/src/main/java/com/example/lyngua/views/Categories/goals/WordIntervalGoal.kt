@@ -1,10 +1,6 @@
 package com.example.lyngua.views.Categories.goals
 
-import android.app.AlarmManager
 import android.app.AlertDialog
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.lyngua.R
 import com.example.lyngua.controllers.CategoryController
-import com.example.lyngua.controllers.notifications.GoalUpdatePublisher
-import com.example.lyngua.controllers.notifications.GoalNotificationPublisher
 import com.example.lyngua.controllers.notifications.AlarmService
 import com.example.lyngua.models.goals.Goal
 import com.example.lyngua.views.Categories.UpdateCategory.SwitchType.SWITCH_OFF
@@ -151,7 +145,7 @@ import kotlin.collections.ArrayList
 
             //Based on which spinner was chosen, detail the time for when the goal should be complete
             when (timeFrameFlag) {
-                0 -> cancelAlarms()
+                0 -> args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
                 1 -> myCalendar.add(Calendar.DAY_OF_MONTH, 1)
                 2 -> myCalendar.add(Calendar.DAY_OF_MONTH, 7)
                 3 -> myCalendar.add(Calendar.MINUTE, 2)
@@ -163,10 +157,10 @@ import kotlin.collections.ArrayList
                 timeFrameFlag,
                 notificationFlag,
                 goalType,
-                args.categoryChosen.goal.numWordsCompleted,
-                wordGoalCount,
                 0,
-                0
+                wordGoalCount,
+                0.0,
+                0.0
             )
 
             val result = categoryController.updateCategory(
@@ -185,6 +179,9 @@ import kotlin.collections.ArrayList
 
                 alarm.startAlarm()
             }
+            if (notificationFlag == SWITCH_OFF){
+                args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
+            }
 
             if (result) {
                 findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
@@ -199,7 +196,7 @@ import kotlin.collections.ArrayList
             confirmation.setMessage("Are you sure you would like to delete this category?")
             confirmation.setPositiveButton("Delete") { _, _ ->
 
-                cancelAlarms()
+                args.categoryChosen.goal.cancelAlarms(requireContext(), args.categoryChosen)
                 categoryController.deleteCategory(args.categoryChosen)
                 Toast.makeText(requireContext(), "Delete Success", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_updateCategoryFragment_to_practice)
@@ -217,37 +214,4 @@ import kotlin.collections.ArrayList
             ContextCompat.getDrawable(requireContext(), R.drawable.selected_goal_background_color)
     }
 
-    private fun cancelAlarms(){
-        val mAlarmSender: PendingIntent
-        val alarmGoalSender: PendingIntent
-        var broadcastIntent: Intent = Intent(context, GoalNotificationPublisher::class.java)
-        var broadcastIntent1: Intent = Intent(context, GoalUpdatePublisher::class.java)
-
-        //Create bundle to send category and goal information to the broadcast receiver
-        var bundle = Bundle()
-        bundle.putParcelable("category", args.categoryChosen)
-        bundle.putParcelable("goal", args.categoryChosen.goal)
-        broadcastIntent.putExtra("bundle", bundle)
-        broadcastIntent1.putExtra("bundle", bundle)
-
-        //Create pending intent to be able to cancel the alarms set for the specific category
-        mAlarmSender =
-            PendingIntent.getBroadcast(
-                context,
-                args.categoryChosen.id,
-                broadcastIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        alarmGoalSender =
-            PendingIntent.getBroadcast(
-                context,
-                args.categoryChosen.id + 1000,
-                broadcastIntent1,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        val am = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        am.cancel(mAlarmSender)
-        am.cancel(alarmGoalSender)
-    }
 }

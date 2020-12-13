@@ -33,6 +33,8 @@ import com.example.lyngua.views.Categories.practice_words.CategoryGameArgs
 import com.example.lyngua.views.Categories.practice_words.CategoryGameDirections
 
 import kotlinx.android.synthetic.main.fragment_category_game.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 import kotlin.concurrent.thread
 
@@ -45,6 +47,7 @@ class CategoryGame : Fragment() {
     private var wrongAnsMap = mutableMapOf<String, String>()
     private val userController: UserController = UserController()
     private var currentQuestionPos = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,8 +76,9 @@ class CategoryGame : Fragment() {
         Log.d("log", "questionList size: ${questionsList.size}")
 
         // Using a data class to store game information and to pass to subsequent game fragments.
-        val gameSessionData = GameSessionData(questionsList, args.categoryChosen, 0, 0, wrongAnsMap, currentQuestionPos)
-
+        var sessionTime: Long = System.currentTimeMillis()
+        val gameSessionData = GameSessionData(questionsList, args.categoryChosen, 0, 0, wrongAnsMap, currentQuestionPos, sessionTime)
+        Log.d("LIST", "${questionsList}")
         when (questionsList[currentQuestionPos]) {
             is MultipleChoice -> {
                 val action = CategoryGameDirections.actionCategoryGameToMultipleChoice(gameSessionData)

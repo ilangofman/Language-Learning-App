@@ -31,15 +31,22 @@ class Session(val category: Category, val user: User?) {
                 }
                 //If a word has yet to be played, or if it is to be in a session but there are already
                 //our a preset number words in the session, then increment the boxNumber so that the word could be in the next session
-                else {
+                else if (category.sessionNumber == word.boxNumber && count >= WORDS_PER_SESSION){
                     word.boxNumber++
                 }
+
+                //If a newly added word is passed, update the box number to keep up with the session number
+                else if(category.sessionNumber > word.boxNumber){
+                    word.boxNumber = category.sessionNumber + 1
+                }
+
             }
             //If no words are to be in the session, then increment to the next session
             if (newSession.size == 0) {
                 category.sessionNumber++
             }
         }
+
         return generateQuestions(newSession)
     }
 

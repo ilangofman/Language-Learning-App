@@ -23,6 +23,10 @@ import com.example.lyngua.models.words.GameSessionData
 import com.example.lyngua.models.words.Results
 import com.example.lyngua.views.Categories.UpdateCategory
 import kotlinx.android.synthetic.main.fragment_multiple_choice.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
+
 
 class MultipleChoice : Fragment(), View.OnClickListener {
     private val args by navArgs<MultipleChoiceArgs>()
@@ -164,6 +168,19 @@ class MultipleChoice : Fragment(), View.OnClickListener {
                         args.gameData.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }
+                else if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON_TIMEGOAL){
+                    var currentTime : Long = System.currentTimeMillis()
+                    var timePlayed : Double = (currentTime - args.gameData.sessionTime).toDouble()
+
+                    args.gameData.categoryChosen.goal.timeSpent += (timePlayed/1000/60)
+
+                    if(args.gameData.categoryChosen.goal.timeSpent >= args.gameData.categoryChosen.goal.totalTime){
+                        args.gameData.categoryChosen.goal.goalType = UpdateCategory.SWITCH_OFF
+                        args.gameData.categoryChosen.goal.timeSpent = 0.0
+                        args.gameData.categoryChosen.goal.cancelAlarms(requireContext(),args.gameData.categoryChosen)
+                    }
+
+                }
 
                 val categoryController = CategoryController(requireContext())
                 val goal = categoryController.updateCategory(
@@ -186,7 +203,8 @@ class MultipleChoice : Fragment(), View.OnClickListener {
                     args.gameData.numWordsDone + numDone,
                     numCorrect,
                     wrongAnsMap,
-                    currentQuestionPos
+                    currentQuestionPos,
+                    args.gameData.sessionTime
                 )
                 when (questionsList[currentQuestionPos]) {
                     is MultipleChoice -> {
