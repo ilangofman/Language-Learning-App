@@ -61,7 +61,7 @@ class FillInBlank : Fragment() {
         keyboard_help.visibility = View.GONE
         //Check if text is empty
         if (editText_translation.text.toString().isEmpty()) {
-            Toast.makeText(activity, "Please enter your translation above.", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "Please enter your translation above.", Toast.LENGTH_SHORT).show()
         } else {
             evaluateAnswer()
         }
@@ -76,6 +76,7 @@ class FillInBlank : Fragment() {
     private fun displayQuestion() {
         val question = questionsList[currentQuestionPos] as FillInTheBlank
 
+        btn_evaluate.isClickable = true
         question_word.text = question.displayWord
         card_view2.visibility = View.INVISIBLE
     }
@@ -94,6 +95,9 @@ class FillInBlank : Fragment() {
         // Make the result_text's cardview visible to indicate to the user whether they got
         // their translation correct or not.
         card_view2.visibility = View.VISIBLE
+
+        // Make the evaluation button unclickable
+        btn_evaluate.isClickable = false
 
         if (editText_translation.text.toString().toLowerCase() == question.correctAnswer.toLowerCase()) {
             result_text.text = "Correct!"

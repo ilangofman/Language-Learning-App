@@ -57,6 +57,7 @@ class WordMatching : Fragment() {
         row_42.setOnDragListener(dragListener)
 
         btn_evaluate.setOnClickListener(clickListener)
+        btn_evaluate.isClickable = true
 
         questionsList = args.gameData.questionList
         currentQuestionPos = args.gameData.currentQuestionPos
@@ -76,7 +77,7 @@ class WordMatching : Fragment() {
             row_32.childCount == 1 && row_42.childCount == 1) {
             evaluateMatches()
         } else {
-            Toast.makeText(activity, "Please add ONLY ONE option to each row.", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "Please add ONLY ONE option to each row.", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -193,6 +194,9 @@ class WordMatching : Fragment() {
         val wordList: ArrayList<TextView> = arrayListOf()
         val tvArrayList: ArrayList<TextView> = arrayListOf()
         val rowCheckBools: ArrayList<Boolean> = arrayListOf()
+
+        // Make the evaluation button unclickable
+        btn_evaluate.isClickable = false
 
         val tv1 : TextView = row_12.getChildAt(0) as TextView
         val tv2 : TextView = row_22.getChildAt(0) as TextView
