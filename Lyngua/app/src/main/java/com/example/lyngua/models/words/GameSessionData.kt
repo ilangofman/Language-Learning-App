@@ -5,6 +5,8 @@ import com.example.lyngua.models.Question
 import com.example.lyngua.models.categories.Category
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Parcelize
 data class GameSessionData (
@@ -13,4 +15,6 @@ data class GameSessionData (
     var numWordsDone: Int = 0,
     var numCorrect: Int = 0,
     var wrongAnsMap: MutableMap<String,String>,
-    var currentQuestionPos: Int = 0) : Parcelable
+    var currentQuestionPos: Int = 0,
+    var sessionTime: Long) : Parcelable
+

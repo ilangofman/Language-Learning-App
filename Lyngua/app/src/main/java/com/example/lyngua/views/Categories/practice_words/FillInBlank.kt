@@ -21,6 +21,8 @@ import com.example.lyngua.models.words.GameSessionData
 import com.example.lyngua.models.words.Results
 import com.example.lyngua.views.Categories.UpdateCategory
 import kotlinx.android.synthetic.main.fragment_fill_in_blank.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FillInBlank : Fragment() {
     private val args by navArgs<FillInBlankArgs>()
@@ -61,7 +63,7 @@ class FillInBlank : Fragment() {
         keyboard_help.visibility = View.GONE
         //Check if text is empty
         if (editText_translation.text.toString().isEmpty()) {
-            Toast.makeText(activity, "Please enter your translation above.", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "Please enter your translation above.", Toast.LENGTH_SHORT).show()
         } else {
             evaluateAnswer()
         }
@@ -76,6 +78,7 @@ class FillInBlank : Fragment() {
     private fun displayQuestion() {
         val question = questionsList[currentQuestionPos] as FillInTheBlank
 
+        btn_evaluate.isClickable = true
         question_word.text = question.displayWord
         card_view2.visibility = View.INVISIBLE
     }
@@ -94,6 +97,9 @@ class FillInBlank : Fragment() {
         // Make the result_text's cardview visible to indicate to the user whether they got
         // their translation correct or not.
         card_view2.visibility = View.VISIBLE
+
+        // Make the evaluation button unclickable
+        btn_evaluate.isClickable = false
 
         if (editText_translation.text.toString().toLowerCase() == question.correctAnswer.toLowerCase()) {
             result_text.text = "Correct!"
@@ -118,6 +124,18 @@ class FillInBlank : Fragment() {
                         args.gameData.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }
+                else if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON_TIMEGOAL){
+                    var currentTime : Long = System.currentTimeMillis()
+                    var timePlayed : Double = (currentTime - args.gameData.sessionTime).toDouble()
+
+                    args.gameData.categoryChosen.goal.timeSpent += (timePlayed/1000/60)
+
+                    if(args.gameData.categoryChosen.goal.timeSpent >= args.gameData.categoryChosen.goal.totalTime){
+                        args.gameData.categoryChosen.goal.goalType = UpdateCategory.SWITCH_OFF
+                        args.gameData.categoryChosen.goal.timeSpent = 0.0
+                        args.gameData.categoryChosen.goal.cancelAlarms(requireContext(),args.gameData.categoryChosen)
+                    }
+                }
 
                 val categoryController = CategoryController(requireContext())
                 val goal = categoryController.updateCategory(
@@ -140,7 +158,8 @@ class FillInBlank : Fragment() {
                     args.gameData.numWordsDone + numDone,
                     numCorrect,
                     wrongAnsMap,
-                    currentQuestionPos
+                    currentQuestionPos,
+                    args.gameData.sessionTime
                 )
                 Log.d("endround", "${args.gameData.numWordsDone + numDone}")
                 Log.d("endround", "$numCorrect")

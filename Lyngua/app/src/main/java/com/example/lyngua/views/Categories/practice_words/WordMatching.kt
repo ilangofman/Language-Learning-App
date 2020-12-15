@@ -23,6 +23,11 @@ import com.example.lyngua.models.words.GameSessionData
 import com.example.lyngua.models.words.Results
 import com.example.lyngua.views.Categories.UpdateCategory
 import kotlinx.android.synthetic.main.fragment_word_matching.*
+import org.w3c.dom.Text
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
+
 
 class WordMatching : Fragment() {
     private val args by navArgs<WordMatchingArgs>()
@@ -57,6 +62,7 @@ class WordMatching : Fragment() {
         row_42.setOnDragListener(dragListener)
 
         btn_evaluate.setOnClickListener(clickListener)
+        btn_evaluate.isClickable = true
 
         questionsList = args.gameData.questionList
         currentQuestionPos = args.gameData.currentQuestionPos
@@ -76,7 +82,7 @@ class WordMatching : Fragment() {
             row_32.childCount == 1 && row_42.childCount == 1) {
             evaluateMatches()
         } else {
-            Toast.makeText(activity, "Please add ONLY ONE option to each row.", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "Please add ONLY ONE option to each row.", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -194,6 +200,9 @@ class WordMatching : Fragment() {
         val tvArrayList: ArrayList<TextView> = arrayListOf()
         val rowCheckBools: ArrayList<Boolean> = arrayListOf()
 
+        // Make the evaluation button unclickable
+        btn_evaluate.isClickable = false
+
         val tv1 : TextView = row_12.getChildAt(0) as TextView
         val tv2 : TextView = row_22.getChildAt(0) as TextView
         val tv3 : TextView = row_32.getChildAt(0) as TextView
@@ -248,6 +257,18 @@ class WordMatching : Fragment() {
                         args.gameData.categoryChosen.goal.numWordsCompleted = 0
                     }
                 }
+                else if(args.gameData.categoryChosen.goal.goalType == UpdateCategory.SWITCH_ON_TIMEGOAL){
+                    var currentTime : Long = System.currentTimeMillis()
+                    var timePlayed : Double = (currentTime - args.gameData.sessionTime).toDouble()
+
+                    args.gameData.categoryChosen.goal.timeSpent += (timePlayed/1000/60)
+
+                    if(args.gameData.categoryChosen.goal.timeSpent >= args.gameData.categoryChosen.goal.totalTime){
+                        args.gameData.categoryChosen.goal.goalType = UpdateCategory.SWITCH_OFF
+                        args.gameData.categoryChosen.goal.timeSpent = 0.0
+                        args.gameData.categoryChosen.goal.cancelAlarms(requireContext(),args.gameData.categoryChosen)
+                    }
+                }
 
                 val categoryController = CategoryController(requireContext())
                 val goal = categoryController.updateCategory(
@@ -270,7 +291,8 @@ class WordMatching : Fragment() {
                     args.gameData.numWordsDone + numWordsToMatch,
                     numCorrect,
                     wrongAnsMap,
-                    currentQuestionPos
+                    currentQuestionPos,
+                    args.gameData.sessionTime
                 )
                 Log.d("endround", "${args.gameData.numWordsDone + numWordsToMatch}")
                 Log.d("endround", "$numCorrect")

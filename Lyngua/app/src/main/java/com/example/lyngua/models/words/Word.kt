@@ -36,7 +36,7 @@ class Word (
         typeFlag = (0..1).random()
         correctGuesses = 0
         totalGuesses = 0
-        EF = 2.0
+        EF = 2.5
         streak = 0
     }
 
@@ -50,7 +50,7 @@ class Word (
         typeFlag = (0..1).random()
         correctGuesses = 0
         totalGuesses = 0
-        EF = 2.0
+        EF = 2.5
         streak = 0
     }
 
@@ -65,7 +65,7 @@ class Word (
     fun correctAnswer(){
 
         //Calls the repetition function to determine the new boxNumber for the word
-        boxNumber = repetitionInterval(4.0)
+        boxNumber = repetitionInterval(3.0)
 
         streak++
         correctGuesses++
@@ -81,7 +81,7 @@ class Word (
     fun incorrectAnswer(){
 
         //Calls the repetition function to determine the new boxNumber for the word
-        boxNumber = repetitionInterval( 0.0)
+        boxNumber = repetitionInterval( 1.0)
 
         if(streak >= 3)
             streak -= 2
@@ -108,8 +108,8 @@ class Word (
         if(EF < 1.4){
             EF = 1.4
         }
-        else if(EF > 2){
-            EF = 2.0
+        else if(EF > 2.5){
+            EF = 2.5
         }
 
         return (boxNumber * EF).roundToInt()

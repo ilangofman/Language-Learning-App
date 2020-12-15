@@ -7,8 +7,8 @@ Work Completed:
 
 Implemented the ability to add custom words to a category
 
-Fixed session class to work with new added words
+Fixes to design of session class involving adding words and problem with spaced repetition
 
-Added tracking of time goal
+Added tracking of time goal after sessions were played for practice mode
 
-Worked on D4 deliverable and presentation
+Worked on D4 deliverable
