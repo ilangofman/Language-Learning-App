@@ -61,7 +61,7 @@ class GalleryController(private var context: Context,
             outputStream.close()
 
             thread {
-                repository.addPhoto(Photo(photoFile.absolutePath, word, options, correctOption))
+                repository.addPhoto(Photo(0, photoFile.absolutePath, word, options, correctOption))
             }
 
             true
@@ -110,6 +110,22 @@ class GalleryController(private var context: Context,
         }.join()
 
         return photos
+    }
+
+    /*
+     * Purpose: Delete all photos provided
+     * Input:   photoList   - List of photos to delete
+     * Output:  None
+     */
+    fun deletePhotos(photoList: List<Photo>) {
+        thread {
+            repository.deletePhotos(photoList)
+        }.join()
+        photoList.forEach {
+            File(it.uriString).delete()
+        }
+        Log.d(TAG, "Photos deleted")
+        liveAlbumData.value = getAlbums()
     }
 
     /*
@@ -190,6 +206,14 @@ class GalleryController(private var context: Context,
                 Log.d(TAG, "Album already exists")
                 false
             } else {
+                val photoList = getPhotos(oldAlbumName)
+                photoList.forEach {
+                    it.uriString = it.uriString.replace(oldAlbumName, newAlbumName)
+                }
+                thread {
+                    repository.updatePhotos(photoList)
+                }.join()
+
                 currentAlbum.renameTo(newAlbum)
                 liveAlbumData.value = getAlbums()
                 true

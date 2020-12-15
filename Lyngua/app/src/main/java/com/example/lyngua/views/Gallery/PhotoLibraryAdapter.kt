@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.custom_gallery_image.view.*
 
 class PhotoLibraryAdapter(private var photoList: MutableList<Photo>) : RecyclerView.Adapter<PhotoLibraryAdapter.ViewHolder>() {
 
+    private var selectEnabled: Boolean = false
+    private var selectedPhotos: MutableSet<Photo> = mutableSetOf()
+
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,12 +34,47 @@ class PhotoLibraryAdapter(private var photoList: MutableList<Photo>) : RecyclerV
 
             Log.d("GalleryAdapter", "\nWord = ${currentPhoto.word}\nOptions = ${currentPhoto.options}")
 
-            val action = MainNavigationDirections.actionGlobalPhotoPractice(arrayOf(currentPhoto))
-            holder.itemView.findNavController().navigate(action)
+            if (selectEnabled) {
+                holder.itemView.view_dim.visibility = View.VISIBLE
+                holder.itemView.imageView_select.visibility = View.VISIBLE
+                selectedPhotos.add(currentPhoto)
+                Log.d("GalleryAdapter", "Selected Photos = $selectedPhotos")
+            } else {
+                val action = MainNavigationDirections.actionGlobalPhotoPractice(arrayOf(currentPhoto))
+                holder.itemView.findNavController().navigate(action)
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return photoList.size
+    }
+
+    /*
+     * Purpose: Update the data and the recyclerview
+     * Input:   photoList   - List of photo objects
+     * Output:  None
+     */
+    fun setData(photoList: MutableList<Photo>) {
+        this.photoList = photoList
+        notifyDataSetChanged()
+    }
+
+    /*
+     * Purpose: Toggle the selectEnabled variable
+     * Input:   None
+     * Output:  None
+     */
+    fun toggleSelectEnabled() {
+        selectEnabled = !selectEnabled
+    }
+
+    /*
+     * Purpose: Get the selectedList
+     * Input:   None
+     * Output:  List of selected photos
+     */
+    fun getSelectedList(): List<Photo> {
+        return selectedPhotos.toList()
     }
 }

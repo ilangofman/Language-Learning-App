@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_photo_library.*
 class PhotoLibrary(private val albumName: String = "") : Fragment() {
 
     private lateinit var galleryController: GalleryController
-    private var layoutManager = SpannedGridLayoutManager(3, 0.75F)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,26 +31,6 @@ class PhotoLibrary(private val albumName: String = "") : Fragment() {
 
         galleryController = GalleryController(requireContext(), requireActivity(), resources.getString(R.string.app_name))
 
-        //If fragment was called from a fragment container then double back for back button press
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().popBackStack()
-        }
-
-        toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-        callback.isEnabled = false
-        if (parentFragmentManager.fragments.size == 1) {
-            callback.isEnabled = true
-            toolbar.visibility = View.VISIBLE
-            toolbar.title = albumName
-            button_play.setOnClickListener {
-                val action = MainNavigationDirections.actionGlobalPhotoPractice(galleryController.getPhotos(albumName).toTypedArray())
-                findNavController().navigate(action)
-            }
-        }
-
         //Send album name to controller to get photos for specified album
         // If album name is blank then all photos will return
         val adapter = PhotoLibraryAdapter(galleryController.getPhotos(albumName))
@@ -59,10 +38,65 @@ class PhotoLibrary(private val albumName: String = "") : Fragment() {
 
         //SpannedGridLayoutManager has a bug when recyclerview only has 1 item
         // so in this case just use GridLayoutManager
-        if (adapter.itemCount > 1) photoGrid.layoutManager = SpannedGridLayoutManager(3, 0.75F)//layoutManager
+        if (adapter.itemCount > 1) photoGrid.layoutManager = SpannedGridLayoutManager(3, 0.75F)
         else photoGrid.layoutManager = GridLayoutManager(requireContext(), 2)
 
         photoGrid.addItemDecoration(SpaceItemDecorator(left = 1, top = 1, right = 1, bottom = 1))
         photoGrid.adapter = adapter
+
+        //If fragment was called from a fragment container then double back for back button press
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().popBackStack()
+        }
+
+        callback.isEnabled = false
+        if (parentFragmentManager.fragments.size == 1) {
+            callback.isEnabled = true
+            button_back.visibility = View.VISIBLE
+            button_play.visibility = View.VISIBLE
+
+            button_back.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
+            button_play.setOnClickListener {
+                val photoList = galleryController.getPhotos(albumName)
+                if (photoList.isNotEmpty()) {
+                    val action = MainNavigationDirections.actionGlobalPhotoPractice(photoList.toTypedArray())
+                    findNavController().navigate(action)
+                }
+            }
+        }
+
+        button_select.setOnClickListener {
+            button_back.visibility = View.GONE
+            button_select.visibility = View.GONE
+            button_play.visibility = View.GONE
+            button_cancel.visibility = View.VISIBLE
+            button_delete.visibility = View.VISIBLE
+            (photoGrid.adapter as PhotoLibraryAdapter).toggleSelectEnabled()
+        }
+
+        button_cancel.setOnClickListener {
+            if (parentFragmentManager.fragments.size == 1) {
+                button_back.visibility = View.VISIBLE
+                button_play.visibility = View.VISIBLE
+            }
+            button_select.visibility = View.VISIBLE
+            button_cancel.visibility = View.GONE
+            button_delete.visibility = View.GONE
+            (photoGrid.adapter as PhotoLibraryAdapter).toggleSelectEnabled()
+        }
+
+        button_delete.setOnClickListener {
+            val selectedList = (photoGrid.adapter as PhotoLibraryAdapter).getSelectedList()
+            galleryController.deletePhotos(selectedList)
+            (photoGrid.adapter as PhotoLibraryAdapter).setData(galleryController.getPhotos(albumName))
+            button_cancel.callOnClick()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (recyclerView_photo_grid.adapter as PhotoLibraryAdapter).setData(galleryController.getPhotos(albumName))
     }
 }

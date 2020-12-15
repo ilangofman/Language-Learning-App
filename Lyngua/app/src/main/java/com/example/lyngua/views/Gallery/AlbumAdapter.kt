@@ -46,7 +46,7 @@ class AlbumAdapter(private var albumList:MutableList<Album>, private var moreCal
 
         //Play button - Start practicing album
         holder.itemView.button_album_play.setOnClickListener {
-            playCallback(currentAlbum.name)
+            if (currentAlbum.coverPhoto != null) playCallback(currentAlbum.name)
         }
     }
 
