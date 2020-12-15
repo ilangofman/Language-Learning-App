@@ -19,6 +19,12 @@ interface PhotoDao{
     @Query("SELECT * FROM photo_table WHERE uriString IN (:album) ORDER BY uriString DESC")
     fun getPhotos(album: MutableList<String>): List<Photo>
 
+    @Update
+    fun updatePhotos(photoList: List<Photo>): Int
+
     @Query("DELETE FROM photo_table WHERE uriString = :uriString")
     fun deletePhoto(uriString: String)
+
+    @Delete
+    fun deletePhotos(photoList: List<Photo>)
 }

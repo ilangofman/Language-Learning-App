@@ -34,15 +34,26 @@ class Albums : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        galleryController = GalleryController(requireContext(), requireActivity(), resources.getString(R.string.app_name))
+        galleryController = GalleryController(
+            requireContext(),
+            requireActivity(),
+            resources.getString(R.string.app_name)
+        )
 
         val albums = galleryController.getAlbums()
 
-        val adapter = AlbumAdapter(albums, {moreButtonCallback(it)}, {playButtonCallback(it)})
+        val adapter = AlbumAdapter(albums, { moreButtonCallback(it) }, { playButtonCallback(it) })
         val albumGrid = recyclerView_album_grid
         albumGrid.adapter = adapter
         albumGrid.layoutManager = GridLayoutManager(requireContext(), 2)
-        albumGrid.addItemDecoration(SpaceItemDecorator(left = 20, top = 20, right = 20, bottom = 20))
+        albumGrid.addItemDecoration(
+            SpaceItemDecorator(
+                left = 20,
+                top = 20,
+                right = 20,
+                bottom = 20
+            )
+        )
 
         //Create Album Button - Display create album dialog
         button_create_album.setOnClickListener {
@@ -77,7 +88,9 @@ class Albums : Fragment() {
      * Output:  None
      */
     private fun playButtonCallback(albumName: String) {
-        val action = MainNavigationDirections.actionGlobalPhotoPractice(galleryController.getPhotos(albumName).toTypedArray())
+        val action = MainNavigationDirections.actionGlobalPhotoPractice(
+            galleryController.getPhotos(albumName).toTypedArray()
+        )
         findNavController().navigate(action)
     }
 
@@ -96,7 +109,7 @@ class Albums : Fragment() {
                     alertSheet.setTargetFragment(this, REQUEST_CODE_DIALOG)
                     alertSheet.show(parentFragmentManager, "alertSheetEditAlbumName")
 
-                //If the choice was to delete album display the delete album dialog
+                    //If the choice was to delete album display the delete album dialog
                 } else {
                     val alertSheet = DeleteAlbum(albumEdited)
 
@@ -105,7 +118,7 @@ class Albums : Fragment() {
                 }
             }
 
-        //If the result is from a dialog check which dialog returned data
+            //If the result is from a dialog check which dialog returned data
         } else if (requestCode == REQUEST_CODE_DIALOG && resultCode == Activity.RESULT_OK) {
             //If the dialog was for creating an album call the controller's create album function
             if (data?.extras?.containsKey("createAlbum")!!) {
@@ -114,22 +127,28 @@ class Albums : Fragment() {
                 val response = galleryController.createAlbum(albumName)
 
                 if (response)
-                    Toast.makeText(requireContext(), "Successfully created album", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Successfully created album",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 else
-                    Toast.makeText(requireContext(), "Failed to create album", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to create album", Toast.LENGTH_SHORT)
+                        .show()
 
-            //If the dialog was for editing album name call the controller's set name function
+                //If the dialog was for editing album name call the controller's set name function
             } else if (data.extras?.containsKey("newAlbumName")!!) {
                 val albumName = data.extras?.getString("newAlbumName")!!
 
                 val response = galleryController.setAlbumName(albumEdited, albumName)
 
                 if (response)
-                    Toast.makeText(context, "Successfully set album name", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Successfully set album name", Toast.LENGTH_SHORT)
+                        .show()
                 else
                     Toast.makeText(context, "Failed to set album name", Toast.LENGTH_SHORT).show()
 
-            //If the dialog was for deleting album call the controller's delete album function
+                //If the dialog was for deleting album call the controller's delete album function
             } else if (data.extras?.containsKey("deleteAlbum")!!) {
                 val delete = data.extras?.getBoolean("deleteAlbum")!!
 
@@ -140,8 +159,7 @@ class Albums : Fragment() {
                         Toast.makeText(context, "Album deleted", Toast.LENGTH_SHORT).show()
                     else
                         Toast.makeText(context, "Failed to delete album", Toast.LENGTH_SHORT).show()
-                }
-                else Toast.makeText(context, "Album not deleted", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(context, "Album not deleted", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -149,5 +167,11 @@ class Albums : Fragment() {
     companion object {
         private const val REQUEST_CODE_BOTTOM_SHEET = 100
         private const val REQUEST_CODE_DIALOG = 101
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val albumList = galleryController.liveAlbumData.value as MutableList
+        (recyclerView_album_grid.adapter as AlbumAdapter).setData(albumList)
     }
 }

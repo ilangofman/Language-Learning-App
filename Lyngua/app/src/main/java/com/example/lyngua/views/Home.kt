@@ -88,11 +88,6 @@ class Home : Fragment() {
             findNavController().navigate(action)
         }
 
-//        button.setOnClickListener {
-//            navBar.visibility = View.GONE
-//            findNavController().navigate(R.id.action_home_to_start_navigation)
-//        }
-
 
         initToolbarScroll()
 
@@ -101,7 +96,19 @@ class Home : Fragment() {
         initCategory()
 
         initAlbum()
+
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        val hour = cal.get(Calendar.HOUR_OF_DAY)
+        when {
+            hour >= 21 || hour < 2 -> textView_greeting.text = resources.getString(R.string.good_night_greeting)
+            hour < 13 -> textView_greeting.text = resources.getString(R.string.good_morning_greeting)
+            hour < 18 -> textView_greeting.text = resources.getString(R.string.good_afternoon_greeting)
+            hour < 21 -> textView_greeting.text = resources.getString(R.string.good_evening_greeting)
+            else -> textView_greeting.text = resources.getString(R.string.welcome_greeting)
+        }
     }
+
 
     private fun initToolbarScroll() {
         var titleShowing = true
@@ -110,8 +117,8 @@ class Home : Fragment() {
             if (scrollRange == -1) {
                 scrollRange = barLayout?.totalScrollRange!!
             }
-            if (scrollRange + verticalOffset == 0) {
-                collapsingToolbarLayout.title = "Home"
+            if (scrollRange + verticalOffset <= 0) {
+                collapsingToolbarLayout.title = resources.getString(R.string.app_name)
                 titleShowing = true
             } else if (titleShowing) {
                 collapsingToolbarLayout.title = " "

@@ -9,8 +9,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "photo_table")
 data class Photo(
-    @PrimaryKey
-    @ColumnInfo(name="uriString")   val uriString: String,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="id")          val id:Int,
+    @ColumnInfo(name="uriString")   var uriString: String,
     @ColumnInfo(name="word")        val word: String,
     @ColumnInfo(name="options")     val options: List<String>,
     @ColumnInfo(name="correct")     val correct: Int,

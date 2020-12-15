@@ -14,7 +14,7 @@ https://www.youtube.com/watch?v=3USvr1Lz8g8
 
 @Database(
     entities = [Photo::class],
-    version = 10,
+    version = 11,
     exportSchema = false )
 
 @TypeConverters(PhotoTypeConverter::class)

@@ -38,6 +38,7 @@
     <string name="delete_button">Delete</string>
     <string name="new_album_button">New Album</string>
     <string name="see_all_button">See all</string>
+    <string name="select_button">Select</string>
 
     <!-- PAGE TITLES AND HEADERS -->
     <string name="sign_up_title">Let\'s Get Started</string>
@@ -45,7 +46,11 @@
     <string name="choose_language_title">What Language\nDo You Want To Learn?</string>
     <string name="choose_interests_title">What Are\nYour Interests?</string>
     <string name="complete_sign_up_title">You\'re Good To Go!</string>
-    <string name="home_title">Welcome</string>
+    <string name="welcome_greeting">Welcome</string>
+    <string name="good_morning_greeting">Good Morning</string>
+    <string name="good_afternoon_greeting">Good Afternoon</string>
+    <string name="good_evening_greeting">Good Evening</string>
+    <string name="good_night_greeting">Good Night</string>
     <string name="home_photos_header">Recent Photos</string>
     <string name="home_category_header">Get Practicing!</string>
     <string name="home_album_header">Check out your recent album</string>
