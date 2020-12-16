@@ -14,7 +14,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.lyngua"
+        applicationId "com.app.lyngua"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

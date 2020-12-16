@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/welcome"
-        android:name="com.example.lyngua.views.Welcome"
+        android:name="com.app.lyngua.views.Welcome"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.lyngua.views.account_creation.LogInFragment"
+        android:name="com.app.lyngua.views.account_creation.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" />
     <fragment
         android:id="@+id/signUp"
-        android:name="com.example.lyngua.views.account_creation.SignUp"
+        android:name="com.app.lyngua.views.account_creation.SignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/setupProfile"
-        android:name="com.example.lyngua.views.account_creation.SetupProfile"
+        android:name="com.app.lyngua.views.account_creation.SetupProfile"
         android:label="fragment_setup_profile"
         tools:layout="@layout/fragment_setup_profile" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseLanguage"
-        android:name="com.example.lyngua.views.account_creation.ChooseLanguage"
+        android:name="com.app.lyngua.views.account_creation.ChooseLanguage"
         android:label="fragment_choose_language"
         tools:layout="@layout/fragment_choose_language" >
         <action
@@ -51,11 +51,11 @@
             app:destination="@id/chooseInterests" />
         <argument
             android:name="user"
-            app:argType="com.example.lyngua.models.User.User" />
+            app:argType="com.app.lyngua.models.User.User" />
     </fragment>
     <fragment
         android:id="@+id/chooseInterests"
-        android:name="com.example.lyngua.views.account_creation.ChooseInterests"
+        android:name="com.app.lyngua.views.account_creation.ChooseInterests"
         android:label="fragment_choose_interests"
         tools:layout="@layout/fragment_choose_interests" >
         <action
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/completeSignUp"
-        android:name="com.example.lyngua.views.account_creation.CompleteSignUp"
+        android:name="com.app.lyngua.views.account_creation.CompleteSignUp"
         android:label="fragment_complete_sign_up"
         tools:layout="@layout/fragment_complete_sign_up" />
 

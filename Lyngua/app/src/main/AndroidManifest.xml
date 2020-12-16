@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lyngua">
+    package="com.app.lyngua">
 
     <uses-feature android:name="android.hardware.camera.any" />
 
@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme"
         android:screenOrientation="portrait">
-        <activity android:name=".views.ActivityTabs"
+        <activity android:name="com.app.lyngua.views.ActivityTabs"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,11 +28,11 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".views.MainActivity">
+        <activity android:name="com.app.lyngua.views.MainActivity">
         </activity>
 
         <receiver
-            android:name="com.example.lyngua.controllers.notifications.GoalNotificationPublisher"
+            android:name="com.app.lyngua.controllers.notifications.GoalNotificationPublisher"
             android:label="BroadcastReceiverAux">
             <intent-filter>
                 <action android:name="ALARM" />
@@ -41,7 +41,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.example.lyngua.controllers.notifications.GoalUpdatePublisher"
+            android:name="com.app.lyngua.controllers.notifications.GoalUpdatePublisher"
             android:label="BroadcastReceiverGoal">
             <intent-filter>
                 <action android:name="ALARM_GOAL" />
