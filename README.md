@@ -24,6 +24,8 @@ life. In addition, the users can set custom goals to make sure they are continui
 desired pace.
 
 
+Video: [https://www.youtube.com/watch?v=gB7sFvncp6A&feature=youtu.be](https://www.youtube.com/watch?v=gB7sFvncp6A&feature=youtu.be)
+
 ### Built With
 
 Huge thank you to the following for making this app possible
